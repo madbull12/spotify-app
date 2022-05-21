@@ -2,7 +2,7 @@ import React from 'react'
 
 const Right = () => {
   return (
-    <div>Right</div>
+    <div className='bg-black min-h-screen'></div>
   )
 }
 

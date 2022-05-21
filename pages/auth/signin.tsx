@@ -11,6 +11,7 @@ import logo from "../../public/img/logo.png"
 const SignInPage:NextPage = ({ providers }:any) => {
     const { data: session } = useSession();
     const router = useRouter();
+    
 
     useEffect(()=>{
         if(session) {
