@@ -10,10 +10,16 @@ const Body = ({ spotifyApi }:any) => {
     const [newReleases,setNewReleases] = useState<any>(null);
 
 
+    console.log(session)
     useEffect(()=>{
       if(!accessToken) return;
-      
-    },[])
+      spotifyApi.setAccessToken(accessToken);
+    },[accessToken]);
+
+    useEffect(()=>{
+      if(!search) return setSearchResult([]);
+      if(!accessToken) return;
+    },[accessToken]);
 
   return (
     <section className="bg-black ml-[5.5rem] p-4 space-y-8 md:max-w-5xl flex-grow md:mr-2.5">
