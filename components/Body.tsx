@@ -1,8 +1,9 @@
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import Card from './Card';
 import Search from './Search'
 
-const Body = ({ spotifyApi }:any) => {
+const Body = ({ spotifyApi,chooseTrack }:any) => {
     const { data: session } = useSession();
     const { accessToken }:any = session;
     const [search,setSearch] = useState<string>("");
@@ -10,23 +11,70 @@ const Body = ({ spotifyApi }:any) => {
     const [newReleases,setNewReleases] = useState<any>(null);
 
 
-    console.log(session)
     useEffect(()=>{
       if(!accessToken) return;
       spotifyApi.setAccessToken(accessToken);
     },[accessToken]);
 
+
+
     useEffect(()=>{
       if(!search) return setSearchResult([]);
       if(!accessToken) return;
-    },[accessToken]);
+
+      spotifyApi.searchTracks(search).then((res:any)=>{
+        setSearchResult(res.body.tracks.items);
+      }).catch((err:any)=>console.log(err))
+    },[search,accessToken]);
+
+    useEffect(()=>{
+
+      if(!accessToken) return;
+
+      spotifyApi.getNewReleases({ limit:4 })
+        .then((res:any)=>{
+          setNewReleases(res.body.albums.items);
+        }).catch((err:any)=>console.log(err))
+    },[]);
+
+    console.log(searchResult)
+    console.log(newReleases);
+
 
   return (
-    <section className="bg-black ml-[5.5rem] p-4 space-y-8 md:max-w-5xl flex-grow md:mr-2.5">
+    <section className="bg-black ml-[3rem] lg:ml-[5.5rem] p-4 space-y-8 md:max-w-5xl flex-grow md:mr-2.5">
         <Search search={search} setSearch={setSearch} />
-        <div className="grid overflow-y-scroll scrollbar-hide h-96 py-4 grid-cols-2 lg:grid-cols-1 xl:grid-cols-4 gap-x-4 gap-y-8">
 
+        {search && (
+          <div className="grid overflow-y-scroll scrollbar-hide gap-4 h-96 py-4 grid-cols-1 md:grid-cols-2">
+          <div>
+            <h1 className="text-white text-2xl font-bold mb-2">
+              Top results
+            </h1>
+            {searchResult.slice(0,1).map((track:any,i:any)=>(
+              <Card key={i} items={track} cardClass="flex-col bg-[#171717] px-4 pt-4 pb-8" textClass="text-md md:text-lg lg:text-2xl xl:text-4xl font-bold" imageClass="max-w-[96px]" imageSrc={track.album.images[0].url} hidden={false} isTopResult={true} chooseTrack={chooseTrack} />
+            ))}
+
+          </div>
+          <div className="space-y-2">
+              <h1 className="text-white text-2xl font-bold ">
+                Tracks
+              </h1>
+              {searchResult.slice(0,7).map((track:any,i:any)=>(
+                <Card key={i} items={track} cardClass="flex-row items-center gap-2 " textClass="text-sm md:text-base font-semibold " imageClass="max-w-[50px]" imageSrc={track.album.images[0].url} hidden={false} isTopResult={false} chooseTrack={chooseTrack} />
+              ))}
+          </div>
+          
         </div>
+        )}
+          <h1 className="text-white text-2xl font-bold mb-2">New Releases</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-16 lg:grid-cols-4 lg:gap-24  overflow-x-scroll scrollbar-hide">
+       
+          {newReleases?.map((release:any,i:any)=>(
+            <Card key={i} items={release} cardClass="flex-col  px-4 pt-4 pb-8" textClass="text-lg font-bold " imageClass="w-[250px] relative" imageSrc={release.images[0].url} hidden={true} isTopResult={false} chooseTrack={chooseTrack} />
+          ))}
+        </div>
+     
     </section>
   )
 }

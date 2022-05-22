@@ -6,10 +6,10 @@ import { HiChartBar,HiDotsHorizontal } from 'react-icons/hi'
 
 const Sidebar = () => {
   return (
-    <section className="fixed top-0 z-40 flex flex-col p-4 items-center bg-black w-[90px] space-y-8 h-screen">
+    <section className="fixed top-0 z-40 flex flex-col p-4 items-center bg-black w-[60px] lg:w-[90px]  space-y-8 h-screen">
         <Image src={logo} width={60} height={60} alt="logo" objectFit='contain' />
         <div className="space-y-6 flex flex-col">
-            <IoMdHome className='text-3xl cursor-pointer text-white' />
+            <IoMdHome className='icon text-white' />
             <IoMdCompass className='icon' />
 
             <IoMdMicrophone className='icon' />

@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.icon {
-  @apply  text-2xl cursor-pointer text-gray-500
-}
+@layer components {
 
-.tag {
-  @apply py-1.5 px-3 text-[#cecece] rounded-xl text-xs font-bold border-2
+  .icon {
+    @apply text-base md:text-lg lg:text-xl xl:text-2xl cursor-pointer text-gray-500
+  }
+  
+  .tag {
+    @apply py-1.5 px-3 text-[#cecece] rounded-xl text-xs font-bold border-2
+  }
 }
