@@ -20,9 +20,9 @@ const Card = ({items,cardClass,textClass,imageClass,imageSrc,hidden,isTopResult,
   return (
     <div className={`flex gap-6 ${cardClass} rounded-md group cursor-pointer  `} onClick={handlePlay}>
         <div className={`${imageClass} overflow-hidden ${hidden && "group-hover:scale-110 transition-transform duration-200 ease-in-out"}`}>
-            <Image alt="image" src={imageSrc} width={300} height={300} objectFit='cover' className={`rounded-xl w-full `} />
-            {hidden && <div className="opacity-0 group-hover:opacity-100 group-hover:block absolute z-10 bottom-2 left-2  transition-all duration-200 ease-out">
-              <div className="w-7 h-7 rounded-full bg-green-500 flex justify-center items-center">
+            <Image alt="image" src={imageSrc} width={300} height={300} objectFit='cover' className={`brightness-75 rounded-xl w-full `} />
+            {hidden && <div className="opacity-0 flex items-center gap-2 group-hover:opacity-100 group-hover:flex absolute z-10 bottom-4 left-2  transition-all duration-200 ease-out ">
+              <div className=" w-7 h-7 rounded-full bg-green-500 flex justify-center items-center">
                 {items.uri === playingTrack.uri && play ? (
                   <BsFillPauseFill className="text-white text-xl" />
                 ):(
@@ -31,8 +31,11 @@ const Card = ({items,cardClass,textClass,imageClass,imageSrc,hidden,isTopResult,
                 )}
                 
               </div>
-              <h1 className={` text-gray-200 ${textClass}`}>{items?.name}</h1>
-
+              <div>
+                <h1 className={` text-gray-200 ${textClass}`}>{items?.name}</h1>
+                <p className="text-gray-200 text-base">{items?.artists[0].name}</p>
+              </div>
+                
             </div>}
 
 

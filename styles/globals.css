@@ -7,6 +7,10 @@
   .icon {
     @apply text-base md:text-lg lg:text-xl xl:text-2xl cursor-pointer text-gray-500
   }
+
+  .genre {
+      @apply text-white border rounded-full py-2 px-4 whitespace-nowrap cursor-pointer hover:bg-white hover:text-black
+  }
   
   .tag {
     @apply py-1.5 px-3 text-[#cecece] rounded-xl text-xs font-bold border-2

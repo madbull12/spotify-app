@@ -74,6 +74,29 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
             <Card key={i} items={release} cardClass="flex-col  px-4 pt-4 pb-8" textClass="text-lg font-bold " imageClass="w-[250px] relative" imageSrc={release.images[0].url} hidden={true} isTopResult={false} chooseTrack={chooseTrack} />
           ))}
         </div>
+        <div className="flex gap-x-8 absolute md:relative min-w-full ml-6">
+          <div className="hidden xl:inline max-w-[270px]">
+            <h2 className="text-white text-base lg:text-2xl font-bold mb-3">
+              Genres
+            </h2>
+            <div>
+              <div className="flex gap-x-2 flex-wrap gap-y-2.5 mb-4">
+                <div className="genre">Classic</div>
+                <div className="genre">House</div>
+                <div className="genre">Minimal</div>
+                <div className="genre">Hip Hop</div>
+                <div className="genre">Electronic</div>
+                <div className="genre">Chillout</div>
+                <div className="genre">Blues</div>
+                <div className="genre">Country</div>
+                <div className="genre">Techno</div>
+              </div>
+              <button className="w-full text-white rounded-xl bg-green-500 py-2 px-4 font-bold hover:bg-green-600 ">
+                All genres
+              </button>
+            </div>
+          </div>
+        </div>
      
     </section>
   )
