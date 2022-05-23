@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply scrollbar-hide
+  }
+}
+
 @layer components {
 
   .icon {
-    @apply text-base md:text-lg lg:text-xl xl:text-2xl cursor-pointer text-gray-500
+    @apply text-lg lg:text-xl xl:text-2xl cursor-pointer text-gray-500
   }
 
   .genre {

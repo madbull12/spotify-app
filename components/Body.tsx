@@ -31,14 +31,14 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
 
       if(!accessToken) return;
 
-      spotifyApi.getNewReleases({ limit:4 })
+      spotifyApi.getNewReleases()
         .then((res:any)=>{
           setNewReleases(res.body.albums.items);
         }).catch((err:any)=>console.log(err))
     },[]);
 
     console.log(searchResult)
-    console.log(newReleases);
+    // console.log(newReleases);
 
 
   return (
@@ -61,7 +61,7 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
                 Tracks
               </h1>
               {searchResult.slice(0,7).map((track:any,i:any)=>(
-                <Card key={i} items={track} cardClass="flex-row items-center gap-2 " textClass="text-sm md:text-base font-semibold " imageClass="max-w-[50px]" imageSrc={track.album.images[0].url} hidden={false} isTopResult={false} chooseTrack={chooseTrack} />
+                <Card key={i} items={track} cardClass="flex-row items-center  " textClass="text-sm md:text-base font-semibold " imageClass="max-w-[50px]" imageSrc={track.album.images[0].url} hidden={false} isTopResult={false} chooseTrack={chooseTrack} />
               ))}
           </div>
           
@@ -70,7 +70,7 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
           <h1 className="text-white text-2xl font-bold mb-2">New Releases</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-16 lg:grid-cols-4 lg:gap-24  overflow-x-scroll scrollbar-hide">
        
-          {newReleases?.map((release:any,i:any)=>(
+          {newReleases?.slice(0,4).map((release:any,i:any)=>(
             <Card key={i} items={release} cardClass="flex-col  px-4 pt-4 pb-8" textClass="text-lg font-bold " imageClass="w-[250px] relative" imageSrc={release.images[0].url} hidden={true} isTopResult={false} chooseTrack={chooseTrack} />
           ))}
         </div>
@@ -96,7 +96,29 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
               </button>
             </div>
           </div>
+          <div className='w-full'>
+            <h2 className="text-white text-base lg:text-2xl font-bold mb-3">
+              {searchResult?.length !== 0 ? "Tracks" : "New Releases"}
+            </h2>
+            <div className="space-y-3 border-2 border-white rounded-2xl p-3 overflow-y-scroll h-64 md:h-96 scrollbar-hide scrollbar-thin">
+             
+              {searchResult?.length === 0 
+              ? newReleases?.slice(4,newReleases?.length)
+                .map((track:any,i:any)=>(
+                  <Card key={i} items={track} cardClass="flex-row items-center gap-2 " textClass="text-sm md:text-base font-semibold " imageClass="max-w-[50px]" imageSrc={track?.images[0].url} hidden={false} isTopResult={false} chooseTrack={chooseTrack}/>
+                ))
+
+               :  searchResult?.slice(4,searchResult.length)
+               .map((track:any,i:any)=>(
+                 <Card key={i} items={track} cardClass="flex-row items-center gap-2 " textClass="text-sm md:text-base font-semibold " imageClass="max-w-[50px]" imageSrc={track?.album.images[0].url} hidden={false} isTopResult={false} chooseTrack={chooseTrack}/>
+               ))
+              }
+            
+         
+            </div>
+          </div>
         </div>
+   
      
     </section>
   )
