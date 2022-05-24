@@ -42,7 +42,7 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
 
 
   return (
-    <section className="bg-black ml-[3rem] lg:ml-[5.5rem] p-4 space-y-8 md:max-w-5xl flex-grow md:mr-2.5">
+    <section className="bg-black ml-[3rem] lg:ml-[5.5rem] p-4 space-y-8 md:max-w-5xl flex-grow ">
         <Search search={search} setSearch={setSearch} />
 
         {search && (
@@ -68,13 +68,13 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
         </div>
         )}
           <h1 className="text-white text-2xl font-bold mb-2">New Releases</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-16 lg:grid-cols-4 lg:gap-24  overflow-x-scroll scrollbar-hide">
+        <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-16 lg:grid-cols-4 lg:gap-24  overflow-x-scroll  scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
        
           {newReleases?.slice(0,4).map((release:any,i:any)=>(
             <Card key={i} items={release} cardClass="flex-col  px-4 pt-4 pb-8" textClass="text-lg font-bold " imageClass="w-[250px] relative" imageSrc={release.images[0].url} hidden={true} isTopResult={false} chooseTrack={chooseTrack} />
           ))}
         </div>
-        <div className="flex gap-x-8 absolute md:relative min-w-full ml-6">
+        <div className="flex gap-x-8 md:relative min-w-full ml-6">
           <div className="hidden xl:inline max-w-[270px]">
             <h2 className="text-white text-base lg:text-2xl font-bold mb-3">
               Genres
@@ -100,7 +100,7 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
             <h2 className="text-white text-base lg:text-2xl font-bold mb-3">
               {searchResult?.length !== 0 ? "Tracks" : "New Releases"}
             </h2>
-            <div className="space-y-3 border-2 border-white rounded-2xl p-3 overflow-y-scroll h-64 md:h-96 scrollbar-hide scrollbar-thin">
+            <div className="space-y-3 border-2 border-white rounded-2xl p-3 overflow-y-scroll h-64 md:h-96 scrollbar-thumb-gray-900 scrollbar-thin">
              
               {searchResult?.length === 0 
               ? newReleases?.slice(4,newReleases?.length)

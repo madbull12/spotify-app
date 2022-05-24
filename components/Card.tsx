@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { BsFillPauseFill,BsPlayFill,BsHeadphones,BsHeartFill,BsHeart } from 'react-icons/bs'
 import { useRecoilState } from 'recoil'
@@ -8,6 +8,7 @@ import { group } from 'console'
 const Card = ({items,cardClass,textClass,imageClass,imageSrc,hidden,isTopResult,chooseTrack }:any) => {
   const [play,setPlay]= useRecoilState(playState);
   const[playingTrack,setPlayingTrack] = useRecoilState(playingTrackState);
+  const [hasLiked,setHasLiked] = useState(false);
 
   const handlePlay = () => {
     chooseTrack(items);
@@ -53,7 +54,10 @@ const Card = ({items,cardClass,textClass,imageClass,imageSrc,hidden,isTopResult,
                 <p className='text-white'>{items.popularity}</p>
               </div>
               <div>
-                <BsHeart className='text-white' />
+                {hasLiked ? <BsHeartFill className="text-green-500" onClick={(e)=>{
+                  e.stopPropagation();
+                  setHasLiked(!hasLiked);
+                }} /> : <BsHeart className='text-white' onClick={()=>setHasLiked(!hasLiked)}  />}
               </div>
             </div>
               
