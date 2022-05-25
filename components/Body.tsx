@@ -44,6 +44,7 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
   return (
     <section className="bg-black ml-[3rem] lg:ml-[5.5rem] p-4 space-y-8 md:max-w-5xl flex-grow ">
         <Search search={search} setSearch={setSearch} />
+        
 
         {search && (
           <div className="grid overflow-y-scroll scrollbar-hide gap-4 h-96 py-4 grid-cols-1 md:grid-cols-2">

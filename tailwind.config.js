@@ -5,7 +5,12 @@ module.exports = {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "sm":"540px",
+        
+      }
+    },
   },
   plugins: [
     require('tailwind-scrollbar-hide'),

@@ -36,21 +36,16 @@ const Right = ({ spotifyApi,chooseTrack }:any) => {
 
       <div className='p-4 space-y-8 pr-8 bg-black w-[300px] '>
         <div className="flex space-x-2 items-center justify-between">
-          <div className="flex items-center space-x-4 border-2 px-2 rounded-full h-8">
+          <div className="items-center space-x-4 border-2 px-2 rounded-full h-8 hidden sm:flex">
               <BsShieldFillCheck className="text-white text-lg cursor-pointer" />
               <IoIosSettings className="text-white text-lg cursor-pointer" />
 
               <AiFillBell className="text-white text-lg cursor-pointer" />
           </div>
-          <Dropdown />
+          <Dropdown  />
         </div>
-        <div className="bg-[#0d0d0d] p-4 border-2 border-white rounded-xl space-y-4">
-          <div className="flex items-center justify-between">
-            <h4 className='text-white '>Recently Played</h4>
-            <HiViewGrid className="text-[#686868] text-base lg:text-2xl" />
-          </div>
-        </div>
-        <div className="bg-[#0D0D0D] border-2 border-white p-4 rounded-xl space-y-4">
+        
+      <div className="bg-[#0D0D0D] border-2 border-white p-4 rounded-xl space-y-4 hidden sm:block">
         <div className="flex items-center justify-between">
           <h4 className="text-white font-semibold text-sm">Recently Played</h4>
           <HiViewGrid className="text-[#686868] h-6" />
