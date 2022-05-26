@@ -3,20 +3,28 @@ import { Fragment } from "react";
 import { IoMdLogOut } from "react-icons/io";
 import { BsChevronBarDown } from "react-icons/bs";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function Dropdown() {
-  const { data: session } = useSession();
+  const { data: session }:any = useSession();
 
   return (
     <Menu as="div" className="w-24 h-12 relative flex items-center sm:block hidden">
       <div className="w-full absolute right-1 group">
-        <Menu.Button className="flex items-center w-full px-4 py-3 text-sm font-medium text-white bg-[#1A1A1A] rounded-full hover:bg-[#3E3E3E]">
+        <Menu.Button className="flex justify-between items-center w-full p-2 text-sm font-medium text-white bg-[#1A1A1A] rounded-full hover:bg-[#3E3E3E]">
           <BsChevronBarDown className="h-6 text-[#686868]" aria-hidden="true" />
-          <img
-            src={session?.user.image}
-            alt=""
-            className="rounded-full w-11 h-11 absolute -right-1 object-cover"
-          />
+
+          <div className="">
+            <Image
+              src={session?.user?.image}
+              width={35}
+              height={35}
+              alt="profile-img"
+              objectFit="cover"
+              className="rounded-full w-11 h-11 absolute -right-1 object-cover"
+            />
+          </div>
+        
         </Menu.Button>
       </div>
       <Transition
