@@ -3,7 +3,7 @@ import { playingTrackState, playState } from "../atoms/playerAtom";
 
 function RecentlyPlayed({ track, chooseTrack }:any) {
   const [play, setPlay] = useRecoilState(playState);
-  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
+  const [playingTrack, setPlayingTrack] = useRecoilState<any>(playingTrackState);
 
   const handlePlay = () => {
     chooseTrack(track);

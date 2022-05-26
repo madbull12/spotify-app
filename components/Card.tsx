@@ -7,7 +7,7 @@ import { group } from 'console'
 
 const Card = ({items,cardClass,textClass,imageClass,imageSrc,hidden,isTopResult,chooseTrack }:any) => {
   const [play,setPlay]= useRecoilState(playState);
-  const[playingTrack,setPlayingTrack] = useRecoilState(playingTrackState);
+  const[playingTrack,setPlayingTrack] = useRecoilState<any>(playingTrackState);
   const [hasLiked,setHasLiked] = useState(false);
 
   const handlePlay = () => {
