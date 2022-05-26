@@ -9,7 +9,7 @@ import RecentlyPlayed from './RecentlyPlayed'
 
 const Right = ({ spotifyApi,chooseTrack }:any) => {
   const { data: session } = useSession();
-  const { accessToken } = session;
+  const  accessToken  = session?.accessToken;
   const [recentlyPlayed, setRecentlyPlayed] = useState([]);
 
   useEffect(() => {
