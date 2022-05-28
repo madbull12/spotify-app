@@ -42,6 +42,9 @@ const SignInPage:NextPage = ({ providers }:any) => {
   )
 }
 
+export default SignInPage
+
+
 export const getServerSideProps: GetServerSideProps = async() => {
     const providers = await getProviders();
     return {
@@ -50,5 +53,3 @@ export const getServerSideProps: GetServerSideProps = async() => {
         }
     }
 }
-
-export default SignInPage
