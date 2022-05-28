@@ -17,7 +17,7 @@ const SignInPage:NextPage = ({ providers }:any) => {
         if(session) {
             router.push("/")
         }
-    },[session]);
+    },[session,router]);
 
     if(session) return( 
         <div className='flex items-center justify-center'>
