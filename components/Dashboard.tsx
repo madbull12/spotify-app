@@ -31,7 +31,14 @@ const Dashboard = () => {
 
   const chooseTrack = (track:any) => {
     setPlayingTrack(track);
+
+    
   }
+
+  useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi.setAccessToken(accessToken);
+  }, [accessToken]);
 
   return (
     <main className='flex min-h-screen min-w-screen' >
