@@ -6,28 +6,40 @@ import { HiViewGrid } from 'react-icons/hi'
 import { AiFillBell } from 'react-icons/ai'
 import Dropdown from './Dropdown'
 import RecentlyPlayed from './RecentlyPlayed'
+import spotifyApi from '../lib/spotifyApi'
 
-const Right = ({ spotifyApi,chooseTrack }:any) => {
+const Right = ({ chooseTrack }:any) => {
   const { data: session } = useSession();
   const  accessToken  = session?.accessToken;
-  const [recentlyPlayed, setRecentlyPlayed] = useState([]);
+  const [recentlyPlayed, setRecentlyPlayed] = useState<any>([]);
 
   useEffect(() => {
     if (!accessToken) return;
+    const fetchRecentlyPlayed = async() => {
+      try {
+        const data = await  spotifyApi.getMyRecentlyPlayedTracks({ limit:20 });
+       setRecentlyPlayed(data?.body.items);
+       console.log(recentlyPlayed)
+      } catch(err) {
+        console.log(err)
+      }
+    }
 
-    spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 }).then((res:any) => {
-      setRecentlyPlayed(
-        res.body.items.map(({ track }:any) => {
-          return {
-            id: track.id,
-            artist: track.artists[0].name,
-            title: track.name,
-            uri: track.uri,
-            albumUrl: track.album.images[0].url,
-          };
-        })
-      );
-    });
+    fetchRecentlyPlayed();
+
+    // spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 }).then((res:any) => {
+    //   setRecentlyPlayed(
+    //     res.body.items.map(({ track }:any) => {
+    //       return {
+    //         id: track.id,
+    //         artist: track.artists[0].name,
+    //         title: track.name,
+    //         uri: track.uri,
+    //         albumUrl: track.album.images[0].url,
+    //       };
+    //     })
+    //   );
+    // });
   }, [accessToken]);
   return (
     <>
@@ -52,7 +64,7 @@ const Right = ({ spotifyApi,chooseTrack }:any) => {
         </div>
 
         <div className="space-y-4 overflow-y-scroll overflow-x-hidden h-[250px] md:h-[400px] scrollbar-hide">
-          {recentlyPlayed.map((track, index) => (
+          {recentlyPlayed.map((track: any, index: any) => (
             <RecentlyPlayed
               key={index}
               track={track}

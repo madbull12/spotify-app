@@ -1,9 +1,12 @@
 import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react'
+import { ISearchResult } from '../interface';
+import spotifyApi from '../lib/spotifyApi';
 import Card from './Card';
 import Search from './Search'
+import { v4 as uuidv4 } from 'uuid'
 
-const Body = ({ spotifyApi,chooseTrack }:any) => {
+const Body = ({ chooseTrack }:any) => {
     const { data: session } = useSession();
     const { accessToken }:any = session;
     const [search,setSearch] = useState<string>("");
@@ -24,7 +27,8 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
 
       spotifyApi.searchTracks(search).then((res:any)=>{
         setSearchResult(res.body.tracks.items);
-      }).catch((err:any)=>console.log(err))
+      }).catch((err:any)=>console.log(err));
+      console.log(searchResult)
     },[search,accessToken]);
 
     useEffect(()=>{
@@ -52,7 +56,7 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
             <h1 className="text-white text-2xl font-bold mb-2">
               Top results
             </h1>
-            {searchResult.slice(0,1).map((track:any,i:any)=>(
+            {searchResult.slice(0,1).map((track:ISearchResult,i:number)=>(
               <Card key={i} items={track} cardClass="flex-col bg-[#171717] px-4 pt-4 pb-8" textClass="text-md md:text-lg lg:text-2xl xl:text-4xl font-bold" imageClass="max-w-[96px]" imageSrc={track.album.images[0].url} hidden={false} isTopResult={true} chooseTrack={chooseTrack} />
             ))}
 
@@ -62,7 +66,7 @@ const Body = ({ spotifyApi,chooseTrack }:any) => {
                 Tracks
               </h1>
               {searchResult.slice(0,7).map((track:any,i:any)=>(
-                <Card key={i} items={track} cardClass="flex-row items-center  " textClass="text-sm md:text-base font-semibold " imageClass="max-w-[50px]" imageSrc={track.album.images[0].url} hidden={false} isTopResult={false} chooseTrack={chooseTrack} />
+                <Card key={uuidv4()} items={track} cardClass="flex-row items-center  " textClass="text-sm md:text-base font-semibold " imageClass="max-w-[50px]" imageSrc={track.album.images[0].url} hidden={false} isTopResult={false} chooseTrack={chooseTrack} />
               ))}
           </div>
           

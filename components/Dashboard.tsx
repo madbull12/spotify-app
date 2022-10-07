@@ -7,13 +7,14 @@ import { useRecoilState } from 'recoil'
 import { playingTrackState, playState } from '../atoms/playerAtom'
 import { useSession } from 'next-auth/react'
 import Player from './Player'
+import spotifyApi from '../lib/spotifyApi'
 
-const spotifyApi = new SpotifyWebApi({
-  clientId:process.env.SPOTIFY_CLIENT_ID,
-  clientSecret:process.env.SPOTIFY_CLIENT_SECRET,
+// const spotifyApi = new SpotifyWebApi({
+//   clientId:process.env.SPOTIFY_CLIENT_ID,
+//   clientSecret:process.env.SPOTIFY_CLIENT_SECRET,
 
   
-});
+// });
 
 
 
