@@ -7,19 +7,21 @@ import { AiFillBell } from 'react-icons/ai'
 import Dropdown from './Dropdown'
 import RecentlyPlayed from './RecentlyPlayed'
 import spotifyApi from '../lib/spotifyApi'
+import { IRecentlyPlayed, ITrack } from '../interface'
+import { v4 } from 'uuid'
 
-const Right = ({ chooseTrack }:any) => {
+const Right = () => {
   const { data: session } = useSession();
   const  accessToken  = session?.accessToken;
   const [recentlyPlayed, setRecentlyPlayed] = useState<any>([]);
-
+  console.log(accessToken)
   useEffect(() => {
     if (!accessToken) return;
     const fetchRecentlyPlayed = async() => {
       try {
         const data = await  spotifyApi.getMyRecentlyPlayedTracks({ limit:20 });
+        console.log(data)
        setRecentlyPlayed(data?.body.items);
-       console.log(recentlyPlayed)
       } catch(err) {
         console.log(err)
       }
@@ -41,12 +43,12 @@ const Right = ({ chooseTrack }:any) => {
     //   );
     // });
   }, [accessToken]);
+  console.log(recentlyPlayed)
+
   return (
     <>
 
-
-
-      <div className='p-4 space-y-8 pr-8 bg-black w-[300px] '>
+      <div className='p-4 space-y-8 pr-8 bg-black w-[300px] fixed right-0 top-0 bottom-0 z-50 '>
         <div className="flex space-x-2 items-center justify-between">
           <div className="items-center space-x-4 border-2 px-2 rounded-full h-8 hidden sm:flex">
               <BsShieldFillCheck className="text-white text-lg cursor-pointer" />
@@ -64,11 +66,11 @@ const Right = ({ chooseTrack }:any) => {
         </div>
 
         <div className="space-y-4 overflow-y-scroll overflow-x-hidden h-[250px] md:h-[400px] scrollbar-hide">
-          {recentlyPlayed.map((track: any, index: any) => (
+          {recentlyPlayed.map((track:IRecentlyPlayed) => (
             <RecentlyPlayed
-              key={index}
+              key={v4()}
               track={track}
-              chooseTrack={chooseTrack}
+              
             />
           ))}
         </div>

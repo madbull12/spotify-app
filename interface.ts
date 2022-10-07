@@ -1,4 +1,4 @@
-export interface ISearchResult {
+export interface ITrack {
     album:IAlbum;
     artists:IArtist[];
     disc_number:number;
@@ -11,6 +11,16 @@ export interface ISearchResult {
     track_number:number;
     type:string;
     uri:string;
+}
+
+export interface IRecentlyPlayed  {
+    context:{
+        href:string;
+        type:string;
+        uri:string;
+    }
+    played_at:string | Date;
+    track:ITrack;
 }
 
 export interface IAlbum {

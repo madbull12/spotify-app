@@ -1,58 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Body from './Body'
 import Right from './Right'
 import Sidebar from './Sidebar'
-import SpotifyWebApi from 'spotify-web-api-node'
-import { useRecoilState } from 'recoil'
-import { playingTrackState, playState } from '../atoms/playerAtom'
-import { useSession } from 'next-auth/react'
-import Player from './Player'
-import spotifyApi from '../lib/spotifyApi'
 
-// const spotifyApi = new SpotifyWebApi({
-//   clientId:process.env.SPOTIFY_CLIENT_ID,
-//   clientSecret:process.env.SPOTIFY_CLIENT_SECRET,
-
-  
-// });
-
-
-
-const Dashboard = () => {
-  const[playingTrack,setPlayingTrack] = useRecoilState<any>(playingTrackState);
-  const [showPlayer,setShowPlayer]= useState(false);
-
-  const { data: session } = useSession();
-  const { accessToken }:any = session;
-
-
-  useEffect(()=>{
-    setShowPlayer(true);
-  },[])
-
-  const chooseTrack = (track:any) => {
-    setPlayingTrack(track);
-
-    
-  }
-
-  useEffect(() => {
-    if (!accessToken) return;
-    spotifyApi.setAccessToken(accessToken);
-  }, [accessToken]);
-
+const Dashboard = ({ children }:{children:React.ReactNode}) => {
   return (
-    <main className='flex min-h-screen min-w-screen' >
+    <div>
         <Sidebar />
-        <Body spotifyApi={spotifyApi} chooseTrack={chooseTrack} />
-        <Right spotifyApi={spotifyApi} chooseTrack={chooseTrack} />
-        {showPlayer && (
-        <div className="fixed bottom-0 left-0 right-0 z-50">
-          <Player accessToken={accessToken} trackUri={playingTrack.uri} />
-        </div>
-        )}
-      
-    </main>
+        <Body>
+            {children}
+        </Body>
+        <Right />
+    </div>
   )
 }
 

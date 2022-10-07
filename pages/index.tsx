@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import Dashboard from '../components/Dashboard'
+import HomeComponent from '../components/HomeComponent'
 import Loader from '../components/Loader'
 import styles from '../styles/Home.module.css'
 
@@ -32,7 +32,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Dashboard />
+      <HomeComponent />
     </div>
   )
 }
