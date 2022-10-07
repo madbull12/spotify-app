@@ -13,6 +13,58 @@ export interface ITrack {
     uri:string;
 }
 
+export interface IPlaylist {
+    collaborative:boolean;
+    description:string;
+    id:string;
+    images:IImage[];
+    name:string;
+    owner:{
+        display_name:string;
+        id:string;
+        type:string;
+        uri:string;
+    };
+    primary_color:null | string;
+    snapshot_id:string;
+    tracks:ITrack[];
+    type:string;
+    uri:string;
+}
+
+export interface IEpisode {
+    description:string;
+    duration_ms:string;
+    explicit:boolean;
+    id:string;
+    images:IImage[];
+    release_date:string;
+    release_date_precision:string;
+    type:string;
+    uri:string;
+    language:string;
+    languages:string[];
+    is_playable:boolean;
+    html_description:string;
+
+}
+
+export interface ISearchResult {
+    albums:{
+        items:IAlbum[]
+    };
+    artists:{
+        items:IArtist[]
+    };
+    tracks:{
+        items:ITrack[]
+    };
+    playlists:{
+        items:IPlaylist[]
+    }
+
+}
+
 export interface ICategory {
     icons:IImage[];
     id:string;

@@ -1,15 +1,17 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import CategoryCard from "../components/CategoryCard";
 import Search from "../components/Search";
 import useDebounce from "../hooks/useDebounce";
-import { ICategory } from "../interface";
+import { IAlbum, ICategory, ISearchResult } from "../interface";
 import spotifyApi from "../lib/spotifyApi";
 
 const SearchPage = () => {
   const [search, setSearch] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<any>(null);
+  const [searchResult, setSearchResult] =
+    useState<SpotifyApi.SearchResponse | null>(null);
   const [categories, setCategories] = useState<any>(null);
   const { data: session } = useSession();
   const accessToken: any = session?.accessToken;
@@ -22,7 +24,7 @@ const SearchPage = () => {
   }, [accessToken]);
 
   useEffect(() => {
-    if (!debouncedSearch) return setSearchResult([]);
+    if (!debouncedSearch) return setSearchResult(null);
     if (!accessToken) return;
 
     const fetchData = async () => {
@@ -68,16 +70,26 @@ const SearchPage = () => {
       </Head>
       <Search search={search} setSearch={setSearch} />
       {debouncedSearch ? (
-        <div className="grid overflow-y-scroll scrollbar-hide gap-4 h-96 py-4 grid-cols-1 md:grid-cols-2">
-          <div>
+        <div className="flex gap-x-4 w-full mt-4">
+          <div className="flex-[0.5]">
             <h1 className="text-white text-2xl font-bold mb-2">Top results</h1>
-            {/* {searchResult.slice(0, 1).map((track: ISearchResult) => (
-              <Card
-                key={uuidv4()}
-                items={track}
-           
-              />
-            ))} */}
+            {searchResult?.tracks?.items.slice(0, 1).map((track) => (
+              <div className="p-4 bg-zinc-800 space-y-4">
+                <Image
+                  src={track.album.images[1].url}
+                  height={100}
+                  className="rounded-lg"
+                  width={100}
+                />
+                <p className="text-2xl text-white ">{track.name}</p>
+                <div className="flex items-center gap-x-4">
+                    <p className="text-zinc-500 font-semibold">{track.artists[0].name}</p>
+                    <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
+                        {track.type}
+                    </span>
+                </div>
+              </div>
+            ))}
           </div>
           <div className="space-y-2">
             <h1 className="text-white text-2xl font-bold ">Tracks</h1>
