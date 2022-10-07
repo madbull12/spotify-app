@@ -13,6 +13,12 @@ export interface ITrack {
     uri:string;
 }
 
+export interface ICategory {
+    icons:IImage[];
+    id:string;
+    name:string;
+}
+
 export interface IRecentlyPlayed  {
     context:{
         href:string;

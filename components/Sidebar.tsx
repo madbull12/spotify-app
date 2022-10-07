@@ -13,8 +13,10 @@ const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <section className="fixed top-0 z-40 flex flex-col p-4 items-center bg-black w-[60px] lg:w-[90px]  space-y-8 h-screen">
-        <Image src={logo} width={60} height={60} alt="logo" objectFit='contain' />
+    <section className="fixed min-h-screen top-0 z-40 flex flex-col p-4 items-center bg-black w-[60px] lg:w-[90px]  space-y-8 h-screen">
+        {session ? (
+          <>
+            <Image src={logo} width={60} height={60} alt="logo" objectFit='contain' />
         <div className="space-y-6 flex flex-col">
           <Link href="/">
             <IoMdHome className={`icon ${router.pathname === "/" ? "text-white" : ""}`} />
@@ -33,6 +35,12 @@ const Sidebar = () => {
 
         </div>
         <IoMdLogOut className="text-2xl cursor-pointer text-white sm:hidden" onClick={()=>signOut({ redirect:false })}  />
+        
+          </>
+
+        ):(
+          null
+        )}
         
   
     </section>

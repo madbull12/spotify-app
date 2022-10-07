@@ -14,7 +14,6 @@ const Right = () => {
   const { data: session } = useSession();
   const  accessToken  = session?.accessToken;
   const [recentlyPlayed, setRecentlyPlayed] = useState<any>([]);
-  console.log(accessToken)
   useEffect(() => {
     if (!accessToken) return;
     const fetchRecentlyPlayed = async() => {
@@ -49,7 +48,9 @@ const Right = () => {
     <>
 
       <div className='p-4 space-y-8 pr-8 bg-black w-[300px] fixed right-0 top-0 bottom-0 z-50 '>
-        <div className="flex space-x-2 items-center justify-between">
+        {session ? (
+          <>
+            <div className="flex space-x-2 items-center justify-between">
           <div className="items-center space-x-4 border-2 px-2 rounded-full h-8 hidden sm:flex">
               <BsShieldFillCheck className="text-white text-lg cursor-pointer" />
               <IoIosSettings className="text-white text-lg cursor-pointer" />
@@ -78,6 +79,11 @@ const Right = () => {
           View All
         </button>
       </div>
+        
+          </>
+        ):(
+          null
+        )}
         
       </div>
 
