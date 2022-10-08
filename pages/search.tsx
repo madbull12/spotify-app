@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { v4 } from "uuid";
 import Card from "../components/Card";
 import Categories from "../components/Categories";
 import CategoryCard from "../components/CategoryCard";
@@ -9,6 +10,8 @@ import Search from "../components/Search";
 import useDebounce from "../hooks/useDebounce";
 import { IAlbum, ICategory, ISearchResult } from "../interface";
 import spotifyApi from "../lib/spotifyApi";
+import TrackSearch from "../components/TrackSearch";
+import AlbumSearch from "../components/AlbumSearch";
 
 const SearchPage = () => {
   const [search, setSearch] = useState<string>("");
@@ -57,34 +60,43 @@ const SearchPage = () => {
       </Head>
       <Search search={search} setSearch={setSearch} />
       {debouncedSearch ? (
-        <div className="flex gap-x-4 w-full mt-4">
-          <div className="flex-[0.5]">
-            <h1 className="text-white text-2xl font-bold mb-2">Top results</h1>
-            {searchResult?.tracks?.items.slice(0, 1).map((track) => (
-              <Card>
-                <Image
-                  src={track.album.images[1].url}
-                  height={100}
-                  className="rounded-lg"
-                  width={100}
-                />
-                <p className="text-4xl text-white font-bold ">{track.name}</p>
-                <div className="flex items-center gap-x-4">
-                  <p className="text-zinc-500 font-semibold">
-                    {track.artists[0].name}
-                  </p>
-                  <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
-                    {track.type}
-                  </span>
-                </div>
-              </Card>
-            ))}
+        <div>
+          <div className="flex gap-x-4 w-full mt-4">
+            <div className="flex-[0.5]">
+              <h1 className="text-white text-2xl font-bold mb-4">
+                Top results
+              </h1>
+              {searchResult?.tracks?.items.slice(0, 1).map((track) => (
+                <Card>
+                  <Image
+                    src={track.album.images[1].url}
+                    height={100}
+                    className="rounded-lg"
+                    width={100}
+                  />
+                  <p className="text-4xl text-white font-bold ">{track.name}</p>
+                  <div className="flex items-center gap-x-4">
+                    <p className="text-zinc-500 font-semibold">
+                      {track.artists[0].name}
+                    </p>
+                    <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
+                      {track.type}
+                    </span>
+                  </div>
+                </Card>
+              ))}
+            </div>
+            <div className="space-y-2 flex-[0.75]">
+              <h1 className="text-white text-2xl font-bold mb-4">Tracks</h1>
+              <div className="border p-2 rounded-lg h-96 overflow-y-scroll  scrollbar-thumb-zinc-800 scrollbar-thin   scrollbar-track-gray-100">
+                {searchResult?.tracks?.items.slice(0, 10).map((track) => (
+                  <TrackSearch key={v4()} track={track} />
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="space-y-2">
-            <h1 className="text-white text-2xl font-bold ">Tracks</h1>
-            {/* {searchResult.slice(0, 7).map((track: ISearchResult) => (
-              <Card key={uuidv4()} items={track} />
-            ))} */}
+          <div className="my-8">
+            <AlbumSearch albums={searchResult?.albums?.items} />
           </div>
         </div>
       ) : (
