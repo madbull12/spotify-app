@@ -2,6 +2,8 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Card from "../components/Card";
+import Categories from "../components/Categories";
 import CategoryCard from "../components/CategoryCard";
 import Search from "../components/Search";
 import useDebounce from "../hooks/useDebounce";
@@ -12,10 +14,8 @@ const SearchPage = () => {
   const [search, setSearch] = useState<string>("");
   const [searchResult, setSearchResult] =
     useState<SpotifyApi.SearchResponse | null>(null);
-  const [categories, setCategories] = useState<any>(null);
   const { data: session } = useSession();
   const accessToken: any = session?.accessToken;
-  console.log(accessToken);
   const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
@@ -48,19 +48,6 @@ const SearchPage = () => {
 
   console.log(searchResult);
 
-  useEffect(() => {
-    if (!accessToken) return;
-
-    const fetchCategories = async () => {
-      try {
-        const res = await spotifyApi.getCategories({ limit: 40 });
-        setCategories(res.body);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCategories();
-  }, []);
   return (
     <div>
       <Head>
@@ -74,21 +61,23 @@ const SearchPage = () => {
           <div className="flex-[0.5]">
             <h1 className="text-white text-2xl font-bold mb-2">Top results</h1>
             {searchResult?.tracks?.items.slice(0, 1).map((track) => (
-              <div className="p-4 bg-zinc-800 space-y-4">
+              <Card>
                 <Image
                   src={track.album.images[1].url}
                   height={100}
                   className="rounded-lg"
                   width={100}
                 />
-                <p className="text-2xl text-white ">{track.name}</p>
+                <p className="text-4xl text-white font-bold ">{track.name}</p>
                 <div className="flex items-center gap-x-4">
-                    <p className="text-zinc-500 font-semibold">{track.artists[0].name}</p>
-                    <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
-                        {track.type}
-                    </span>
+                  <p className="text-zinc-500 font-semibold">
+                    {track.artists[0].name}
+                  </p>
+                  <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
+                    {track.type}
+                  </span>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
           <div className="space-y-2">
@@ -99,14 +88,7 @@ const SearchPage = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <h1 className="font-bold text-2xl my-4 text-white">Browse all</h1>
-          <div className="grid grid-cols-5 gap-4">
-            {categories?.categories.items.map((category: ICategory) => (
-              <CategoryCard category={category} />
-            ))}
-          </div>
-        </div>
+        <Categories />
       )}
     </div>
   );

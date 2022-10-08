@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { IAlbum } from "../interface";
 import spotifyApi from "../lib/spotifyApi";
-import Card from "./Card";
+import Card from "./NewRelease";
 import Search from "./Search";
 import { v4 as uuidv4 } from "uuid";
 

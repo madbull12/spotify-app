@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import Player from "./Player";
 import spotifyApi from "../lib/spotifyApi";
 import { IAlbum } from "../interface";
-import Card from "./Card";
+import NewRelease from "./NewRelease";
 import { v4 as uuidv4 } from "uuid";
 
 // const spotifyApi = new SpotifyWebApi({
@@ -63,7 +63,7 @@ const HomeComponent = () => {
         <h1 className="text-white text-2xl font-bold mb-2">New Releases</h1>
         <div className="grid   overflow-x-scroll  auto-cols-max grid-flow-col auto-rows-auto gap-x-2  scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
           {newReleases?.map((release: IAlbum) => (
-            <Card key={uuidv4()} items={release} />
+            <NewRelease key={uuidv4()} items={release} />
           ))}
         </div>
         <div className="flex gap-x-8 md:relative min-w-full ml-6">
