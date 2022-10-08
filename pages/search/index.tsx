@@ -1,17 +1,21 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { v4 } from "uuid";
-import Card from "../components/Card";
-import Categories from "../components/Categories";
-import CategoryCard from "../components/CategoryCard";
-import Search from "../components/Search";
-import useDebounce from "../hooks/useDebounce";
-import { IAlbum, ICategory, ISearchResult } from "../interface";
-import spotifyApi from "../lib/spotifyApi";
-import TrackSearch from "../components/TrackSearch";
-import AlbumSearch from "../components/AlbumSearch";
+import Card from "../../components/Card";
+import Categories from "../../components/Categories";
+import CategoryCard from "../../components/CategoryCard";
+import Search from "../../components/Search";
+import useDebounce from "../../hooks/useDebounce";
+import { IAlbum, ICategory, ISearchResult } from "../../interface";
+import spotifyApi from "../../lib/spotifyApi";
+import TrackSearch from "../../components/TrackSearch";
+import AlbumSearch from "../../components/AlbumSearch";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Dashboard from "../../components/Dashboard";
+import SearchLayout from "../../layouts/SearchLayout";
 
 const SearchPage = () => {
   const [search, setSearch] = useState<string>("");
@@ -20,6 +24,7 @@ const SearchPage = () => {
   const { data: session } = useSession();
   const accessToken: any = session?.accessToken;
   const debouncedSearch = useDebounce(search, 500);
+  const router=  useRouter();
 
   useEffect(() => {
     if (!accessToken) return;
@@ -41,6 +46,7 @@ const SearchPage = () => {
           }
         );
         setSearchResult(res.body);
+        // router.push(`/search?q=${debouncedSearch}`,undefined,{ shallow:true})
       } catch (error) {
         console.log(error);
       }
@@ -61,7 +67,11 @@ const SearchPage = () => {
       <Search search={search} setSearch={setSearch} />
       {debouncedSearch ? (
         <div>
+            <div className="flex items-center text-white">
+                <Link href={`/search/tidak?q=${debouncedSearch}`}>tidak</Link>
+            </div>
           <div className="flex gap-x-4 w-full mt-4">
+          
             <div className="flex-[0.5]">
               <h1 className="text-white text-2xl font-bold mb-4">
                 Top results
@@ -106,4 +116,9 @@ const SearchPage = () => {
   );
 };
 
+SearchPage.Layout = SearchLayout;
+
+
 export default SearchPage;
+
+
