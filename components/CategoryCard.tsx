@@ -7,7 +7,6 @@ interface IProps {
   category: ICategory;
 }
 const CategoryCard = ({ category }: IProps) => {
-    console.log(category)
   return (
     <Link href="/">
         <div className="relative cursor-pointer">

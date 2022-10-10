@@ -7,19 +7,19 @@ interface IProps {
 }
 function RecentlyPlayed({ track }:IProps) {
   console.log(track)
-  const [play, setPlay] = useRecoilState(playState);
-  const [playingTrack, setPlayingTrack] = useRecoilState<any>(playingTrackState);
+  // const [play, setPlay] = useRecoilState(playState);
+  // const [playingTrack, setPlayingTrack] = useRecoilState<any>(playingTrackState);
 
-  const handlePlay = () => {
-    setPlayingTrack(track);
+  // const handlePlay = () => {
+  //   setPlayingTrack(track);
 
-    if (track.track.uri === playingTrack.uri) {
-      setPlay(!play);
-    }
-  };
+  //   if (track.track.uri === playingTrack.uri) {
+  //     setPlay(!play);
+  //   }
+  // };
 
   return (
-    <div className="flex items-center space-x-3" onClick={handlePlay}>
+    <div className="flex items-center space-x-3" >
       <img
         src={track?.track.album.images[1].url}
         alt="album-image"

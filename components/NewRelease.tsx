@@ -18,18 +18,18 @@ interface IProps {
 }
 const NewRelease = ({ items }: IProps) => {
   console.log(items);
-  const [play, setPlay] = useRecoilState(playState);
-  const [playingTrack, setPlayingTrack] =
-    useRecoilState<any>(playingTrackState);
+  // const [play, setPlay] = useRecoilState(playState);
+  // const [playingTrack, setPlayingTrack] =
+  //   useRecoilState<any>(playingTrackState);
   const [hasLiked, setHasLiked] = useState(false);
 
-  const handlePlay = () => {
-    setPlayingTrack(items);
+  // const handlePlay = () => {
+  //   setPlayingTrack(items);
 
-    if (items.uri === playingTrack.uri) {
-      setPlay(!play);
-    }
-  };
+  //   if (items.uri === playingTrack.uri) {
+  //     setPlay(!play);
+  //   }
+  // };
 
   const [onHover, setOnHover] = useState(false);
 
@@ -45,7 +45,7 @@ const NewRelease = ({ items }: IProps) => {
         height={items.images[1].height}
         width={items.images[1].width}
       />
-      {onHover && (
+      {/* {onHover && (
         <div onClick={handlePlay} className="rounded-full absolute right-2 bottom-6 grid place-items-center bg-green-500 w-8 h-8">
           {play ? (
             <FaPause className="text-white"  />
@@ -54,7 +54,7 @@ const NewRelease = ({ items }: IProps) => {
 
           )}
         </div>
-      )}
+      )} */}
   
     </div>
   );

@@ -1,13 +1,12 @@
 import React from 'react'
+import Search from '../components/Search'
 
 const SearchLayout = ({ children }:{children:React.ReactNode}) => {
   return (
-    <div>
-        <div className='h-44 bg-white w-44'>
-            <h1 className='text-white'>dsfsdfds</h1>
-        </div>
+    <>
+        <Search />
         {children}
-    </div>
+    </>
   )
 }
 

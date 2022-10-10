@@ -1,6 +1,10 @@
 import React,{ useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineShortText } from "react-icons/md";
+import { useRecoilState } from "recoil";
+import { searchState } from "../atoms/searchAtom";
+import { useSearch } from "../lib/zustand";
+import shallow from 'zustand/shallow'
 
 interface IProps {
   search:string;
@@ -8,11 +12,14 @@ interface IProps {
 }
 
 
-const Search = ({ search,setSearch }: IProps) => {
+const Search = () => {
+  const [search,setSearch] = useSearch((state:any)=>[state.search,state.setSearch],shallow);
+
+  console.log(search)
 
   return (
-    <>
-      <div className="max-w-5xl flex  bg-[#2e2e2e] rounded-lg overflow-hidden space-x-2 items-center p-2">
+    <div className="bg-black pt-4">
+      <div className="max-w-4xl  relative z-50 ml-16 lg:ml-24 xl:ml-32 flex  bg-[#2e2e2e] rounded-lg overflow-hidden space-x-2 items-center p-2">
         <IoMdSearch className="text-white text-3xl animate-pulse" />
         <input
           type="text"
@@ -40,7 +47,7 @@ const Search = ({ search,setSearch }: IProps) => {
 
         <button className="tag">Minimal</button>
       </div> */}
-    </>
+    </div>
   );
 };
 

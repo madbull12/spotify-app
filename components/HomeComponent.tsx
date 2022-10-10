@@ -19,8 +19,8 @@ import { v4 as uuidv4 } from "uuid";
 // });
 
 const HomeComponent = () => {
-  const [playingTrack, setPlayingTrack] =
-    useRecoilState<any>(playingTrackState);
+  // const [playingTrack, setPlayingTrack] =
+  //   useRecoilState<any>(playingTrackState);
   const [showPlayer, setShowPlayer] = useState(false);
 
   const { data: session } = useSession();
@@ -91,11 +91,11 @@ const HomeComponent = () => {
           <div className="w-full"></div>
         </div>
       </Body>
-      {showPlayer && (
+      {/* {showPlayer && (
         <div className="fixed bottom-0 left-0 right-0 z-50">
           <Player accessToken={accessToken} trackUri={playingTrack.uri} />
         </div>
-      )}
+      )} */}
     </main>
   );
 };
