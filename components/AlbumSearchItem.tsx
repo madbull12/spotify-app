@@ -12,15 +12,15 @@ const AlbumSearchItem = ({ album }: IProps ) => {
   return (
     <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
         <Card>
-            <div className='space-y-3 relative '>
+            <div className='space-y-3 relative group '>
                 <div className='relative'>
                     <Image
-                        src={album.images[1].url}
-                        height={album.images[1].height}
-                        width={album.images[1].width}
+                        src={album.images[0].url}
+                        height={200}
+                        width={200}
                     />
                     {hovered && (
-                        <div className='w-10 absolute bottom-3 right-2 h-10 rounded-full bg-green-500 grid place-items-center'>
+                        <div className='w-10   absolute bottom-4 right-2 h-10 rounded-full bg-green-500 grid place-items-center'>
                             <FaPlay />
                         </div>
                     )}

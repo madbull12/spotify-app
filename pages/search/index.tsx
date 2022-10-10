@@ -19,6 +19,8 @@ import { NextPageWithLayout } from "../_app";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { searchState, searchValue } from "../../atoms/searchAtom";
 import { useSearch } from "../../lib/zustand";
+import { FaPlay } from "react-icons/fa";
+import PlayButton from "../../components/PlayButton";
 
 const SearchPage:NextPageWithLayout = () => {
   const search = useSearch((state:any)=>state.search);
@@ -29,6 +31,7 @@ const SearchPage:NextPageWithLayout = () => {
   const router=  useRouter();
   const [categories, setCategories] = useState<any>(null);
   const accessToken: any = session?.accessToken;
+  const [hovered,setHovered] = useState<boolean>();
 
   useEffect(() => {
     if (!accessToken) return;
@@ -96,23 +99,31 @@ const SearchPage:NextPageWithLayout = () => {
                 Top results
               </h1>
               {searchResult?.tracks?.items.slice(0, 1).map((track) => (
-                <Card key={v4()}>
-                  <Image
-                    src={track.album.images[1].url}
-                    height={100}
-                    className="rounded-lg"
-                    width={100}
-                  />
-                  <p className="text-4xl text-white font-bold ">{track.name}</p>
-                  <div className="flex items-center gap-x-4">
-                    <p className="text-zinc-500 font-semibold">
-                      {track.artists[0].name}
-                    </p>
-                    <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
-                      {track.type}
-                    </span>
-                  </div>
-                </Card>
+                <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
+                  <Card key={v4()}>
+                    <Image
+                      src={track.album.images[1].url}
+                      height={100}
+                      className="rounded-lg"
+                      width={100}
+                    />
+                    <p className="text-4xl text-white font-bold ">{track.name}</p>
+                    <div className="flex items-center gap-x-4">
+                      <p className="text-zinc-500 font-semibold">
+                        {track.artists[0].name}
+                      </p>
+                      <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
+                        {track.type}
+                      </span>
+                    </div>
+                    {hovered && (
+                        <div className="absolute bottom-4 right-2">
+                          <PlayButton />
+                        </div>
+                      )}
+                  </Card>
+                </div>
+                
               ))}
             </div>
             <div className="space-y-2 flex-[0.75]">
