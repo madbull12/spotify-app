@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil'
 import Dashboard from '../components/Dashboard'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
+import AuthWrapper from '../components/AuthWrapper'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -21,11 +22,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
   return getLayout(
 
       <SessionProvider session={session}>
-            <Dashboard>
-              <Component {...pageProps} />
+        <AuthWrapper>
+          <Dashboard>
+            <Component {...pageProps} />
 
 
-            </Dashboard>
+          </Dashboard>
+
+        </AuthWrapper>
+           
 
 
 

@@ -30,12 +30,13 @@ const SearchPage:NextPageWithLayout = () => {
   const search = useSearch((state:any)=>state.search);
   const [searchResult, setSearchResult] =
     useState<SpotifyApi.SearchResponse | null>(null);
-  const { data: session } = useSession();
+  const { status,data: session }= useSession();
   const debouncedSearch = useDebounce(search, 500);
   const router=  useRouter();
   const [categories, setCategories] = useState<any>(null);
   const accessToken: any = session?.accessToken;
   const [hovered,setHovered] = useState<boolean>();
+
 
   useEffect(() => {
     if (!accessToken) return;

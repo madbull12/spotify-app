@@ -45,7 +45,7 @@ export default function Dropdown() {
                   className={`${
                     active && "bg-white/10"
                   } group flex rounded-md items-center w-full px-2 py-2 text-sm font-semibold tracking-wide text-white cursor-default`}
-                  onClick={() => signOut({ redirect: false })}
+                  onClick={() => signOut({redirect: false, callbackUrl: "/auth/signin"})}
                 >
                   <IoMdLogOut className="w-5 h-5 mr-2" aria-hidden="true" />
                   Log out

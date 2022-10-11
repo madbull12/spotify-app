@@ -3,7 +3,7 @@ import React from 'react'
 import Card from './Card'
 
 interface IProps {
-    show:SpotifyApi.ShowObjectFull
+    show:SpotifyApi.ShowObjectSimplified
 }
 const PodcastSearchItem = ({ show }:IProps ) => {
   return (
