@@ -16,8 +16,9 @@ const AlbumSearchItem = ({ album }: IProps ) => {
                 <div className='relative'>
                     <Image
                         src={album.images[0].url}
-                        height={200}
-                        width={200}
+                        height={150}
+                        width={150}
+                        className="rounded-md"
                     />
                     {hovered && (
                         <div className='w-10   absolute bottom-4 right-2 h-10 rounded-full bg-green-500 grid place-items-center'>
@@ -27,7 +28,7 @@ const AlbumSearchItem = ({ album }: IProps ) => {
                 
                 </div>
             
-                <p className="font-semibold text-white">
+                <p className="font-semibold text-white w-[120px]">
                     {album.name}
                 </p>
                 <p className='text-gray-400 '>

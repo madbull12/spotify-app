@@ -5,7 +5,7 @@ interface IProps {
 }
 const Card = ({ children }: IProps) => {
   return (
-    <div className="p-4 hover:-translate-y-2 group  bg-neutral-900 rounded-lg space-y-4 hover:bg-neutral-800 duration-150 ease-in-out relative transition-all cursor-pointer">
+    <div className="p-4 max-w-[250px] hover:-translate-y-2 group  bg-neutral-900 rounded-lg space-y-4 hover:bg-neutral-800 duration-150 ease-in-out relative transition-all cursor-pointer">
       {children}
     </div>
   );

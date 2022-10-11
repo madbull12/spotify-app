@@ -46,10 +46,6 @@ const HomeComponent = () => {
     fetchNewReleases();
   }, []);
 
-
-
-  
-
   useEffect(() => {
     setShowPlayer(true);
   }, []);

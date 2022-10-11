@@ -21,6 +21,9 @@ import { searchState, searchValue } from "../../atoms/searchAtom";
 import { useSearch } from "../../lib/zustand";
 import { FaPlay } from "react-icons/fa";
 import PlayButton from "../../components/PlayButton";
+import ArtistsSearch from "../../components/ArtistsSearch";
+import PlaylistsSearch from "../../components/PlaylistsSearch";
+import EpisodesSearch from "../../components/EpisodesSearch";
 
 const SearchPage:NextPageWithLayout = () => {
   const search = useSearch((state:any)=>state.search);
@@ -88,7 +91,7 @@ const SearchPage:NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {debouncedSearch  ? (
-        <div>
+        <div className="space-y-8">
             <div className="flex items-center text-white">
                 <Link href={`/search/tidak?q=${debouncedSearch}`}>tidak</Link>
             </div>
@@ -135,9 +138,11 @@ const SearchPage:NextPageWithLayout = () => {
               </div>
             </div>
           </div>
-          <div className="my-8">
-            <AlbumSearch albums={searchResult?.albums?.items} />
-          </div>
+         
+          <AlbumSearch albums={searchResult?.albums?.items} />
+          <ArtistsSearch artists={searchResult?.artists?.items} />
+          <PlaylistsSearch playlists={searchResult?.playlists?.items} />
+          <EpisodesSearch episodes={searchResult?.episodes?.items} />
         </div>
       ) : (
         <div className="grid grid-cols-5 gap-4 mt-8">
