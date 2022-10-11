@@ -18,6 +18,7 @@ const PlaylistSearchItem = ({ playlist }: IProps ) => {
                       src={playlist.images[0].url}
                       height={150}
                       width={150}
+                      objectFit="cover"
                       className="rounded-md "
                   />
                   {hovered && (

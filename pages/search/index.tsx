@@ -64,7 +64,7 @@ const SearchPage:NextPageWithLayout = () => {
       try {
         const res = await spotifyApi.search(
           debouncedSearch,
-          ["track", "playlist", "album", "episode", "artist"],
+          ["track", "playlist", "album", "episode", "artist","show"],
           {
             limit: 20,
             offset: 1,
