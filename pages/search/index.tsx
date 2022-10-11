@@ -24,6 +24,7 @@ import PlayButton from "../../components/PlayButton";
 import ArtistsSearch from "../../components/ArtistsSearch";
 import PlaylistsSearch from "../../components/PlaylistsSearch";
 import EpisodesSearch from "../../components/EpisodesSearch";
+import PodcastSearch from "../../components/PodcastSearch";
 
 const SearchPage:NextPageWithLayout = () => {
   const search = useSearch((state:any)=>state.search);
@@ -143,6 +144,7 @@ const SearchPage:NextPageWithLayout = () => {
           <ArtistsSearch artists={searchResult?.artists?.items} />
           <PlaylistsSearch playlists={searchResult?.playlists?.items} />
           <EpisodesSearch episodes={searchResult?.episodes?.items} />
+          <PodcastSearch shows={searchResult?.shows?.items} />
         </div>
       ) : (
         <div className="grid grid-cols-5 gap-4 mt-8">
