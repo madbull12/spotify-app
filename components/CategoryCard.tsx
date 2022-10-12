@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { ICategory } from "../interface";
 
@@ -7,8 +8,10 @@ interface IProps {
   category: ICategory;
 }
 const CategoryCard = ({ category }: IProps) => {
+  console.log(category);
+
   return (
-    <Link href="/">
+    <Link href={`/genre/${category.id}`}>
         <div className="relative cursor-pointer">
             <Image
                 src={category.icons[0].url}

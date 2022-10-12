@@ -2,7 +2,7 @@ import React from 'react'
 import PlaylistSearchItem from './PlaylistSearchItem'
 
 interface IProps {
-    playlists:SpotifyApi.PlaylistObjectFull[] | undefined
+    playlists:SpotifyApi.PlaylistObjectSimplified[] | undefined
 }
 const PlaylistsSearch = ({ playlists }:IProps) => {
   return (
