@@ -28,7 +28,7 @@ const AlbumSearchItem = ({ album }: IProps ) => {
                 
                 </div>
             
-                <p className="font-semibold text-white w-[120px]">
+                <p className="font-semibold text-white truncate">
                     {album.name}
                 </p>
                 <p className='text-gray-400 '>

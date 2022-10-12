@@ -30,7 +30,7 @@ const PlaylistSearchItem = ({ playlist }: IProps ) => {
               
               </div>
           
-              <p className="font-semibold text-white capitalize">
+              <p className="font-semibold text-white capitalize truncate">
                    {playlist.name}
               </p>
               <p className='text-gray-400 capitalize'>

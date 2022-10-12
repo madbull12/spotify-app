@@ -29,7 +29,7 @@ const ArtistSearchItem = ({ artist }:IProps ) => {
             
             </div>
         
-            <p className="font-semibold text-white capitalize">
+            <p className="font-semibold text-white capitalize truncate">
                 {artist.name}
             </p>
             <p className='text-gray-400 capitalize'>

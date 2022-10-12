@@ -21,7 +21,7 @@ const PodcastSearchItem = ({ show }:IProps ) => {
             
             </div>
         
-            <p className="font-semibold text-white w-[120px]">
+            <p className="font-semibold text-white w-[120px] truncate">
                 {show.name}
             </p>
             {/* <p className='text-gray-400 text-sm'>

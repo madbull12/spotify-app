@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import { AppProps } from 'next/app'
 import { SessionProvider } from "next-auth/react"
 import { RecoilRoot } from 'recoil'
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import Dashboard from '../components/Dashboard'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
@@ -18,17 +19,22 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
 
   const getLayout = Component.getLayout || ((page) => page);
-
+  const queryClient = new QueryClient()
   return getLayout(
 
       <SessionProvider session={session}>
+
         <AuthWrapper>
-          <Dashboard>
-            <Component {...pageProps} />
+          <QueryClientProvider client={queryClient}>
+            <Dashboard>
+              <Component {...pageProps} />
 
 
-          </Dashboard>
+            </Dashboard>
 
+
+          </QueryClientProvider>
+     
         </AuthWrapper>
            
 

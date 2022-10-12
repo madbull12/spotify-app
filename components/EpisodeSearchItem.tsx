@@ -34,7 +34,7 @@ const EpisodeSearchItem = ({ episode }:IProps ) => {
                   
                   </div>
               
-                  <p className="font-semibold text-white w-[120px]">
+                  <p className="font-semibold text-white truncate">
                       {episode.name}
                   </p>
                   <p className='text-gray-400 text-sm'>
