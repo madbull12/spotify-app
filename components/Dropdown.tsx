@@ -12,8 +12,9 @@ export default function Dropdown() {
   return (
     <Menu as="div" className="w-24 h-12 relative items-center sm:flex hidden">
       <div className="w-full absolute right-1 group">
-        <Menu.Button className="flex justify-between items-center w-full p-2 text-sm font-medium text-white bg-[#1A1A1A] rounded-full hover:bg-[#3E3E3E]">
-          <BsChevronBarDown className="h-6 text-[#686868]" aria-hidden="true" />
+        <Menu.Button className="flex  justify-between items-center  p-2  font-medium text-white bg-[#1A1A1A] gap-x-2 rounded-full hover:bg-[#3E3E3E]">
+          <p className="whitespace-nowrap text-sm">{session?.user?.name}</p>
+          <BsChevronBarDown className=" text-[#686868]" aria-hidden="true" />
 
           <div className="">
             {/* <Image

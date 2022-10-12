@@ -15,7 +15,7 @@ const ArtistSearchItem = ({ artist }:IProps ) => {
         <div className='space-y-3 relative group '>
             <div className='relative'>
                 <Image
-                    src={artist.images[0].url}
+                    src={artist?.images[0]?.url ?? ""}
                     height={150}
                     width={150}
                     className="rounded-full"

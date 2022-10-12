@@ -3,12 +3,15 @@ import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import HomeComponent from '../components/HomeComponent'
 import Loader from '../components/Loader'
+import spotifyApi from '../lib/spotifyApi'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const [myData,setMyData] = useState<any>(null);
   const { status,data: session }= useSession({
     required:true,
     onUnauthenticated() {
@@ -17,12 +20,38 @@ const Home: NextPage = () => {
 
   });
 
+  const accessToken: any = session?.accessToken;
+
+
+  useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi.setAccessToken(accessToken);
+  }, [accessToken]);
+
+  useEffect(() => {
+      // if (!accessToken) return;
+  
+      const fetchMe = async () => {
+        try {
+          const res = await spotifyApi.getMe();
+          setMyData(res.body);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchMe();
+  }, []);
+
+  console.log(myData)
+
   if(status==="loading") {
     return      <div className='flex items-center justify-center'>
       <Loader />
 
    </div>
   }
+
+  
 
   return (
     <div>

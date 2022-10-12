@@ -10,7 +10,7 @@ const AlbumSearchItem = ({ album }: IProps ) => {
     const [hovered,setHovered] = useState<boolean>(false);
 
   return (
-    <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
+    <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} >
         <Card>
             <div className='space-y-3 relative group '>
                 <div className='relative'>
