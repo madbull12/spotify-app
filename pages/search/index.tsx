@@ -104,30 +104,33 @@ const SearchPage:NextPageWithLayout = () => {
                 Top results
               </h1>
               {searchResult?.tracks?.items.slice(0, 1).map((track) => (
-                <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
-                  <Card key={v4()} large={true}>
-                    <Image
-                      src={track.album.images[1].url}
-                      height={100}
-                      className="rounded-lg"
-                      width={100}
-                    />
-                    <p className="text-4xl text-white font-bold ">{track.name}</p>
-                    <div className="flex items-center gap-x-4">
-                      <p className="text-zinc-500 font-semibold truncate">
-                        {track.artists[0].name}
-                      </p>
-                      <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
-                        {track.type}
-                      </span>
-                    </div>
-                    {hovered && (
-                        <div className="absolute bottom-4 right-2">
-                          <PlayButton />
-                        </div>
-                      )}
-                  </Card>
-                </div>
+                <Link href={`/album/${track.album.id}`}>
+                  <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} >
+                    <Card key={v4()} large={true}>
+                      <Image
+                        src={track.album.images[1].url ?? ""}
+                        height={100}
+                        className="rounded-lg"
+                        width={100}
+                      />
+                      <p className="text-4xl text-white font-bold ">{track.name}</p>
+                      <div className="flex items-center gap-x-4">
+                        <p className="text-zinc-500 font-semibold truncate">
+                          {track.artists[0].name}
+                        </p>
+                        <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
+                          {track.type}
+                        </span>
+                      </div>
+                      {hovered && (
+                          <div className="absolute bottom-4 right-2">
+                            <PlayButton />
+                          </div>
+                        )}
+                    </Card>
+                  </div>
+                </Link>
+                
                 
               ))}
             </div>
