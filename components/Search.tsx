@@ -1,10 +1,11 @@
-import React,{ useState } from "react";
+import React,{ useState,useEffect } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineShortText } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { searchState } from "../atoms/searchAtom";
 import { useSearch } from "../lib/zustand";
 import shallow from 'zustand/shallow'
+import { useRouter } from "next/router";
 
 interface IProps {
   search:string;
@@ -14,8 +15,10 @@ interface IProps {
 
 const Search = () => {
   const [search,setSearch] = useSearch((state:any)=>[state.search,state.setSearch],shallow);
-
-  console.log(search)
+  const router = useRouter();
+  useEffect(()=>{
+    setSearch("")
+  },[router.pathname])
 
   return (
     <div className="bg-black pt-4">

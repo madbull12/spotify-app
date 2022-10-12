@@ -99,13 +99,13 @@ const SearchPage:NextPageWithLayout = () => {
             </div>
           <div className="flex gap-x-4 w-full mt-4">
             
-            <div className="flex-[0.5]">
+            <div className="flex-[0.4]">
               <h1 className="text-white text-2xl font-bold mb-4">
                 Top results
               </h1>
               {searchResult?.tracks?.items.slice(0, 1).map((track) => (
                 <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
-                  <Card key={v4()}>
+                  <Card key={v4()} large={true}>
                     <Image
                       src={track.album.images[1].url}
                       height={100}
@@ -114,7 +114,7 @@ const SearchPage:NextPageWithLayout = () => {
                     />
                     <p className="text-4xl text-white font-bold ">{track.name}</p>
                     <div className="flex items-center gap-x-4">
-                      <p className="text-zinc-500 font-semibold">
+                      <p className="text-zinc-500 font-semibold truncate">
                         {track.artists[0].name}
                       </p>
                       <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
@@ -131,7 +131,7 @@ const SearchPage:NextPageWithLayout = () => {
                 
               ))}
             </div>
-            <div className="space-y-2 flex-[0.75]">
+            <div className="space-y-2 flex-[0.6]">
               <h1 className="text-white text-2xl font-bold mb-4">Tracks</h1>
               <div className="border p-2 rounded-lg h-96 overflow-y-scroll  scrollbar-thumb-zinc-800 scrollbar-thin   scrollbar-track-gray-100">
                 {searchResult?.tracks?.items.slice(0, 10).map((track) => (
