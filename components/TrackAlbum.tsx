@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React,{ useState } from 'react'
 import { FaHeart, FaPlay } from 'react-icons/fa';
 import { FiHeart, FiMoreHorizontal } from 'react-icons/fi';
@@ -14,11 +15,12 @@ const TrackAlbum = ({ track,index }:IProps) => {
   return (
     <div onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} className='flex gap-x-4 items-center py-2 hover:bg-neutral-800 rounded-lg px-4'>
         {hovered ? (
-            <FaPlay className='text-xs' />
+            <FaPlay className='text-xs text-white' />
         ):(
-            <span>{index}</span>
+            <span className='text-gray-400'>{index}</span>
 
         )}
+      
         <div className='flex flex-col items-start flex-1'>
             <p className='text-white'>{track.name}</p>
             <div className='flex items-center gap-x-1'>
@@ -26,16 +28,16 @@ const TrackAlbum = ({ track,index }:IProps) => {
                     <span className='rounded-sm bg-gray-400 text-black text-xs w-4 h-4 grid place-items-center'>E</span>
 
                 )}
-                <p>
+                <p className='text-gray-400'>
                     {track.artists[0].name}
                 </p>
             </div>
 
         </div>
        
-        <FiHeart className={` ${hovered ? "visible" : "invisible"}`} />
-        <p>{msToClock(track.duration_ms)}</p>
-        <FiMoreHorizontal className={` ${hovered ? "visible" : "invisible"}`} />
+        <FiHeart className={` ${hovered ? "visible" : "invisible"} text-gray-400`} />
+        <p className='text-gray-400'>{msToClock(track.duration_ms)}</p>
+        <FiMoreHorizontal className={` ${hovered ? "visible" : "invisible"} text-gray-400`} />
     </div>
   )
 }

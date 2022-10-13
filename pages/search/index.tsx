@@ -115,9 +115,12 @@ const SearchPage:NextPageWithLayout = () => {
                       />
                       <p className="text-4xl text-white font-bold ">{track.name}</p>
                       <div className="flex items-center gap-x-4">
-                        <p className="text-zinc-500 font-semibold truncate">
-                          {track.artists[0].name}
-                        </p>
+                        <Link href={`/artist/${track.artists[0].id}`}>
+                          <p className="text-zinc-500 font-semibold truncate hover:underline">
+                            {track.artists[0].name}
+                          </p>
+                        </Link>
+                    
                         <span className="bg-black rounded-full text-white  font-bold uppercase px-2 text-sm">
                           {track.type}
                         </span>
