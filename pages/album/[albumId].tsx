@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React from 'react'
+import React,{ useState } from 'react'
 import spotifyApi from '../../lib/spotifyApi';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
@@ -13,6 +13,7 @@ import TrackAlbum from '../../components/TrackAlbum';
 
 const AlbumPage = () => {
     const router:any = useRouter();
+
     
     const fetchAlbum =async()=>{
         const res = await spotifyApi.getAlbum(router?.query.albumId);
@@ -62,11 +63,11 @@ const AlbumPage = () => {
           <FiMoreHorizontal className='text-4xl text-gray-400' />
         </div>
         <div className="flex flex-col text-gray-400">
-          <div className='flex items-center  gap-x-4'>
+          <div className='flex items-center  gap-x-4 px-4'>
             <span>#</span>
             <span className='flex-1'>TITLE</span>
             <BsClock />
-          </div>
+          </div >
             {data?.tracks.items.map((track,i:number)=>(
               <TrackAlbum track={track} index={i+1}/>
             ))}
