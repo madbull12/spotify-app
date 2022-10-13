@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import React from 'react'
 import Card from './Card';
+import NoImage from '../public/img/no-image.jpg'
+
 
 interface IProps {
     episode:SpotifyApi.EpisodeObjectSimplified;
@@ -25,7 +27,7 @@ const EpisodeSearchItem = ({ episode }:IProps ) => {
               <div className='space-y-3 relative group '>
                   <div className='relative'>
                       <Image
-                          src={episode.images[0].url}
+                          src={episode.images[0].url ?? NoImage}
                           height={150}
                           width={150}
                           className="rounded-md"

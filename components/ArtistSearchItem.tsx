@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react'
 import Card from './Card';
 import PlayButton from './PlayButton';
+import NoImage from '../public/img/no-image.jpg'
 
 interface IProps {
   artist:SpotifyApi.ArtistObjectFull
@@ -15,10 +16,11 @@ const ArtistSearchItem = ({ artist }:IProps ) => {
         <div className='space-y-3 relative group '>
             <div className='relative'>
                 <Image
-                    src={artist?.images[0]?.url ?? ""}
+                    src={artist?.images[0]?.url ??  NoImage}
                     height={150}
                     width={150}
-                    className="rounded-full"
+                    className="rounded-full "
+                    objectFit='cover'
                 />
                 {hovered && (
                   <div className='absolute bottom-4 right-4 '>

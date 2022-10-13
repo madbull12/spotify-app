@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React,{ useState } from 'react'
 import { FaPlay } from 'react-icons/fa';
 import Card from './Card';
+import NoImage from '../public/img/no-image.jpg'
 
 interface IProps {
     album:SpotifyApi.AlbumObjectSimplified
@@ -15,7 +16,7 @@ const AlbumSearchItem = ({ album }: IProps ) => {
             <div className='space-y-3 relative group '>
                 <div className='relative'>
                     <Image
-                        src={album.images[0].url}
+                        src={album.images[0].url ?? NoImage}
                         height={150}
                         width={150}
                         className="rounded-md"

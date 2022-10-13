@@ -2,6 +2,8 @@ import Image from 'next/image';
 import React, { useState } from 'react'
 import Card from './Card';
 import PlayButton from './PlayButton';
+import NoImage from '../public/img/no-image.jpg'
+
 
 interface IProps {
     playlist:SpotifyApi.PlaylistObjectSimplified
@@ -15,7 +17,7 @@ const PlaylistSearchItem = ({ playlist }: IProps ) => {
           <div className='space-y-3 relative group '>
               <div className='relative'>
                   <Image
-                      src={playlist.images[0].url}
+                      src={playlist.images[0].url ?? NoImage}
                       height={150}
                       width={150}
                       objectFit="cover"
