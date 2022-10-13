@@ -2,22 +2,13 @@ import Image from 'next/image';
 import React from 'react'
 import Card from './Card';
 import NoImage from '../public/img/no-image.jpg'
+import timeConversion from '../helper/timeConversion'
 
 
 interface IProps {
     episode:SpotifyApi.EpisodeObjectSimplified;
 }
 
-function msToTime(ms:number) {
-    let seconds = (ms / 1000).toFixed(0);
-    let minutes = (ms / (1000 * 60)).toFixed(0);
-    let hours = (ms / (1000 * 60 * 60)).toFixed(0);
-    let days = (ms / (1000 * 60 * 60 * 24)).toFixed(0);
-    if (Number(seconds) < 60) return `${seconds} Sec`
-    else if (Number(minutes) < 60) return minutes + " Min";
-    else if (Number(hours) < 24) return hours + " Hrs";
-    else return days + " Days"
-  }
 
 const EpisodeSearchItem = ({ episode }:IProps ) => {
 
@@ -40,7 +31,7 @@ const EpisodeSearchItem = ({ episode }:IProps ) => {
                       {episode.name}
                   </p>
                   <p className='text-gray-400 text-sm'>
-                      {episode.release_date} . {msToTime(episode.duration_ms)}
+                      {episode.release_date} . {timeConversion(episode.duration_ms)}
                   </p>
               
               </div>

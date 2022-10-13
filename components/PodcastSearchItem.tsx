@@ -3,7 +3,6 @@ import React from 'react'
 import Card from './Card'
 import NoImage from '../public/img/no-image.jpg'
 
-
 interface IProps {
     show:SpotifyApi.ShowObjectSimplified
 }
@@ -18,7 +17,7 @@ const PodcastSearchItem = ({ show }:IProps ) => {
                     height={150}
                     width={150}
                     className="rounded-md"
-                    
+
                 />
             
             
@@ -27,9 +26,7 @@ const PodcastSearchItem = ({ show }:IProps ) => {
             <p className="font-semibold text-white w-[120px] truncate">
                 {show.name}
             </p>
-            {/* <p className='text-gray-400 text-sm'>
-                {episode.release_date} . {msToTime(episode.duration_ms)}
-            </p> */}
+        
         
         </div>
     </Card>
