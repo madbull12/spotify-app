@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Loader from "../../components/Loader";
 import TrackAlbum from "../../components/TrackAlbum";
 import spotifyApi from "../../lib/spotifyApi";
@@ -16,25 +17,38 @@ const ArtistPage = () => {
     const res = await spotifyApi.getArtist(artistId);
     return await res.body;
   };
+  const fetchRelatedArtist = async () => {
+    const res = await spotifyApi.getArtistRelatedArtists(artistId);
+    return await res.body;
+  };
+  
+  
 
   const fetchArtistTopTracks = async () => {
     const res = await spotifyApi.getArtistTopTracks(artistId, "US");
     return await res.body;
   };
 
-  const artist = useQuery(["fetchArtist"], fetchArtist, {
-    staleTime: 100000,
-  });
+  const artist = useQuery(["fetchArtist"], fetchArtist);
 
   const artistTopTracks = useQuery(
     ["fetchArtistTopTracks"],
-    fetchArtistTopTracks,
-    {
-      staleTime: 100000,
-    }
+    fetchArtistTopTracks
   );
+  // const relatedArtists = useQuery(
+  //   ["fetchRelatedArtists"],
+  //   fetchRelatedArtist,{
+  //   refetchOnMount:true
+  // }
+ 
+  // );
 
-  console.log(artistTopTracks);
+  useEffect(() => {
+    artist.refetch();
+    artistTopTracks.refetch()
+  }, [router]);
+
+  console.log(artist);
 
   if (artist.isLoading)
     return (
@@ -55,7 +69,7 @@ const ArtistPage = () => {
         <div className="flex flex-col space-y-4">
           <p className="font-bold text-6xl text-white">{artist?.data?.name}</p>
           <p className="text-gray-400">
-            {artist?.data?.followers.total} followers
+            {artist?.data?.followers.total.toLocaleString()} followers
           </p>
         </div>
       </div>
@@ -73,6 +87,9 @@ const ArtistPage = () => {
           {seeAll ? "See less" : "See all" }
         </button>
       </div>
+      <Link href={`/album/5EzDhyNZuO7kuaABHwbBKX`}>
+            fuck
+      </Link>
     </div>
   );
 };
