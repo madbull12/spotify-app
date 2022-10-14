@@ -36,8 +36,10 @@ const HomeComponent = () => {
     return await res.body;
   }
 
-  const fetchRecommendations = async () => {
-    const res = await spotifyApi.getRecommendations();
+  const fetchMyTopArtists = async () => {
+    const res = await spotifyApi.getMyTopArtists({
+      limit:5
+    });
     return await res.body;
   }
 
@@ -63,14 +65,16 @@ const HomeComponent = () => {
     fetchNewReleases();
   }, []);
 
-  const featuredPlaylists = useQuery(["fetchFeaturedPlaylists"],fetchFeaturedPlaylists);
-  const recommendations = useQuery(["fetchRecommendations"],fetchRecommendations);
-
   useEffect(() => {
     setShowPlayer(true);
   }, []);
 
-  console.log(recommendations);
+
+  const featuredPlaylists = useQuery(["fetchFeaturedPlaylists"],fetchFeaturedPlaylists);
+
+
+
+
 
   return (
     <main>
@@ -107,10 +111,8 @@ const HomeComponent = () => {
           <div className="w-full"></div>
         </div> */}
         <div className="">
-          <h1 className="text-white">
-            {featuredPlaylists.data?.message}
-          </h1>
-          <PlaylistsSearch playlists={featuredPlaylists?.data?.playlists.items} />
+    
+          <PlaylistsSearch playlists={featuredPlaylists?.data?.playlists.items} title={featuredPlaylists?.data?.message} />
         </div>
       </Body>
       {/* {showPlayer && (
