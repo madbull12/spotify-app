@@ -102,15 +102,23 @@ const ArtistPage = () => {
       </div>
       <div>
         <h1>Discography</h1>
-        <div className="flex gap-x-4 ">
+        <div className="flex gap-x-4 mb-4 ">
           <button
-            className="rounded-full cursor-pointer text-white bg-zinc-900 px-4 py-2"
+            className={`rounded-full cursor-pointer  px-4 py-2 ${
+              discography === "album"
+                ? "bg-white text-black"
+                : "text-white bg-zinc-900"
+            }`}
             onClick={() => setDiscography("album")}
           >
             Albums
           </button>
           <button
-            className="rounded-full cursor-pointer text-white bg-zinc-900 px-4 py-2"
+              className={`rounded-full cursor-pointer  px-4 py-2 ${
+                discography === "single"
+                  ? "bg-white text-black"
+                  : "text-white bg-zinc-900"
+              }`}
             onClick={() => setDiscography("single")}
           >
             Single and EP

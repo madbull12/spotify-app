@@ -11,6 +11,9 @@ import spotifyApi from "../lib/spotifyApi";
 import { IAlbum } from "../interface";
 import NewRelease from "./NewRelease";
 import { v4 as uuidv4 } from "uuid";
+import { useQuery } from "@tanstack/react-query";
+import PlaylistSearchItem from "./PlaylistSearchItem";
+import PlaylistsSearch from "./PlaylistsSearch";
 
 // const spotifyApi = new SpotifyWebApi({
 //   clientId:process.env.SPOTIFY_CLIENT_ID,
@@ -27,10 +30,24 @@ const HomeComponent = () => {
   const { accessToken }: any = session;
   const [newReleases, setNewReleases] = useState<any>(null);
 
+
+  const fetchFeaturedPlaylists = async () => {
+    const res = await spotifyApi.getFeaturedPlaylists();
+    return await res.body;
+  }
+
+  const fetchRecommendations = async () => {
+    const res = await spotifyApi.getRecommendations();
+    return await res.body;
+  }
+
+
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
+
+
 
   useEffect(() => {
     if (!accessToken) return;
@@ -46,11 +63,14 @@ const HomeComponent = () => {
     fetchNewReleases();
   }, []);
 
+  const featuredPlaylists = useQuery(["fetchFeaturedPlaylists"],fetchFeaturedPlaylists);
+  const recommendations = useQuery(["fetchRecommendations"],fetchRecommendations);
+
   useEffect(() => {
     setShowPlayer(true);
   }, []);
 
-  console.log(newReleases);
+  console.log(recommendations);
 
   return (
     <main>
@@ -62,7 +82,7 @@ const HomeComponent = () => {
             <NewRelease key={uuidv4()} items={release} />
           ))}
         </div>
-        <div className="flex gap-x-8 md:relative min-w-full ml-6">
+        {/* <div className="flex gap-x-8 md:relative min-w-full ml-6">
           <div className="hidden xl:inline max-w-[270px]">
             <h2 className="text-white text-base lg:text-2xl font-bold mb-3">
               Genres
@@ -85,6 +105,12 @@ const HomeComponent = () => {
             </div>
           </div>
           <div className="w-full"></div>
+        </div> */}
+        <div className="">
+          <h1 className="text-white">
+            {featuredPlaylists.data?.message}
+          </h1>
+          <PlaylistsSearch playlists={featuredPlaylists?.data?.playlists.items} />
         </div>
       </Body>
       {/* {showPlayer && (
