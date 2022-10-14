@@ -148,7 +148,7 @@ const SearchPage:NextPageWithLayout = () => {
           </div>
          
           <AlbumSearch albums={searchResult?.albums?.items} />
-          <ArtistsSearch artists={searchResult?.artists?.items} />
+          <ArtistsSearch title={"Artists"} artists={searchResult?.artists?.items} />
           <PlaylistsSearch playlists={searchResult?.playlists?.items} />
           <EpisodesSearch episodes={searchResult?.episodes?.items} />
           <PodcastSearch shows={searchResult?.shows?.items} />

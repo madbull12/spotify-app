@@ -17,7 +17,7 @@ const PlaylistSearchItem = ({ playlist }: IProps ) => {
           <div className='space-y-3 relative group '>
               <div className='relative'>
                   <Image
-                      src={playlist.images[0].url ?? NoImage}
+                      src={playlist?.images[0]?.url ?? NoImage}
                       height={150}
                       width={150}
                       objectFit="cover"
@@ -33,10 +33,10 @@ const PlaylistSearchItem = ({ playlist }: IProps ) => {
               </div>
           
               <p className="font-semibold text-white capitalize truncate">
-                   {playlist.name}
+                   {playlist?.name }
               </p>
               <p className='text-gray-400 capitalize'>
-                    by {playlist.owner.display_name}
+                    by {playlist?.owner.display_name ?? "Unknown"}
               </p>
           
           </div>
