@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react'
-import { useRecoilState } from 'recoil';
-import { playingTrackState, playState } from '../atoms/playerAtom';
+
 import SpotifyPlayer from 'react-spotify-web-playback';
+import { usePlayTrack } from '../lib/zustand';
+import shallow from 'zustand/shallow';
 
 
 const Player = ({ accessToken,trackUri }:any) => {
-    const [play,setPlay]= useRecoilState(playState);
-  const[playingTrack,setPlayingTrack] = useRecoilState(playingTrackState);
+  //   const [play,setPlay]= useRecoilState(playState);
+  // const[playingTrack,setPlayingTrack] = useRecoilState(playingTrackState);
+  const [playingTrack, setPlayingTrack] = usePlayTrack((state:any)=>[state.playingTrack,state.setPlayingTrack],shallow)
+  const [isPlaying,setIsPlaying] = usePlayTrack((state:any)=>[state.isPlaying,state.setIsPlaying],shallow);
 
   useEffect(()=>{
-    if(trackUri) setPlay(true);
+    if(trackUri) setIsPlaying(true);
 
   
   },[trackUri])
@@ -35,9 +38,9 @@ const Player = ({ accessToken,trackUri }:any) => {
     token={accessToken}
     showSaveIcon
     callback={(state) => {
-      setPlay(state.isPlaying);
+      setIsPlaying(state.isPlaying);
     }}
-    play={play}
+    play={isPlaying}
     uris={trackUri ? [trackUri] : []}
     magnifySliderOnHover={true}
     autoPlay={true}

@@ -5,7 +5,13 @@ const nextConfig = {
 
 module.exports = {
   images: {
-    domains: ['i.scdn.co','platform-lookaside.fbsbx.com',"t.scdn.co","mosaic.scdn.co","thisis-images.scdn.co"],
+    // remotePatterns: [
+    //   {
+    //     protocol: "https",
+    //     hostname: "**.scdn.co",
+    //   },
+    // ],
+    domains: ['i.scdn.co',"seeded-session-images.scdn.co","charts-images.scdn.co",'platform-lookaside.fbsbx.com',"t.scdn.co","mosaic.scdn.co","thisis-images.scdn.co"],
   },
   nextConfig
 }

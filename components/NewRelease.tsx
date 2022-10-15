@@ -12,24 +12,26 @@ import { playingTrackState, playState } from "../atoms/playerAtom";
 import { IAlbum } from "../interface";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { FaPause, FaPlay, FaPlayCircle } from "react-icons/fa";
+import { usePlayTrack } from "../lib/zustand";
+import shallow from "zustand/shallow";
 
 interface IProps {
   items: IAlbum;
 }
 const NewRelease = ({ items }: IProps) => {
   console.log(items);
-  // const [play, setPlay] = useRecoilState(playState);
-  // const [playingTrack, setPlayingTrack] =
-  //   useRecoilState<any>(playingTrackState);
-  const [hasLiked, setHasLiked] = useState(false);
+  const [playingTrack, setPlayingTrack] = usePlayTrack((state:any)=>[state.playingTrack,state.setPlayingTrack],shallow)
+  const [isPlaying,setIsPlaying] = usePlayTrack((state:any)=>[state.isPlaying,state.setIsPlaying],shallow);
 
-  // const handlePlay = () => {
-  //   setPlayingTrack(items);
+  // const [hasLiked, setHasLiked] = useState(false);
+  console.log(playingTrack)
+  const handlePlay = () => {
+    setPlayingTrack(items);
 
-  //   if (items.uri === playingTrack.uri) {
-  //     setPlay(!play);
-  //   }
-  // };
+    if (items.uri === playingTrack.uri) {
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   const [onHover, setOnHover] = useState(false);
 
@@ -45,16 +47,16 @@ const NewRelease = ({ items }: IProps) => {
         height={items.images[1].height}
         width={items.images[1].width}
       />
-      {/* {onHover && (
+      {onHover && (
         <div onClick={handlePlay} className="rounded-full absolute right-2 bottom-6 grid place-items-center bg-green-500 w-8 h-8">
-          {play ? (
+          {items.uri === playingTrack.uri && isPlaying  ? (
             <FaPause className="text-white"  />
           ):(
             <FaPlay className="text-white"  />
 
           )}
         </div>
-      )} */}
+      )}
   
     </div>
   );

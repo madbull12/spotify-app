@@ -14,6 +14,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useQuery } from "@tanstack/react-query";
 import PlaylistSearchItem from "./PlaylistSearchItem";
 import PlaylistsSearch from "./PlaylistsSearch";
+import { usePlayTrack } from "../lib/zustand";
+import shallow from "zustand/shallow";
 
 // const spotifyApi = new SpotifyWebApi({
 //   clientId:process.env.SPOTIFY_CLIENT_ID,
@@ -25,6 +27,9 @@ const HomeComponent = () => {
   // const [playingTrack, setPlayingTrack] =
   //   useRecoilState<any>(playingTrackState);
   const [showPlayer, setShowPlayer] = useState(false);
+  const [playingTrack, setPlayingTrack] = usePlayTrack((state:any)=>[state.playingTrack,state.setPlayingTrack],shallow)
+  const [isPlaying,setIsPlaying] = usePlayTrack((state:any)=>[state.isPlaying,state.setIsPlaying],shallow);
+
 
   const { data: session } = useSession();
   const { accessToken }: any = session;
@@ -115,11 +120,7 @@ const HomeComponent = () => {
           <PlaylistsSearch playlists={featuredPlaylists?.data?.playlists.items} title={featuredPlaylists?.data?.message} />
         </div>
       </Body>
-      {/* {showPlayer && (
-        <div className="fixed bottom-0 left-0 right-0 z-50">
-          <Player accessToken={accessToken} trackUri={playingTrack.uri} />
-        </div>
-      )} */}
+   
     </main>
   );
 };

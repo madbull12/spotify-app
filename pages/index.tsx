@@ -42,7 +42,7 @@ const Home: NextPage = () => {
       fetchMe();
   }, []);
 
-  console.log(myData)
+  console.log(myData);
 
   if(status==="loading") {
     return      <div className='flex items-center justify-center'>
