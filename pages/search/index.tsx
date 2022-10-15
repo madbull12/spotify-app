@@ -18,13 +18,15 @@ import SearchLayout from "../../layouts/SearchLayout";
 import { NextPageWithLayout } from "../_app";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { searchState, searchValue } from "../../atoms/searchAtom";
-import { useSearch } from "../../lib/zustand";
+import { usePlayTrack, useSearch } from "../../lib/zustand";
 import { FaPlay } from "react-icons/fa";
 import PlayButton from "../../components/PlayButton";
 import ArtistsSearch from "../../components/ArtistsSearch";
 import PlaylistsSearch from "../../components/PlaylistsSearch";
 import EpisodesSearch from "../../components/EpisodesSearch";
 import PodcastSearch from "../../components/PodcastSearch";
+import shallow from "zustand/shallow";
+import useHandlePlay from "../../hooks/useHandlePlay";
 
 const SearchPage:NextPageWithLayout = () => {
   const search = useSearch((state:any)=>state.search);
@@ -32,11 +34,15 @@ const SearchPage:NextPageWithLayout = () => {
     useState<SpotifyApi.SearchResponse | null>(null);
   const { status,data: session }= useSession();
   const debouncedSearch = useDebounce(search, 500);
-  const router=  useRouter();
   const [categories, setCategories] = useState<any>(null);
   const accessToken: any = session?.accessToken;
   const [hovered,setHovered] = useState<boolean>();
+  const [playingTrack, setPlayingTrack] = usePlayTrack((state:any)=>[state.playingTrack,state.setPlayingTrack],shallow)
+  const [isPlaying,setIsPlaying] = usePlayTrack((state:any)=>[state.isPlaying,state.setIsPlaying],shallow);
 
+  const handlePlay = useHandlePlay();
+  // const [hasLiked, setHasLiked] = useState(false);
+  console.log(playingTrack)
 
   useEffect(() => {
     if (!accessToken) return;
@@ -127,7 +133,7 @@ const SearchPage:NextPageWithLayout = () => {
                       </div>
                       {hovered && (
                           <div className="absolute bottom-4 right-2">
-                            <PlayButton />
+                            <PlayButton handlePlay={handlePlay} item={track} />
                           </div>
                         )}
                     </Card>

@@ -2,8 +2,8 @@ import create from "zustand";
 
 type PlayTrack = {
     isPlaying:boolean;
-    playingTrack:SpotifyApi.TrackObjectSimplified | {};
-    setPlayingTrack:(data:SpotifyApi.TrackObjectSimplified) => void;
+    playingTrack:SpotifyApi.TrackObjectSimplified |null;
+    setPlayingTrack:(data:SpotifyApi.TrackObjectFull) => void;
     setIsPlaying:(condition:boolean)=>void;
 }
 
@@ -14,8 +14,8 @@ type Search = {
 
 export const usePlayTrack = create<PlayTrack>((set)=>({
     isPlaying:false,
-    playingTrack:{},
-    setPlayingTrack:async(data:SpotifyApi.TrackObjectSimplified)=>{
+    playingTrack:null,
+    setPlayingTrack:async(data:SpotifyApi.TrackObjectFull)=>{
         set({ playingTrack:data })
     },
     setIsPlaying:(condition:boolean)=>set(()=>({ isPlaying:condition }))

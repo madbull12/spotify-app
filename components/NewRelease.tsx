@@ -16,22 +16,23 @@ import { usePlayTrack } from "../lib/zustand";
 import shallow from "zustand/shallow";
 
 interface IProps {
-  items: IAlbum;
+  items: SpotifyApi.AlbumObjectFull;
+  handlePlay:(items:SpotifyApi.AlbumObjectFull) => void
 }
-const NewRelease = ({ items }: IProps) => {
+const NewRelease = ({ items,handlePlay }: IProps) => {
   console.log(items);
   const [playingTrack, setPlayingTrack] = usePlayTrack((state:any)=>[state.playingTrack,state.setPlayingTrack],shallow)
   const [isPlaying,setIsPlaying] = usePlayTrack((state:any)=>[state.isPlaying,state.setIsPlaying],shallow);
 
   // const [hasLiked, setHasLiked] = useState(false);
   console.log(playingTrack)
-  const handlePlay = () => {
-    setPlayingTrack(items);
+  // const handlePlay = () => {
+  //   setPlayingTrack(items);
 
-    if (items.uri === playingTrack.uri) {
-      setIsPlaying(!isPlaying);
-    }
-  };
+  //   if (items.uri === playingTrack.uri) {
+  //     setIsPlaying(!isPlaying);
+  //   }
+  // };
 
   const [onHover, setOnHover] = useState(false);
 
@@ -48,7 +49,7 @@ const NewRelease = ({ items }: IProps) => {
         width={items.images[1].width}
       />
       {onHover && (
-        <div onClick={handlePlay} className="rounded-full absolute right-2 bottom-6 grid place-items-center bg-green-500 w-8 h-8">
+        <div onClick={()=>handlePlay(items)} className="rounded-full absolute right-2 bottom-6 grid place-items-center bg-green-500 w-8 h-8">
           {items.uri === playingTrack.uri && isPlaying  ? (
             <FaPause className="text-white"  />
           ):(

@@ -29,6 +29,13 @@ const HomeComponent = () => {
   const [showPlayer, setShowPlayer] = useState(false);
   const [playingTrack, setPlayingTrack] = usePlayTrack((state:any)=>[state.playingTrack,state.setPlayingTrack],shallow)
   const [isPlaying,setIsPlaying] = usePlayTrack((state:any)=>[state.isPlaying,state.setIsPlaying],shallow);
+  const handlePlay = (items:SpotifyApi.AlbumObjectFull) => {
+    setPlayingTrack(items);
+
+    if (items.uri === playingTrack.uri) {
+      setIsPlaying(!isPlaying);
+    }
+  };
 
 
   const { data: session } = useSession();
@@ -87,8 +94,8 @@ const HomeComponent = () => {
       <Body>
         <h1 className="text-white text-2xl font-bold mb-2">New Releases</h1>
         <div className="grid   overflow-x-scroll  auto-cols-max grid-flow-col auto-rows-auto gap-x-2  scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
-          {newReleases?.map((release: IAlbum) => (
-            <NewRelease key={uuidv4()} items={release} />
+          {newReleases?.map((release: SpotifyApi.AlbumObjectFull) => (
+            <NewRelease key={uuidv4()} items={release} handlePlay={handlePlay} />
           ))}
         </div>
         {/* <div className="flex gap-x-8 md:relative min-w-full ml-6">

@@ -13,7 +13,7 @@ const Dashboard = ({ children }:{children:React.ReactNode}) => {
   const [showPlayer, setShowPlayer] = useState(false);
   useEffect(() => {
     setShowPlayer(true);
-  }, []);
+  }, [playingTrack]);
 
   const { accessToken }: any = session;
 
@@ -25,9 +25,9 @@ const Dashboard = ({ children }:{children:React.ReactNode}) => {
         </Body>
         <Right />
         {showPlayer && (
-        <div className="fixed bottom-0 left-0 right-0 z-50">
-          <Player accessToken={accessToken} trackUri={playingTrack.uri} />
-        </div>
+          <div className="fixed bottom-0 left-0 right-0 z-50">
+            <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+          </div>
       )}
     </div>
   )
