@@ -4,12 +4,15 @@ import Card from './Card';
 import PlayButton from './PlayButton';
 import NoImage from '../public/img/no-image.jpg'
 import Link from 'next/link';
+import useHandlePlay from '../hooks/useHandlePlay';
 
 interface IProps {
   artist:SpotifyApi.ArtistObjectFull
 }
 const ArtistSearchItem = ({ artist }:IProps ) => {
   const [hovered,setHovered] = useState<boolean>(false);
+  const handlePlay = useHandlePlay();
+
 
   return (
     <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
@@ -26,7 +29,7 @@ const ArtistSearchItem = ({ artist }:IProps ) => {
                   />
                   {hovered && (
                     <div className='absolute bottom-4 right-4 '>
-                      <PlayButton />
+                      <PlayButton handlePlay={handlePlay} item={artist.uri} />
 
                     </div>
                   )}

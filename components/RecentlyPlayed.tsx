@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { playingTrackState, playState } from "../atoms/playerAtom";
 import { IRecentlyPlayed, ITrack } from "../interface";
@@ -26,12 +27,18 @@ function RecentlyPlayed({ track }:IProps) {
         className="rounded-full w-[52px] h-[52px]"
       />
       <div>
-        <h4 className="text-white text-[13px] mb-0.5 font-semibold hover:underline cursor-pointer truncate max-w-[150px]">
-          {track?.track.name}
-        </h4>
+        <Link href={`/album/${track?.track.album.id}`}>
+          <h4 className="text-white text-[13px] mb-0.5 font-semibold hover:underline cursor-pointer truncate max-w-[150px]">
+            {track?.track.name}
+          </h4>
+        </Link>
+
+        <Link href={`/artist/${track.track.artists[0].id}`}>
         <p className="text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
           {track?.track.artists[0]?.name}
         </p>
+        </Link>
+        
       </div>
     </div>
   );

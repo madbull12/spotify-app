@@ -1,31 +1,27 @@
-import React, { useState,useCallback,useRef } from 'react'
+import { Ref, useRef, useState, useCallback } from 'react'
 
-const useHover = () => {
-    const [isHovering, setIsHovering] = useState(false);
-  
-    const handleMouseOver = useCallback(() => setIsHovering(true), []);
-    const handleMouseOut = useCallback(() => setIsHovering(false), []);
-  
-    const nodeRef = useRef<HTMLDivElement | null | undefined>(null);
-  
-    const callbackRef = useCallback(
-      (node:HTMLDivElement) => {
-        if (nodeRef.current) {
-          nodeRef.current.removeEventListener('mouseover', handleMouseOver);
-          nodeRef.current.removeEventListener('mouseout', handleMouseOut);
-        }
-  
-        nodeRef.current = node;
-  
-        if (nodeRef.current) {
-          nodeRef.current.addEventListener('mouseover', handleMouseOver);
-          nodeRef.current.addEventListener('mouseout', handleMouseOut);
-        }
-      },
-      [handleMouseOver, handleMouseOut]
-    );
-  
-    return [callbackRef, isHovering];
-  };
+export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
 
-  export default useHover;
+  const ref = useRef<T>();
+  const callbackRef = useCallback((node:any) => {
+    if (ref.current) {
+      ref.current.removeEventListener('mouseenter', handleMouseEnter);
+      ref.current.removeEventListener('mouseleave', handleMouseLeave);
+    }
+
+    ref.current = node;
+
+    if (ref.current) {
+      ref.current.addEventListener('mouseenter', handleMouseEnter);
+      ref.current.addEventListener('mouseleave', handleMouseLeave);
+    }
+  }, [handleMouseEnter, handleMouseLeave]);
+
+  // your code here
+  return [callbackRef, isHovered];
+}
+
+export default useHover;

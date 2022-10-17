@@ -25,16 +25,23 @@ const TrackSearch = ({ track }: IProps) => {
             height={45}
             width={45}
           />
-          {isHovering && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            {track.uri === playingTrack?.uri && isPlaying  ? (
-              <FaPause className="text-white"  />
-            ):(
-              <FaPlay className="text-white"  />
 
-            )}
+          {isHovering && (
+          <div className="bg-[#00000093] absolute right-0 left-0 top-0 bottom-0 grid place-items-center">
+          
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              {track.uri === playingTrack?.uri && isPlaying  ? (
+                <FaPause className="text-white"  />
+              ):(
+                <FaPlay className="text-white"  />
+
+              )}
+            </div>
+           
           </div>
           )}
+          
+          
      
         </div>
   

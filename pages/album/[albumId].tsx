@@ -10,9 +10,12 @@ import { FiHeart,FiMoreHorizontal } from 'react-icons/fi'
 import { BsClock } from 'react-icons/bs';
 import TrackSearch from '../../components/TrackSearch';
 import TrackAlbum from '../../components/TrackAlbum';
+import useHandlePlay from '../../hooks/useHandlePlay';
+import { v4 } from 'uuid';
 
 const AlbumPage = () => {
     const router:any = useRouter();
+    const handlePlay = useHandlePlay();
 
     
     const fetchAlbum =async()=>{
@@ -58,7 +61,7 @@ const AlbumPage = () => {
             
         </div>
         <div className='p-4 flex items-center gap-x-6'>
-          <PlayButton large={true} />
+          <PlayButton large={true} handlePlay={handlePlay} item={data?.uri} />
           <FiHeart className='text-4xl text-gray-400 ' />
           <FiMoreHorizontal className='text-4xl text-gray-400' />
         </div>
@@ -69,7 +72,7 @@ const AlbumPage = () => {
             <BsClock />
           </div >
             {data?.tracks.items.map((track,i:number)=>(
-              <TrackAlbum track={track} index={i+1}/>
+              <TrackAlbum key={v4()} track={track} index={i+1}/>
             ))}
        
         </div>

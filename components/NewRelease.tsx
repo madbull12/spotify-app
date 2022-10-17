@@ -23,7 +23,7 @@ const NewRelease = ({ items,handlePlay }: IProps) => {
   console.log(items);
   const [playingTrack, setPlayingTrack] = usePlayTrack((state:any)=>[state.playingTrack,state.setPlayingTrack],shallow)
   const [isPlaying,setIsPlaying] = usePlayTrack((state:any)=>[state.isPlaying,state.setIsPlaying],shallow);
-
+  
   // const [hasLiked, setHasLiked] = useState(false);
   console.log(playingTrack)
   // const handlePlay = () => {
@@ -50,7 +50,7 @@ const NewRelease = ({ items,handlePlay }: IProps) => {
       />
       {onHover && (
         <div onClick={()=>handlePlay(items)} className="rounded-full absolute right-2 bottom-6 grid place-items-center bg-green-500 w-8 h-8">
-          {items.uri === playingTrack.uri && isPlaying  ? (
+          {items?.uri === playingTrack?.uri && isPlaying  ? (
             <FaPause className="text-white"  />
           ):(
             <FaPlay className="text-white"  />

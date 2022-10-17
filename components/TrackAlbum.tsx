@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { FaHeart, FaPlay } from "react-icons/fa";
+import { FaHeart, FaPause, FaPlay } from "react-icons/fa";
 import { FiHeart, FiMoreHorizontal } from "react-icons/fi";
 import msToClock from "../helper/msToClock";
+import useHandlePlay from "../hooks/useHandlePlay";
+import { usePlayTrack } from "../lib/zustand";
 
 interface IProps {
   track: SpotifyApi.TrackObjectSimplified;
@@ -11,15 +13,27 @@ interface IProps {
 }
 const TrackAlbum = ({ track, index }: IProps) => {
   const [hovered, setIsHovered] = useState<boolean>(false);
+  const playingTrack = usePlayTrack((state) => state.playingTrack);
+  const isPlaying = usePlayTrack((state) => state.isPlaying);
+  const handlePlay = useHandlePlay();
 
   return (
     <div
+      onClick={()=>handlePlay(track)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="flex gap-x-4 items-center py-2 hover:bg-neutral-800 rounded-lg px-4"
+      className="flex gap-x-4 items-center py-2 cursor-pointer hover:bg-neutral-800 rounded-lg px-4"
     >
       {hovered ? (
-        <FaPlay className="text-xs text-white" />
+        <>
+          {track.uri === playingTrack?.uri && isPlaying  ? (
+            <FaPause className="text-white"  />
+          ):(
+            <FaPlay className="text-white"  />
+
+          )}
+        </>
+       
       ) : (
         <span className="text-gray-400">{index}</span>
       )}
