@@ -4,18 +4,18 @@ import { FiHeart, FiMoreHorizontal } from 'react-icons/fi'
 import timeConversion from '../helper/timeConversion'
 import useHandlePlay from '../hooks/useHandlePlay'
 import PlayButton from './PlayButton'
+import NoImage from '../public/img/no-image.jpg'
 
 interface IProps {
     data:any
 }
 const Banner = ({ data }:IProps) => {
-    let durations:any = data?.tracks.items.reduce((acc:any,cur:any)=>cur.duration_ms + acc,0)
     const handlePlay = useHandlePlay();
   return (
     <div>
  <div className='flex items-center gap-x-8 text-white'>
             <Image 
-                src={data?.images[1].url ?? ""}
+                src={data?.images[0].url ?? NoImage}
                 height={250}
                 width={250}
                 objectFit="cover"
@@ -26,7 +26,7 @@ const Banner = ({ data }:IProps) => {
                 <h1 className='font-black text-6xl'>{data?.name}</h1>
                 <div className='flex items-center gap-x-2 font-semibold text-sm'>
                   
-                    <p>{data?.artists[0].name}</p>
+                    <p>{data?.artists[0].name && data?.owner.display_name } </p>
                     <p>{data?.release_date.slice(0,4)}</p>
                     <p>{data?.total_tracks} tracks,</p>
                     <p>

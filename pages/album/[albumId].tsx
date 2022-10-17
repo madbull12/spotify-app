@@ -12,6 +12,9 @@ import TrackSearch from '../../components/TrackSearch';
 import TrackAlbum from '../../components/TrackAlbum';
 import useHandlePlay from '../../hooks/useHandlePlay';
 import { v4 } from 'uuid';
+import Link from 'next/link';
+import Banner from '../../components/Banner';
+import NoImage from "../../public/img/no-image.jpg"
 
 const AlbumPage = () => {
     const router:any = useRouter();
@@ -26,7 +29,6 @@ const AlbumPage = () => {
         staleTime:100000
     });
 
-    let durations:any = data?.tracks.items.reduce((acc,cur)=>cur.duration_ms + acc,0)
     if(isLoading) return (
       <div className='flex items-center justify-center'>
          <Loader />
@@ -34,9 +36,11 @@ const AlbumPage = () => {
         </div>
     )
     console.log(data)
+    let durations:any = data?.tracks.items.reduce((acc:any,cur:any)=>cur.duration_ms + acc,0)
+
   return (
     <div className='py-8'>
-        <div className='flex items-center gap-x-8 text-white'>
+         <div className='flex items-center gap-x-8 text-white'>
             <Image 
                 src={data?.images[1].url ?? ""}
                 height={250}
@@ -49,7 +53,7 @@ const AlbumPage = () => {
                 <h1 className='font-black text-6xl'>{data?.name}</h1>
                 <div className='flex items-center gap-x-2 font-semibold text-sm'>
                   
-                    <p>{data?.artists[0].name}</p>
+                    <p>{data?.artists[0].name  } </p>
                     <p>{data?.release_date.slice(0,4)}</p>
                     <p>{data?.total_tracks} tracks,</p>
                     <p>
@@ -65,6 +69,7 @@ const AlbumPage = () => {
           <FiHeart className='text-4xl text-gray-400 ' />
           <FiMoreHorizontal className='text-4xl text-gray-400' />
         </div>
+   
         <div className="flex flex-col text-gray-400">
           <div className='flex items-center  gap-x-4 px-4'>
             <span>#</span>
