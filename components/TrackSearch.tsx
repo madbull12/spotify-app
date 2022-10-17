@@ -13,7 +13,7 @@ const TrackSearch = ({ track }: IProps) => {
   const playingTrack = usePlayTrack((state) => state.playingTrack);
   const isPlaying = usePlayTrack((state) => state.isPlaying);
   const handlePlay = useHandlePlay();
-  const [hoverRef, isHovering] = useHover();
+  const [hoverRef, isHovering] = useHover<HTMLDivElement>();
 
 
   return (

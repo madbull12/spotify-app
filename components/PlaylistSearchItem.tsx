@@ -10,6 +10,7 @@ interface IProps {
     playlist:SpotifyApi.PlaylistObjectSimplified
 }
 const PlaylistSearchItem = ({ playlist }: IProps ) => {
+
     const [hovered,setHovered] = useState<boolean>(false);
 
     return (
