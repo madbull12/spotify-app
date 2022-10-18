@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React,{ useState } from 'react'
+import React,{ useState,useEffect } from 'react'
 import spotifyApi from '../../lib/spotifyApi';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
@@ -19,15 +19,22 @@ import NoImage from "../../public/img/no-image.jpg"
 const AlbumPage = () => {
     const router:any = useRouter();
     const handlePlay = useHandlePlay();
-
+  
     
     const fetchAlbum =async()=>{
         const res = await spotifyApi.getAlbum(router?.query.albumId);
         return await res.body;
     }
-    const { data,isError,isLoading } = useQuery(["getAlbum"],fetchAlbum,{
+    const { data,isError,isLoading,refetch } = useQuery(["getAlbum"],fetchAlbum,{
         staleTime:100000
     });
+    useEffect(() => {
+      const controller = new AbortController();
+      refetch();
+      return () => {
+        controller.abort()
+      }
+    }, [router]);
 
     if(isLoading) return (
       <div className='flex items-center justify-center'>
@@ -37,7 +44,7 @@ const AlbumPage = () => {
     )
     console.log(data)
     let durations:any = data?.tracks.items.reduce((acc:any,cur:any)=>cur.duration_ms + acc,0)
-
+   
   return (
     <div className='py-8'>
          <div className='flex items-center gap-x-8 text-white'>
@@ -65,7 +72,7 @@ const AlbumPage = () => {
             
         </div>
         <div className='p-4 flex items-center gap-x-6'>
-          <PlayButton large={true} handlePlay={handlePlay} item={data?.uri} />
+          <PlayButton large={true} handlePlay={()=>handlePlay(data)} item={data} />
           <FiHeart className='text-4xl text-gray-400 ' />
           <FiMoreHorizontal className='text-4xl text-gray-400' />
         </div>

@@ -22,8 +22,11 @@ import shallow from "zustand/shallow";
 //   clientSecret:process.env.SPOTIFY_CLIENT_SECRET,
 
 // });
+interface IProps {
+  myPlaylists:SpotifyApi.PlaylistObjectSimplified[] | undefined;
+}
 
-const HomeComponent = () => {
+const HomeComponent = ({ myPlaylists }:IProps) => {
   // const [playingTrack, setPlayingTrack] =
   //   useRecoilState<any>(playingTrackState);
   const [showPlayer, setShowPlayer] = useState(false);
@@ -48,12 +51,17 @@ const HomeComponent = () => {
     return await res.body;
   }
 
-  const fetchMyTopArtists = async () => {
-    const res = await spotifyApi.getMyTopArtists({
-      limit:5
-    });
-    return await res.body;
-  }
+  // const fetchMyTopArtists = async () => {
+  //   const res = await spotifyApi.getMyTopArtists({
+  //     limit:5
+  //   });
+  //   return await res.body;
+  // }
+
+
+
+
+
 
 
   useEffect(() => {
@@ -83,9 +91,7 @@ const HomeComponent = () => {
 
 
   const featuredPlaylists = useQuery(["fetchFeaturedPlaylists"],fetchFeaturedPlaylists);
-
-
-
+  console.log(myPlaylists)
 
 
   return (
@@ -122,9 +128,11 @@ const HomeComponent = () => {
           </div>
           <div className="w-full"></div>
         </div> */}
-        <div className="">
-    
+        <div className=" space-y-4">
+   
+        
           <PlaylistsSearch playlists={featuredPlaylists?.data?.playlists.items} title={featuredPlaylists?.data?.message} />
+          <PlaylistsSearch playlists={myPlaylists} title="Your playlists" />
         </div>
       </Body>
    

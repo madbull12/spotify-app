@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
@@ -11,7 +12,7 @@ import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [myData,setMyData] = useState<any>(null);
+  const [myData,setMyData] = useState<SpotifyApi.CurrentUsersProfileResponse | any>(null);
   const { status,data: session }= useSession({
     required:true,
     onUnauthenticated() {
@@ -30,6 +31,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
       // if (!accessToken) return;
+      const controller = new AbortController()
   
       const fetchMe = async () => {
         try {
@@ -40,7 +42,16 @@ const Home: NextPage = () => {
         }
       };
       fetchMe();
+      return () => controller.abort()
   }, []);
+
+  const fetchMyPlaylists = async () => {
+    const res = await spotifyApi.getUserPlaylists(myData?.id);
+    return await res.body;
+  }
+
+  const myPlaylists = useQuery(["fetchMyPlaylists"],fetchMyPlaylists);
+  console.log(myPlaylists)
 
   console.log(myData);
 
@@ -61,7 +72,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HomeComponent />
+      <HomeComponent myPlaylists={myPlaylists.data?.items} />
     </div>
   )
 }

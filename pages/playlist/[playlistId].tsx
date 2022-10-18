@@ -36,13 +36,24 @@ const PlaylistPage = () => {
   return (
     <div className=''>
         <div className='flex items-center gap-x-8 text-white'>
-            <Image 
-                src={playlist?.images[0].url ?? NoImage}
-                height={250}
-                width={250}
-                objectFit="cover"
-            
-            />
+            {playlist?.images.length !== 0 ? (
+                <Image 
+                    src={playlist?.images[0].url ?? NoImage}
+                    height={250}
+                    width={250}
+                    objectFit="cover"
+
+                />
+            ):(
+                <Image 
+                    src={NoImage}
+                    height={250}
+                    width={250}
+                    objectFit="cover"
+
+                />
+            )}
+        
             <div className='space-y-8'>
                 <p className='uppercase font-semibold tracking-tighter'>{playlist?.type}</p>
                 <h1 className='font-black text-6xl'>{playlist?.name}</h1>
@@ -61,7 +72,7 @@ const PlaylistPage = () => {
             
         </div>
         <div className='p-4 flex items-center gap-x-6'>
-          <PlayButton large={true} handlePlay={handlePlay} item={playlist?.uri} />
+          <PlayButton large={true} handlePlay={()=>handlePlay(playlist)} item={playlist} />
           <FiHeart className='text-4xl text-gray-400 ' />
           <FiMoreHorizontal className='text-4xl text-gray-400' />
         </div>
