@@ -4,6 +4,8 @@ import Card from './Card';
 import PlayButton from './PlayButton';
 import NoImage from '../public/img/no-image.jpg'
 import Link from 'next/link';
+import useHover from '../hooks/useHover';
+import useHandlePlay from '../hooks/useHandlePlay';
 
 
 interface IProps {
@@ -11,10 +13,11 @@ interface IProps {
 }
 const PlaylistSearchItem = ({ playlist }: IProps ) => {
 
-    const [hovered,setHovered] = useState<boolean>(false);
+    const [hoverRef,isHovering] = useHover<HTMLDivElement>();
+    const handlePlay = useHandlePlay();
 
     return (
-      <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
+      <div ref={hoverRef}>
         <Card>
           <Link href={`/playlist/${playlist.id}`}>
             <div className='space-y-3 relative group '>
@@ -26,9 +29,9 @@ const PlaylistSearchItem = ({ playlist }: IProps ) => {
                         objectFit="cover"
                         className="rounded-md "
                     />
-                    {hovered && (
+                    {isHovering && (
                       <div className='absolute bottom-4 right-4 '>
-                        <PlayButton />
+                        <PlayButton handlePlay={() => handlePlay(playlist)} item={playlist} />
     
                       </div>
                     )}

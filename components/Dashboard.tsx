@@ -25,7 +25,7 @@ const Dashboard = ({ children }:{children:React.ReactNode}) => {
         </Body>
         <Right />
         {showPlayer && (
-          <div className="fixed bottom-0 left-0 right-0 z-50">
+          <div className="fixed  bottom-0 left-0 right-0 z-50">
             <Player accessToken={session?.accessToken} trackUri={playingTrack?.uri} />
           </div>
       )}

@@ -44,7 +44,7 @@ const Body = ({ children }:IProps) => {
   }, []);
 
   return (
-    <section className="bg-black min-h-screen ml-[3rem] lg:ml-[5.5rem] p-4 space-y-8 md:max-w-[980px] flex-grow ">
+    <section className="bg-black pb-32 min-h-screen ml-[3rem] lg:ml-[5.5rem] p-4  space-y-8 md:max-w-[980px] flex-grow ">
       {children}
     </section>
   );

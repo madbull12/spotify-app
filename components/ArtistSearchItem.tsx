@@ -5,17 +5,19 @@ import PlayButton from './PlayButton';
 import NoImage from '../public/img/no-image.jpg'
 import Link from 'next/link';
 import useHandlePlay from '../hooks/useHandlePlay';
+import useHover from '../hooks/useHover';
 
 interface IProps {
   artist:SpotifyApi.ArtistObjectFull
 }
 const ArtistSearchItem = ({ artist }:IProps ) => {
-  const [hovered,setHovered] = useState<boolean>(false);
+  const [hoverRef,isHovering] = useHover<HTMLDivElement>();
+
   const handlePlay = useHandlePlay();
 
 
   return (
-    <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
+    <div ref={hoverRef}>
       <Card>
         <Link href={`/artist/${artist.id}`}>
           <div className='space-y-3 relative group '>
@@ -27,9 +29,9 @@ const ArtistSearchItem = ({ artist }:IProps ) => {
                       className="rounded-full "
                       objectFit='cover'
                   />
-                  {hovered && (
+                  {isHovering && (
                     <div className='absolute bottom-4 right-4 '>
-                      <PlayButton handlePlay={handlePlay} item={artist.uri} />
+                      <PlayButton handlePlay={()=>handlePlay(artist)} item={artist} />
 
                     </div>
                   )}

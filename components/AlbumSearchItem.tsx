@@ -4,15 +4,19 @@ import { FaPlay } from 'react-icons/fa';
 import Card from './Card';
 import NoImage from '../public/img/no-image.jpg'
 import Link from 'next/link';
+import useHover from '../hooks/useHover';
+import useHandlePlay from '../hooks/useHandlePlay';
+import PlayButton from './PlayButton';
 
 interface IProps {
     album:SpotifyApi.AlbumObjectSimplified
 }
 const AlbumSearchItem = ({ album }: IProps ) => {
-    const [hovered,setHovered] = useState<boolean>(false);
+    const [hoverRef,isHovering] = useHover<HTMLDivElement>();
 
+    const handlePlay = useHandlePlay();
   return (
-    <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
+    <div ref={hoverRef}>
         <Card>
             <Link href={`/album/${album.id}`}>
                 <div className='space-y-3 relative group '>
@@ -23,9 +27,9 @@ const AlbumSearchItem = ({ album }: IProps ) => {
                             width={150}
                             className="rounded-md"
                         />
-                        {hovered && (
+                        {isHovering && (
                             <div className='w-10   absolute bottom-4 right-2 h-10 rounded-full bg-green-500 grid place-items-center'>
-                                <FaPlay />
+                                <PlayButton handlePlay={()=>handlePlay(album)} item={album} />
                             </div>
                         )}
                     
