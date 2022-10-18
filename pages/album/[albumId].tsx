@@ -60,7 +60,10 @@ const AlbumPage = () => {
                 <h1 className='font-black text-6xl'>{data?.name}</h1>
                 <div className='flex items-center gap-x-2 font-semibold text-sm'>
                   
-                    <p>{data?.artists[0].name  } </p>
+                  <Link href={`/artist/${data?.artists[0].id}`}>
+                    <p className='hover:underline cursor-pointer'>{data?.artists[0].name  } </p>
+                  
+                  </Link>
                     <p>{data?.release_date.slice(0,4)}</p>
                     <p>{data?.total_tracks} tracks,</p>
                     <p>

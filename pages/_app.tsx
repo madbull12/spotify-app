@@ -12,6 +12,7 @@ import Backdrop from '../components/Backdrop'
 import PlaylistModal from '../components/PlaylistModal'
 import { usePlaylistModal } from '../lib/zustand'
 import shallow from 'zustand/shallow'
+import { Toaster } from 'react-hot-toast'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -33,6 +34,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
 
         <AuthWrapper>
           <QueryClientProvider client={queryClient}>
+            <Toaster 
+                position="top-right"
+                reverseOrder={false}
+            />
             <ReactTooltip />
             <Dashboard>
               <Component {...pageProps} />
