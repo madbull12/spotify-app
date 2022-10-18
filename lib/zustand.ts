@@ -12,6 +12,12 @@ type Search = {
     setSearch:(search:string)=>void
 }
 
+type PlaylistModal = {
+    isOpen:boolean;
+    setOpen:(condition:boolean)=>void;
+
+}
+
 export const usePlayTrack = create<PlayTrack>((set)=>({
     isPlaying:false,
     playingTrack:null,
@@ -29,7 +35,7 @@ export const useSearch = create<Search>((set)=>({
     }))
 }));
 
-export const usePlaylistModal = create((set)=>({
+export const usePlaylistModal = create<PlaylistModal>((set)=>({
     isOpen:false,
     setOpen:(open:boolean)=>set(()=>({ isOpen:open }))
 }))

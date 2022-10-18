@@ -22,7 +22,8 @@ type AppPropsWithLayout = AppProps & {
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
-  const [isOpen,setOpen] = usePlaylistModal((state:any)=>[state.isOpen,state.setOpen],shallow);
+  const isOpen = usePlaylistModal((state)=>state.isOpen);
+  // const [isOpen,setOpen] = usePlaylistModal((state:any)=>[state.isOpen,state.setOpen],shallow);
   const getLayout = Component.getLayout || ((page) => page);
   const queryClient = new QueryClient();
   

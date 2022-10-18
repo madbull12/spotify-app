@@ -14,7 +14,8 @@ import shallow from 'zustand/shallow'
 const Sidebar = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [isOpen,setOpen] = usePlaylistModal((state:any)=>[state.isOpen,state.setOpen],shallow);
+  // const [isOpen,setOpen] = usePlaylistModal((state)=>[state.isOpen,state.setOpen],shallow);
+  const setOpen = usePlaylistModal((state)=>state.setOpen);
 
 
   return (

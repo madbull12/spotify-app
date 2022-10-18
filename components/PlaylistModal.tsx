@@ -18,7 +18,7 @@ const PlaylistModal = ({ isEditing }:IProps) => {
   const [description,setDescription] = useState<string>("");
   const { data: session } = useSession();
   const { accessToken }: any = session;
-  const [isOpen,setOpen] = usePlaylistModal((state:any)=>[state.isOpen,state.setOpen],shallow);
+  const setOpen = usePlaylistModal((state)=>state.setOpen);
 
   const modal = useRef<HTMLDivElement>(null);
   
@@ -36,6 +36,8 @@ const PlaylistModal = ({ isEditing }:IProps) => {
     
     setName("");
     setDescription("");
+    setOpen(false)
+    router.push(`/playlist/${res.body.id}`);
     
     return res;
   }

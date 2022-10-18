@@ -29,7 +29,10 @@ const PlaylistPage = () => {
         return await res.body;
     }
 
-    const { data:playlist } = useQuery(["fetchPlaylist"],fetchPlaylist);
+    const { data:playlist,refetch } = useQuery(["fetchPlaylist"],fetchPlaylist);
+    useEffect(()=>{
+        refetch()
+    },[router])
     console.log(playlist)
     let durations:any = playlist?.tracks.items.reduce((acc:any,cur:any)=>cur.track.duration_ms + acc,0)
 
