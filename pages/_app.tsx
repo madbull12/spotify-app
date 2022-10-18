@@ -7,6 +7,7 @@ import Dashboard from '../components/Dashboard'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 import AuthWrapper from '../components/AuthWrapper'
+import ReactTooltip from 'react-tooltip'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
 
         <AuthWrapper>
           <QueryClientProvider client={queryClient}>
+            <ReactTooltip />
             <Dashboard>
               <Component {...pageProps} />
 

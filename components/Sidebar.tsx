@@ -7,6 +7,7 @@ import Dropdown from './Dropdown'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { BsPlusSquare } from 'react-icons/bs'
 
 const Sidebar = () => {
   const { data: session } = useSession();
@@ -26,6 +27,10 @@ const Sidebar = () => {
             <IoMdSearch className={`icon ${router.pathname === "/search" ? "text-white" : ""}`} />
           
           </Link>
+          <div data-tip="Create playlist">
+            <BsPlusSquare className='icon' />
+
+          </div>
             <IoMdCompass className='icon' />
 
             <IoMdMicrophone className='icon' />
