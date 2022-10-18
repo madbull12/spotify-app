@@ -1,29 +1,66 @@
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React,{ useState,useEffect,useRef } from 'react'
 import { MdClose } from 'react-icons/md'
+import shallow from 'zustand/shallow'
+import useOnClickOutside from '../hooks/useOutsideClick'
+import spotifyApi from '../lib/spotifyApi'
+import { usePlaylistModal } from '../lib/zustand'
 import NoImage from '../public/img/no-image.jpg'
 
 interface IProps {
   isEditing:boolean
 }
 const PlaylistModal = ({ isEditing }:IProps) => {
+  const [name,setName] = useState<string>("");
+  const router = useRouter();
+  const [description,setDescription] = useState<string>("");
+  const { data: session } = useSession();
+  const { accessToken }: any = session;
+  const [isOpen,setOpen] = usePlaylistModal((state:any)=>[state.isOpen,state.setOpen],shallow);
+
+  const modal = useRef<HTMLDivElement>(null);
+  
+  const clickOutsidehandler = () => {
+    setOpen(false)
+  };
+  useOnClickOutside(modal, clickOutsidehandler);
+  useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi.setAccessToken(accessToken);
+  }, [accessToken]);
+  const createPlaylist = async(e:React.SyntheticEvent) => {
+    e.preventDefault();
+    const res = await spotifyApi.createPlaylist(name,{ description,public:true });
+    
+    setName("");
+    setDescription("");
+    
+    return res;
+  }
+
   return (
-    <div className='p-4 bg-zinc-800 rounded-xl text-white space-y-3'>
+    <div className='p-4 bg-zinc-800 rounded-xl text-white space-y-3' ref={modal}>
       <header className='flex justify-between items-center'>
         <p className='font-bold text-xl'>{isEditing ? "Edit details" : "Create playlist"}</p>
         <MdClose className='text-gray-400' />
       </header>
-      <div className='flex items-center gap-x-4'>
-        <Image
-          src={NoImage}
-          height={200}
-          width={200}
-        />
-        <div className='space-y-2 flex flex-col'>
-          <input placeholder="Enter playlist's name" className="bg-zinc-600 px-4 py-2 rounded-lg outline-none" />
-          <textarea placeholder="Add an optional description " className='px-4 py-2 bg-zinc-600 rounded-lg outline-none'></textarea>
+      <form className='flex flex-col' onSubmit={createPlaylist}>
+        <div className='flex  gap-x-4'>
+          <Image
+            src={NoImage}
+            height={200}
+            width={200}
+          />
+          <div className='space-y-2 flex flex-col'>
+            <input onChange={(e)=>setName(e.target.value)} placeholder="Enter playlist's name" className="bg-zinc-700 px-4 py-2 rounded-lg outline-none" />
+            <textarea onChange={(e)=>setDescription(e.target.value)}  placeholder="Add an optional description " className='px-4 py-2 bg-zinc-700 rounded-lg outline-none'></textarea>
+          </div>
         </div>
-      </div>
+        <button type="submit" className='font-bold text-black bg-white px-6 py-2 rounded-full self-end'>SUBMIT</button>
+        
+      </form>
     </div>
   )
 }

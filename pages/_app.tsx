@@ -8,6 +8,10 @@ import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 import AuthWrapper from '../components/AuthWrapper'
 import ReactTooltip from 'react-tooltip'
+import Backdrop from '../components/Backdrop'
+import PlaylistModal from '../components/PlaylistModal'
+import { usePlaylistModal } from '../lib/zustand'
+import shallow from 'zustand/shallow'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -18,9 +22,10 @@ type AppPropsWithLayout = AppProps & {
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
-
+  const [isOpen,setOpen] = usePlaylistModal((state:any)=>[state.isOpen,state.setOpen],shallow);
   const getLayout = Component.getLayout || ((page) => page);
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
+  
   return getLayout(
 
       <SessionProvider session={session}>
@@ -30,9 +35,17 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
             <ReactTooltip />
             <Dashboard>
               <Component {...pageProps} />
+           
 
 
             </Dashboard>
+            {isOpen && (
+            <Backdrop>
+                <PlaylistModal isEditing={false} />
+
+            </Backdrop> 
+            )}
+      
 
 
           </QueryClientProvider>

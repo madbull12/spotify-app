@@ -27,4 +27,9 @@ export const useSearch = create<Search>((set)=>({
         ...state,
         search
     }))
+}));
+
+export const usePlaylistModal = create((set)=>({
+    isOpen:false,
+    setOpen:(open:boolean)=>set(()=>({ isOpen:open }))
 }))

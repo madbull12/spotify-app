@@ -8,10 +8,14 @@ import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { BsPlusSquare } from 'react-icons/bs'
+import { usePlaylistModal } from '../lib/zustand'
+import shallow from 'zustand/shallow'
 
 const Sidebar = () => {
   const { data: session } = useSession();
   const router = useRouter();
+  const [isOpen,setOpen] = usePlaylistModal((state:any)=>[state.isOpen,state.setOpen],shallow);
+
 
   return (
     <section className="fixed min-h-screen top-0 z-40 flex flex-col p-4 items-center bg-black w-[60px] lg:w-[90px]  space-y-8 h-screen">
@@ -27,7 +31,7 @@ const Sidebar = () => {
             <IoMdSearch className={`icon ${router.pathname === "/search" ? "text-white" : ""}`} />
           
           </Link>
-          <div data-tip="Create playlist">
+          <div data-tip="Create playlist" onClick={()=>setOpen(true)}>
             <BsPlusSquare className='icon' />
 
           </div>
