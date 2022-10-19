@@ -19,6 +19,7 @@ const TrackAlbum = ({ track, index }: IProps) => {
   const [hovered, setIsHovered] = useState<boolean>(false);
   const playingTrack = usePlayTrack((state) => state.playingTrack);
   const isPlaying = usePlayTrack((state) => state.isPlaying);
+  
 
 
 

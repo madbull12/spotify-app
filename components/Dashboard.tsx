@@ -18,7 +18,7 @@ const Dashboard = ({ children }:{children:React.ReactNode}) => {
   // const { accessToken }: any = session;
 
   return (
-    <div>
+    <div className="scroll-smooth">
         <Sidebar />
         <Body>
             {children}

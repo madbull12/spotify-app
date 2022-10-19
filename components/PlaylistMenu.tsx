@@ -44,25 +44,31 @@ const PlaylistMenu = ({ clickOutsideHandler }: IProps) => {
     return await res.body;
   };
 
-  const { data:myPlaylists } = useQuery(["fetchMyPlaylists"],fetchMyPlaylists);
+  const { data: myPlaylists } = useQuery(
+    ["fetchMyPlaylists"],
+    fetchMyPlaylists
+  );
 
-  const [hoverRef,isHovering] = useHover<HTMLDivElement>();
+  const [hoverRef, isHovering] = useHover<HTMLDivElement>();
 
   useOnClickOutside(menu, clickOutsideHandler);
   return (
     <div
+      onClick={(e) => e.stopPropagation()}
       ref={menu}
       className="bg-neutral-900 p-1 absolute top-full rounded-sm right-0 w-44 text-white"
     >
       <ul>
         <div className="p-2 hover:bg-neutral-700 ">
-          <div className="flex items-center relative rounded-sm justify-between " ref={hoverRef}>
+          <div
+            className="flex items-center relative rounded-sm justify-between "
+            ref={hoverRef}
+          >
             <li>Add to playlist</li>
             <AiOutlineCaretRight />
             {isHovering && (
-                <PlaylistMenuList myPlaylists={myPlaylists?.items} />
+              <PlaylistMenuList myPlaylists={myPlaylists?.items} />
             )}
-        
           </div>
         </div>
       </ul>

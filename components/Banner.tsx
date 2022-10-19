@@ -30,7 +30,7 @@ const Banner = ({ data }:IProps) => {
                     <p>{data?.release_date.slice(0,4)}</p>
                     <p>{data?.total_tracks} tracks,</p>
                     <p>
-                        {timeConversion(durations)}
+                        {/* {timeConversion(durations)} */}
                     </p>
 
                 </div>

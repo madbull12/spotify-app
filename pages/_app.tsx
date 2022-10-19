@@ -5,7 +5,7 @@ import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import Dashboard from '../components/Dashboard'
 import { NextPage } from 'next'
-import { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode, useEffect } from 'react'
 import AuthWrapper from '../components/AuthWrapper'
 import ReactTooltip from 'react-tooltip'
 import Backdrop from '../components/Backdrop'
@@ -28,6 +28,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
   const getLayout = Component.getLayout || ((page) => page);
   const queryClient = new QueryClient();
   
+
+  useEffect(()=>{
+    document.body.style.overflow = isOpen ? "hidden" : "visible"
+  },[isOpen])
+
   return getLayout(
 
       <SessionProvider session={session}>

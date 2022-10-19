@@ -32,7 +32,10 @@ const Sidebar = () => {
             <IoMdSearch className={`icon ${router.pathname === "/search" ? "text-white" : ""}`} />
           
           </Link>
-          <div data-tip="Create playlist" onClick={()=>setOpen(true)}>
+          <div data-tip="Create playlist" onClick={()=>{
+            setOpen(true)
+            window.scrollTo(0,0)
+          }}>
             <BsPlusSquare className='icon' />
 
           </div>

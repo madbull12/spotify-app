@@ -66,7 +66,7 @@ const PlaylistModal = ({ isEditing }: IProps) => {
         <p className="font-bold text-xl">
           {isEditing ? "Edit details" : "Create playlist"}
         </p>
-        <MdClose className="text-gray-400" />
+        <MdClose className="text-gray-400 cursor-pointer" onClick={()=>setOpen(false)} />
       </header>
       <form className="flex flex-col" onSubmit={createPlaylist}>
         <div className="flex  gap-x-4">
