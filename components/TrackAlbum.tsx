@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { AiOutlineCaretRight } from "react-icons/ai";
+import { BsArrowRight } from "react-icons/bs";
 import { FaHeart, FaPause, FaPlay } from "react-icons/fa";
 import { FiHeart, FiMoreHorizontal } from "react-icons/fi";
 import msToClock from "../helper/msToClock";
 import useHandlePlay from "../hooks/useHandlePlay";
+import useOnClickOutside from "../hooks/useOutsideClick";
 import { usePlayTrack } from "../lib/zustand";
 
 interface IProps {
@@ -15,6 +18,15 @@ const TrackAlbum = ({ track, index }: IProps) => {
   const [hovered, setIsHovered] = useState<boolean>(false);
   const playingTrack = usePlayTrack((state) => state.playingTrack);
   const isPlaying = usePlayTrack((state) => state.isPlaying);
+
+
+
+  const [showMenu,setShowMenu] = useState<boolean>(false);
+  const menu = useRef<HTMLDivElement>(null);
+  const clickOutsidehandler = () => {
+    setShowMenu(false);
+  };
+  useOnClickOutside(menu, clickOutsidehandler);
   const handlePlay = useHandlePlay();
 
   return (
@@ -56,9 +68,28 @@ const TrackAlbum = ({ track, index }: IProps) => {
         className={` ${hovered ? "visible" : "invisible"} text-gray-400`}
       />
       <p className="text-gray-400">{msToClock(track.duration_ms)}</p>
-      <FiMoreHorizontal
-        className={` ${hovered ? "visible" : "invisible"} text-gray-400`}
-      />
+      <div className="relative">
+        <FiMoreHorizontal
+          className={` ${hovered ? "visible" : "invisible"} text-gray-400`}
+          onClick={(e)=>{
+            e.stopPropagation();
+            setShowMenu(!showMenu)
+          }}
+        />
+        {showMenu && (
+          <div ref={menu} className="bg-zinc-700 p-1 absolute top-full rounded-sm right-0 w-44 text-white">
+            <ul>
+              <div className="flex items-center rounded-sm justify-between p-2 hover:bg-zinc-600">
+                <li >Add to playlist</li>
+                <AiOutlineCaretRight />
+
+              </div>
+            </ul>
+          </div>
+        )}
+       
+      </div>
+  
     </div>
   );
 };

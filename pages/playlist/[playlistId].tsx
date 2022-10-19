@@ -81,7 +81,7 @@ const PlaylistPage = () => {
         </div>
 
         <div className='flex flex-col gap-y-4 mt-4'>
-            <div className='flex items-center gap-x-4 text-gray-400'>
+            <div className='flex items-center gap-x-4 px-4 py-2 text-gray-400'>
                 <p>#</p>
                 <p className='flex-[0.5]'>TITLE</p>
                 <p className='flex-[0.5]'>ALBUM</p>
