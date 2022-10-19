@@ -2,9 +2,14 @@ import create from "zustand";
 
 type PlayTrack = {
     isPlaying:boolean;
-    playingTrack:SpotifyApi.TrackObjectSimplified |null;
+    playingTrack:SpotifyApi.TrackObjectSimplified | null;
     setPlayingTrack:(data:SpotifyApi.TrackObjectFull) => void;
     setIsPlaying:(condition:boolean)=>void;
+}
+
+type SaveTrack = {
+    savedTrack:SpotifyApi.TrackObjectSimplified | any;
+    setSavedTrack:(data:SpotifyApi.TrackObjectSimplified) => void;
 }
 
 type Search = {
@@ -39,3 +44,10 @@ export const usePlaylistModal = create<PlaylistModal>((set)=>({
     isOpen:false,
     setOpen:(open:boolean)=>set(()=>({ isOpen:open }))
 }))
+
+export const useSaveTrack = create<SaveTrack>((set)=>({
+    savedTrack:null,
+    setSavedTrack:async(data:SpotifyApi.TrackObjectSimplified)=>{
+        set({ savedTrack:data })
+    },
+}));

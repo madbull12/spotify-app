@@ -34,7 +34,7 @@ const PlaylistPage = () => {
         refetch()
     },[router])
     console.log(playlist)
-    let durations:any = playlist?.tracks.items.reduce((acc:any,cur:any)=>cur.track.duration_ms + acc,0)
+    let durations:any = playlist?.tracks.items.reduce((acc:any,cur:any)=>cur?.track?.duration_ms + acc,0)
 
   return (
     <div className=''>

@@ -8,7 +8,8 @@ import { FiHeart, FiMoreHorizontal } from "react-icons/fi";
 import msToClock from "../helper/msToClock";
 import useHandlePlay from "../hooks/useHandlePlay";
 import useOnClickOutside from "../hooks/useOutsideClick";
-import { usePlayTrack } from "../lib/zustand";
+import { usePlayTrack, useSaveTrack } from "../lib/zustand";
+import PlaylistMenu from "./PlaylistMenu";
 
 interface IProps {
   track: SpotifyApi.TrackObjectSimplified;
@@ -22,12 +23,13 @@ const TrackAlbum = ({ track, index }: IProps) => {
 
 
   const [showMenu,setShowMenu] = useState<boolean>(false);
-  const menu = useRef<HTMLDivElement>(null);
   const clickOutsidehandler = () => {
     setShowMenu(false);
   };
-  useOnClickOutside(menu, clickOutsidehandler);
+  
   const handlePlay = useHandlePlay();
+
+  const setSavedTrack = useSaveTrack((state)=>state.setSavedTrack);
 
   return (
     <div
@@ -74,18 +76,11 @@ const TrackAlbum = ({ track, index }: IProps) => {
           onClick={(e)=>{
             e.stopPropagation();
             setShowMenu(!showMenu)
+            setSavedTrack(track)
           }}
         />
         {showMenu && (
-          <div ref={menu} className="bg-zinc-700 p-1 absolute top-full rounded-sm right-0 w-44 text-white">
-            <ul>
-              <div className="flex items-center rounded-sm justify-between p-2 hover:bg-zinc-600">
-                <li >Add to playlist</li>
-                <AiOutlineCaretRight />
-
-              </div>
-            </ul>
-          </div>
+          <PlaylistMenu clickOutsideHandler={clickOutsidehandler} />
         )}
        
       </div>

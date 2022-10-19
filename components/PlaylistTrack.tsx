@@ -5,6 +5,7 @@ import msToClock from "../helper/msToClock";
 import useHandlePlay from "../hooks/useHandlePlay";
 import useHover from "../hooks/useHover";
 import { usePlayTrack } from "../lib/zustand";
+import NoImage from '../public/img/no-image.jpg'
 
 interface IProps {
   playlist: SpotifyApi.PlaylistTrackObject;
@@ -32,11 +33,24 @@ const PlaylistTrack = ({ playlist, i }: IProps) => {
 
         )}
       <div className="flex gap-x-2 items-center flex-[0.5]">
-        <Image
-          src={playlist.track?.album.images[0].url ?? ""}
-          height={40}
-          width={40}
-        />
+     
+        {playlist?.track?.album.images.length !== 0 ? (
+                <Image 
+                    src={playlist.track?.album.images[0].url ?? NoImage}
+                    height={40}
+                    width={40}
+                    objectFit="cover"
+
+                />
+            ):(
+                <Image 
+                    src={NoImage}
+                    height={40}
+                    width={40}
+                    objectFit="cover"
+
+                />
+            )}
         <div>
           <p>{playlist?.track?.name}</p>
           <div className="flex items-center gap-x-1">
