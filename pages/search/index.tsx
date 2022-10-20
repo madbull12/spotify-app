@@ -100,9 +100,15 @@ const SearchPage:NextPageWithLayout = () => {
       </Head>
       {debouncedSearch  ? (
         <div className="space-y-8">
-            <div className="flex items-center text-white">
-                <Link href={`/search/tidak?q=${debouncedSearch}`}>tidak</Link>
-            </div>
+          <nav className="mt-2">
+            <ul className="flex items-center gap-x-4">
+              <li className="link-tag">
+                <Link href={`/search/tracks`}>
+                  Tracks
+                </Link>
+              </li>
+            </ul>
+          </nav>
           <div className="flex gap-x-4 w-full mt-4">
             
             <div className="flex-[0.4]">

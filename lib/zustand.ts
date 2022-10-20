@@ -20,6 +20,8 @@ type Search = {
 type PlaylistModal = {
     isOpen:boolean;
     setOpen:(condition:boolean)=>void;
+    isEditing:boolean;
+    setIsEditing:(condition:boolean)=>void;
 
 }
 
@@ -42,7 +44,9 @@ export const useSearch = create<Search>((set)=>({
 
 export const usePlaylistModal = create<PlaylistModal>((set)=>({
     isOpen:false,
-    setOpen:(open:boolean)=>set(()=>({ isOpen:open }))
+    isEditing:false,
+    setIsEditing:(condition:boolean)=>set(()=>({ isEditing:condition })),
+    setOpen:(condition:boolean)=>set(()=>({ isOpen:condition }))
 }))
 
 export const useSaveTrack = create<SaveTrack>((set)=>({

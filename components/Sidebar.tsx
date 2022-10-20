@@ -16,7 +16,7 @@ const Sidebar = () => {
   const router = useRouter();
   // const [isOpen,setOpen] = usePlaylistModal((state)=>[state.isOpen,state.setOpen],shallow);
   const setOpen = usePlaylistModal((state)=>state.setOpen);
-
+  const setIsEditing = usePlaylistModal((state)=>state.setIsEditing);
 
   return (
     <section className="fixed min-h-screen top-0 z-40 flex flex-col p-4 items-center bg-black w-[60px] lg:w-[90px]  space-y-8 h-screen">
@@ -37,6 +37,7 @@ const Sidebar = () => {
           </Link>
           <div data-tip="Create playlist" onClick={()=>{
             setOpen(true)
+            setIsEditing(false)
             window.scrollTo(0,0)
           }}>
             <BsPlusSquare className='icon' />

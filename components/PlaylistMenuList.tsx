@@ -1,7 +1,8 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
+import { BsSearch } from 'react-icons/bs';
 import spotifyApi from '../lib/spotifyApi';
 import { usePlaylistModal, useSaveTrack } from '../lib/zustand';
 
@@ -10,8 +11,9 @@ interface IProps {
 }
 const PlaylistMenuList = ({ myPlaylists }:IProps) => {
   const savedTrack = useSaveTrack((state)=>state.savedTrack);
-  const setOpenModal = usePlaylistModal((state)=>state.setOpen);
+  const [term,setTerm] = useState<string>("")
   
+
   const { data: session } = useSession();
   const { accessToken }: any = session;
   const router = useRouter()
@@ -39,18 +41,23 @@ const PlaylistMenuList = ({ myPlaylists }:IProps) => {
         return res;
     }
   return (
-    <div className="absolute p-1 w-44 h-56 overflow-y-scroll bg-neutral-900 right-full bottom-full  " >
-    <ul>
-        <li onClick={createAndSaveToPlaylist} className="p-2 hover:bg-neutral-700">
-            Create playlist
-        </li>
-        
-        {myPlaylists?.map((playlist)=>(
-            <li className="p-2 hover:bg-neutral-700" onClick={(e)=>{
-                addTrackToPlaylist(playlist)
-            }}>{playlist.name}</li>
-        ))}
-    </ul>
+    <div className="absolute p-1 w-44 h-56 overflow-y-scroll overflow-x-hidden bg-neutral-900 right-full bottom-full  " >
+      <div className='bg-neutral-700 flex gap-x-2 items-center p-1 rounded-sm'>
+        <BsSearch className='text-white text-lg' />
+        <input type="text" placeholder="Find playlist" onChange={(e)=>setTerm(e.target.value)} className='bg-transparent  outline-none'  />
+
+      </div>
+      <ul>
+          <li onClick={createAndSaveToPlaylist} className="p-2 hover:bg-neutral-700">
+              Create playlist
+          </li>
+          
+          {myPlaylists?.filter((playlist)=>playlist.name.includes(term)).map((playlist)=>(
+              <li className="p-2 hover:bg-neutral-700" onClick={(e)=>{
+                  addTrackToPlaylist(playlist)
+              }}>{playlist.name}</li>
+          ))}
+      </ul>
 </div>
   )
 }

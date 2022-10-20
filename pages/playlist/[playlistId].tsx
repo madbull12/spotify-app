@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { BsClock } from 'react-icons/bs';
 import { FiHeart, FiMoreHorizontal } from 'react-icons/fi';
 import PlayButton from '../../components/PlayButton';
@@ -10,6 +10,7 @@ import TrackAlbum from '../../components/TrackAlbum';
 import timeConversion from '../../helper/timeConversion';
 import useHandlePlay from '../../hooks/useHandlePlay';
 import spotifyApi from '../../lib/spotifyApi';
+import { usePlaylistModal } from '../../lib/zustand';
 import NoImage from "../../public/img/no-image.jpg"
 
 
@@ -17,25 +18,53 @@ const PlaylistPage = () => {
     const router:any = useRouter();
     const { data: session } = useSession();
     const { accessToken }: any = session;
-
-
+    const [myData,setMyData] = useState<SpotifyApi.CurrentUsersProfileResponse | any>(null);
+    const setOpenModal = usePlaylistModal((state)=>state.setOpen);
+    const setIsEditing = usePlaylistModal((state)=>state.setIsEditing);
     const handlePlay = useHandlePlay();
+    
     useEffect(() => {
         if (!accessToken) return;
         spotifyApi.setAccessToken(accessToken);
-      }, [accessToken]);
+    }, [accessToken]);
+
+    useEffect(() => {
+        // if (!accessToken) return;
+        const controller = new AbortController()
+    
+        const fetchMe = async () => {
+          try {
+            const res = await spotifyApi.getMe();
+            setMyData(res.body);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchMe();
+        return () => controller.abort()
+    }, []);
+
+ 
     const fetchPlaylist = async() => {
         const res = await spotifyApi.getPlaylist(router.query.playlistId);
         return await res.body;
     }
 
     const { data:playlist,refetch } = useQuery(["fetchPlaylist"],fetchPlaylist);
+
     useEffect(()=>{
         refetch()
-    },[router])
-    console.log(playlist)
-    let durations:any = playlist?.tracks.items.reduce((acc:any,cur:any)=>cur?.track?.duration_ms + acc,0)
+    },[router]);
 
+    console.log(myData)
+
+    let durations:any = playlist?.tracks.items.reduce((acc:any,cur:any)=>cur?.track?.duration_ms + acc,0)
+    let isOwner = playlist?.owner.id === myData?.id;
+
+    const openEditModal = () => {
+        setOpenModal(true);
+        setIsEditing(true);
+    }
   return (
     <div className=''>
         <div className='flex items-center gap-x-8 text-white'>
@@ -59,7 +88,9 @@ const PlaylistPage = () => {
         
             <div className='space-y-8'>
                 <p className='uppercase font-semibold tracking-tighter'>{playlist?.type}</p>
-                <h1 className='font-black text-6xl'>{playlist?.name}</h1>
+                <h1 className={`${isOwner ? "cursor-pointer":null } font-black text-6xl`} onClick={()=>{
+                    isOwner ? openEditModal()  :null
+                }}>{playlist?.name}</h1>
                 <p className='text-gray-400'>{playlist?.description}</p>
                 <div className='flex items-center gap-x-2 font-semibold text-sm'>
                   

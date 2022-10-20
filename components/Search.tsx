@@ -17,7 +17,11 @@ const Search = () => {
   const [search,setSearch] = useSearch((state:any)=>[state.search,state.setSearch],shallow);
   const router = useRouter();
   useEffect(()=>{
-    setSearch("")
+    if(router.pathname.includes("/search")) {
+      return;
+    }else{
+      setSearch("")
+    }
   },[router.pathname])
 
   return (
