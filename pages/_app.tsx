@@ -39,11 +39,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
 
         <AuthWrapper>
           <QueryClientProvider client={queryClient}>
+          <ReactTooltip />
             <Toaster 
                 position="top-right"
                 reverseOrder={false}
             />
-            <ReactTooltip />
+           
             <Dashboard>
               <Component {...pageProps} />
            

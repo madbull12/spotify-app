@@ -25,11 +25,14 @@ const Sidebar = () => {
             <Image src={logo} width={60} height={60} alt="logo" objectFit='contain' />
         <div className="space-y-6 flex flex-col">
           <Link href="/">
-            <IoMdHome className={`icon ${router.pathname === "/" ? "text-white" : ""}`} />
+            <IoMdHome data-tip="Home" className={`icon ${router.pathname === "/" ? "text-white" : ""}`} />
           
           </Link>
           <Link href="/search">
-            <IoMdSearch className={`icon ${router.pathname === "/search" ? "text-white" : ""}`} />
+            <div data-tip="Search">
+              <IoMdSearch data-tip="Search" className={`icon ${router.pathname === "/search" ? "text-white" : ""}`} />
+
+            </div>
           
           </Link>
           <div data-tip="Create playlist" onClick={()=>{

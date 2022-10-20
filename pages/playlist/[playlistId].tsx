@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import { BsClock } from 'react-icons/bs';
 import { FiHeart, FiMoreHorizontal } from 'react-icons/fi';
 import PlayButton from '../../components/PlayButton';
-import PlaylistTrack from '../../components/PlaylistTrack';
+import TrackAlbum from '../../components/TrackAlbum';
 import timeConversion from '../../helper/timeConversion';
 import useHandlePlay from '../../hooks/useHandlePlay';
 import spotifyApi from '../../lib/spotifyApi';
@@ -89,7 +89,7 @@ const PlaylistPage = () => {
             
             </div>
             {playlist?.tracks.items.map((playlist:SpotifyApi.PlaylistTrackObject,i)=>(
-                <PlaylistTrack i={i} playlist={playlist} />
+                <TrackAlbum track={playlist?.track} index={i+1} />
             ))}
         </div>
   
