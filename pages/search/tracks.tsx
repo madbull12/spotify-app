@@ -7,11 +7,13 @@ import Loader from '../../components/Loader'
 
 import SearchNavLayout from '../../components/SearchNavLayout'
 import TrackAlbum from '../../components/TrackAlbum'
+import useDebounce from '../../hooks/useDebounce'
 import spotifyApi from '../../lib/spotifyApi'
 import { useSearch } from '../../lib/zustand'
 
 const TrackPage = () => {
   const search = useSearch((state)=>state.search);
+  const debouncedSearch = useDebounce(search,500);
 
   const { data: session } = useSession();
   const { accessToken }: any = session;
@@ -23,15 +25,21 @@ const TrackPage = () => {
 
 
   const fetchSearchTracks = async()=>{
-    const res = await spotifyApi.searchTracks(search,{
+    const res = await spotifyApi.searchTracks(debouncedSearch,{
       limit:40
     });
     return await res.body;
 
   }
 
-  const { data: searchTracks,isLoading } = useQuery(["fetchSearchTracks"],fetchSearchTracks);
-  console.log()
+  
+
+  const { data: searchTracks,isLoading,refetch } = useQuery(["fetchSearchTracks"],fetchSearchTracks);
+  console.log();
+
+  useEffect(()=>{
+    refetch()
+  },[debouncedSearch])
 
   if(isLoading) return <Loader />
   return (

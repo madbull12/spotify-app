@@ -21,6 +21,8 @@ const PlaylistModal = ({ isEditing }: IProps) => {
   const { accessToken }: any = session;
   const setOpen = usePlaylistModal((state) => state.setOpen);
 
+  const editValue = usePlaylistModal((state)=>state.editTrack);
+
   const modal = useRef<HTMLDivElement>(null);
 
   const clickOutsidehandler = () => {
@@ -74,11 +76,14 @@ const PlaylistModal = ({ isEditing }: IProps) => {
           <div className="space-y-2 flex flex-col">
             <input
               onChange={(e) => setName(e.target.value)}
+              defaultValue={editValue.name}
               placeholder="Enter playlist's name"
               className="bg-zinc-700 px-4 py-2 rounded-lg outline-none"
             />
             <textarea
               onChange={(e) => setDescription(e.target.value)}
+              defaultValue={editValue.description}
+
               placeholder="Add an optional description "
               className="px-4 py-2 bg-zinc-700 rounded-lg outline-none"
             ></textarea>

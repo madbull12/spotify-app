@@ -21,6 +21,7 @@ const PlaylistPage = () => {
     const [myData,setMyData] = useState<SpotifyApi.CurrentUsersProfileResponse | any>(null);
     const setOpenModal = usePlaylistModal((state)=>state.setOpen);
     const setIsEditing = usePlaylistModal((state)=>state.setIsEditing);
+    const setEdit = usePlaylistModal((state)=>state.setEditTrack);
     const handlePlay = useHandlePlay();
     
     useEffect(() => {
@@ -64,6 +65,7 @@ const PlaylistPage = () => {
     const openEditModal = () => {
         setOpenModal(true);
         setIsEditing(true);
+        setEdit(playlist);
     }
   return (
     <div className=''>

@@ -4,12 +4,13 @@ import React, { ReactElement, useEffect } from 'react'
 import { v4 } from 'uuid'
 import ArtistSearchItem from '../../components/ArtistSearchItem'
 import Loader from '../../components/Loader'
+import PlaylistSearchItem from '../../components/PlaylistSearchItem'
 import SearchNavLayout from '../../components/SearchNavLayout'
 import useDebounce from '../../hooks/useDebounce'
 import spotifyApi from '../../lib/spotifyApi'
 import { useSearch } from '../../lib/zustand'
 
-const ArtistsPage = () => {
+const PlaylistsPage = () => {
 
   const search = useSearch((state)=>state.search);
   const debouncedSearch = useDebounce(search,500);
@@ -21,15 +22,16 @@ const ArtistsPage = () => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
-  const fetchArtistsSearch = async()=>{
-    const res = await spotifyApi.searchArtists(debouncedSearch,{
+  const fetchPlaylistsSearch = async()=>{
+    const res = await spotifyApi.searchPlaylists(debouncedSearch,{
       limit:40
     });
     return await res.body;
   }
 
 
-  const { data:searchArtists,isLoading,refetch } = useQuery(["fetchArtistsSearch"],fetchArtistsSearch);
+  const { data:playlistsSearch,isLoading,refetch } = useQuery(["fetchPlaylistsSearch"],fetchPlaylistsSearch);
+
 
   useEffect(()=>{
     refetch();
@@ -38,15 +40,15 @@ const ArtistsPage = () => {
 
   return (
     <div className='grid grid-cols-5 gap-4'>
-      {searchArtists?.artists?.items.map((artist)=>(
-        <ArtistSearchItem key={v4()} artist={artist} />
+      {playlistsSearch?.playlists?.items.map((playlist)=>(
+        <PlaylistSearchItem key={v4()} playlist={playlist} />
 
       ))}
     </div>
   )
 }
 
-ArtistsPage.getLayout = function getLayout(page: ReactElement) {
+PlaylistsPage.getLayout = function getLayout(page: ReactElement) {
   return (
       <>
           <SearchNavLayout>
@@ -60,4 +62,4 @@ ArtistsPage.getLayout = function getLayout(page: ReactElement) {
 
   )
 }
-export default ArtistsPage
+export default PlaylistsPage

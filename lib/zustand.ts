@@ -23,7 +23,7 @@ type PlaylistModal = {
     isEditing:boolean;
     setIsEditing:(condition:boolean)=>void;
     editTrack:SpotifyApi.TrackObjectFull | any;
-    setEditTrack:(data:SpotifyApi.TrackObjectFull) => void
+    setEditTrack:(data:SpotifyApi.TrackObjectFull | any) => void
 }
 
 export const usePlayTrack = create<PlayTrack>((set)=>({
