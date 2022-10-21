@@ -15,10 +15,11 @@ interface IProps {
 }
 const PlaylistModal = ({ isEditing }: IProps) => {
   const [name, setName] = useState<string>("");
-  const router = useRouter();
+  const router:any = useRouter();
   const [description, setDescription] = useState<string>("");
   const { data: session } = useSession();
   const { accessToken }: any = session;
+  console.log(router)
   const setOpen = usePlaylistModal((state) => state.setOpen);
 
   const editValue = usePlaylistModal((state)=>state.editTrack);
@@ -33,6 +34,18 @@ const PlaylistModal = ({ isEditing }: IProps) => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
+
+  const editPlaylist = async(e:React.SyntheticEvent) => {
+    e.preventDefault();
+    const res = await spotifyApi.changePlaylistDetails(router.query.playlistId,{
+  
+      name:name || editValue.name,
+      description:description || editValue.description
+    });
+
+    toast.success("Playlist changed to " + name)
+    return res;
+  }
   
   const createPlaylist = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -70,19 +83,20 @@ const PlaylistModal = ({ isEditing }: IProps) => {
         </p>
         <MdClose className="text-gray-400 cursor-pointer" onClick={()=>setOpen(false)} />
       </header>
-      <form className="flex flex-col" onSubmit={createPlaylist}>
+      <form className="flex flex-col" onSubmit={isEditing ? editPlaylist : createPlaylist}>
         <div className="flex  gap-x-4">
           <Image src={NoImage} height={200} width={200} />
           <div className="space-y-2 flex flex-col">
             <input
               onChange={(e) => setName(e.target.value)}
-              defaultValue={editValue.name}
+              defaultValue={isEditing ? editValue.name : ""}
               placeholder="Enter playlist's name"
               className="bg-zinc-700 px-4 py-2 rounded-lg outline-none"
             />
             <textarea
               onChange={(e) => setDescription(e.target.value)}
-              defaultValue={editValue.description}
+              defaultValue={isEditing ? editValue.description : ""}
+
 
               placeholder="Add an optional description "
               className="px-4 py-2 bg-zinc-700 rounded-lg outline-none"
