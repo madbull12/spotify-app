@@ -1,4 +1,5 @@
 import React from 'react'
+import { v4 } from 'uuid'
 import EpisodeSearchItem from './EpisodeSearchItem'
 
 interface IProps {
@@ -11,7 +12,7 @@ const EpisodesSearch = ({ episodes }:IProps) => {
         
         <div className='grid scrollbar overflow-x-scroll  auto-cols-max grid-flow-col auto-rows-auto gap-x-2   scrollbar-thumb-gray-900 scrollbar-track-gray-100'>
             {episodes?.slice(0,5).map((episode)=>(
-                <EpisodeSearchItem episode={episode} />
+                <EpisodeSearchItem key={v4()} episode={episode} />
         
             ))}
             

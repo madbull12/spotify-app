@@ -14,7 +14,7 @@ import AlbumSearch from "../../components/AlbumSearch";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Dashboard from "../../components/Dashboard";
-import SearchLayout from "../../layouts/SearchLayout";
+import SearchLayout from "../../components/SearchLayout";
 import { NextPageWithLayout } from "../_app";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { searchState, searchValue } from "../../atoms/searchAtom";
@@ -109,7 +109,7 @@ const SearchPage:NextPageWithLayout = () => {
                 Top results
               </h1>
               {searchResult?.tracks?.items.slice(0, 1).map((track) => (
-                <Link href={`/album/${track.album.id}`}>
+                <Link href={`/album/${track.album.id}`} key={v4()}>
                   <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} >
                     <Card key={v4()} large={true}>
                       <Image

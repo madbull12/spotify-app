@@ -1,4 +1,5 @@
 import React from 'react'
+import { v4 } from 'uuid'
 import PodcastSearchItem from './PodcastSearchItem'
 
 interface IProps {
@@ -11,7 +12,7 @@ const PodcastSearch = ({ shows }:IProps) => {
     
     <div className='grid scrollbar overflow-x-scroll  auto-cols-max grid-flow-col auto-rows-auto gap-x-2   scrollbar-thumb-gray-900 scrollbar-track-gray-100'>
         {shows?.slice(0,5).map((show)=>(
-            <PodcastSearchItem show={show} />
+            <PodcastSearchItem key={v4()} show={show} />
     
         ))}
         

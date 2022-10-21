@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 } from "uuid";
 import ArtistSearchItem from "./ArtistSearchItem";
 
 interface IProps {
@@ -22,7 +23,7 @@ const ArtistsSearch = ({ artists, title }: IProps) => {
 
       <div className="grid scrollbar overflow-x-scroll  auto-cols-max grid-flow-col auto-rows-auto gap-x-2   scrollbar-thumb-gray-900 scrollbar-track-gray-100">
         {artists?.slice(0, showMore ? artists.length : 5).map((artist) => (
-          <ArtistSearchItem artist={artist} />
+          <ArtistSearchItem key={v4()} artist={artist} />
         ))}
       </div>
     </div>

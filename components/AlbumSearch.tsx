@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { FaPlay } from "react-icons/fa";
+import { v4 } from "uuid";
 import AlbumSearchItem from "./AlbumSearchItem";
 import Card from "./Card";
 
@@ -24,7 +25,7 @@ const AlbumSearch = ({ albums }: IProps) => {
 
       <div className="grid scrollbar overflow-x-scroll auto-cols-max grid-flow-col auto-rows-auto gap-x-2   scrollbar-thumb-gray-900 scrollbar-track-gray-100">
         {albums?.slice(0, showMore ? albums.length : 5 ).map((album) => (
-          <AlbumSearchItem album={album} />
+          <AlbumSearchItem key={v4()} album={album} />
         ))}
       </div>
     </div>

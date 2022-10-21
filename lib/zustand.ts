@@ -22,7 +22,8 @@ type PlaylistModal = {
     setOpen:(condition:boolean)=>void;
     isEditing:boolean;
     setIsEditing:(condition:boolean)=>void;
-
+    editTrack:SpotifyApi.TrackObjectFull | any;
+    setEditTrack:(data:SpotifyApi.TrackObjectFull) => void
 }
 
 export const usePlayTrack = create<PlayTrack>((set)=>({
@@ -46,7 +47,9 @@ export const usePlaylistModal = create<PlaylistModal>((set)=>({
     isOpen:false,
     isEditing:false,
     setIsEditing:(condition:boolean)=>set(()=>({ isEditing:condition })),
-    setOpen:(condition:boolean)=>set(()=>({ isOpen:condition }))
+    setOpen:(condition:boolean)=>set(()=>({ isOpen:condition })),
+    editTrack:null,
+    setEditTrack:(data:SpotifyApi.TrackObjectFull) => set(()=>({ editTrack:data }))
 }))
 
 export const useSaveTrack = create<SaveTrack>((set)=>({
