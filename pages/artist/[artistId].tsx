@@ -3,19 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+import { FiHeart, FiMoreHorizontal } from "react-icons/fi";
 import AlbumSearch from "../../components/AlbumSearch";
 import AlbumSearchItem from "../../components/AlbumSearchItem";
 import ArtistSearchItem from "../../components/ArtistSearchItem";
 import ArtistsSearch from "../../components/ArtistsSearch";
 import Loader from "../../components/Loader";
+import PlayButton from "../../components/PlayButton";
 import TrackAlbum from "../../components/TrackAlbum";
+import useHandlePlay from "../../hooks/useHandlePlay";
 import spotifyApi from "../../lib/spotifyApi";
 
 const ArtistPage = () => {
   const router: any = useRouter();
   const { artistId } = router.query;
   const [discography, setDiscography] = useState<string>("album");
-
+  const handlePlay = useHandlePlay()
   const [seeAll, setSeeAll] = useState<boolean>(false);
 
   const fetchArtist = async () => {
@@ -38,6 +42,12 @@ const ArtistPage = () => {
     const res = await spotifyApi.getArtistTopTracks(artistId, "US");
     return await res.body;
   };
+
+  const followArtist = async(artistId:any)=>{
+    const res = await spotifyApi.followArtists([artistId]);
+    toast.success("Following ");
+    return res.body;
+  }
 
   const artist = useQuery(["fetchArtist"], fetchArtist);
 
@@ -80,6 +90,11 @@ const ArtistPage = () => {
           </p>
         </div>
       </div>
+      <div className='p-4 flex items-center gap-x-6'>
+          <PlayButton large={true} handlePlay={()=>handlePlay(artist?.data)} item={artist?.data} />
+          <button onClick={()=>followArtist(artist?.data?.id)} className="px-4 py-2  text-gray-200 font-semibold uppercase bg-transparent border-gray-200 border rounded-lg">Follow</button>
+          <FiMoreHorizontal className='text-4xl text-gray-400' />
+        </div>
       <div>
         <h1 className="text-white text-2xl font-bold my-4">Popular</h1>
         {artistTopTracks?.data?.tracks

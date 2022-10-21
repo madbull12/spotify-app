@@ -41,14 +41,14 @@ const ShowPage = () => {
             <p className='font-semibold'>{show?.publisher}</p>
         </div>
 
-        <div className='divide-y divide-gray-300'>
-            {show?.episodes.items.map((episode)=>(
-                <EpisodeCard episode={episode} />
-            ))}
-        </div>
+   
         
     </div>
-    
+    <div className='divide-y divide-gray-300 mt-6 w-3/4'>
+        {show?.episodes.items.map((episode)=>(
+            <EpisodeCard episode={episode} />
+        ))}
+    </div>
 
 </div>
   )

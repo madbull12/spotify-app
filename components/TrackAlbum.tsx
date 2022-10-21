@@ -70,7 +70,7 @@ const TrackAlbum = ({ track, index }: IProps) => {
         className={` ${isHovering ? "visible" : "invisible"} text-gray-400`}
       />
 
-      <p className="text-gray-400">{msToClock(track.duration_ms)}</p>
+      <p className="text-gray-400">{msToClock(track?.duration_ms)}</p>
       <div className="relative" >
         <FiMoreHorizontal
           // data-tip={`Other options for ${track.name} by ${track.artists[0].name}`}
