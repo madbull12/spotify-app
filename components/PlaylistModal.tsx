@@ -15,14 +15,14 @@ interface IProps {
 }
 const PlaylistModal = ({ isEditing }: IProps) => {
   const [name, setName] = useState<string>("");
-  const router:any = useRouter();
+  const router: any = useRouter();
   const [description, setDescription] = useState<string>("");
   const { data: session } = useSession();
   const { accessToken }: any = session;
-  console.log(router)
+  console.log(router);
   const setOpen = usePlaylistModal((state) => state.setOpen);
 
-  const editValue = usePlaylistModal((state)=>state.editTrack);
+  const editValue = usePlaylistModal((state) => state.editTrack);
 
   const modal = useRef<HTMLDivElement>(null);
 
@@ -35,18 +35,20 @@ const PlaylistModal = ({ isEditing }: IProps) => {
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
 
-  const editPlaylist = async(e:React.SyntheticEvent) => {
+  const editPlaylist = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const res = await spotifyApi.changePlaylistDetails(router.query.playlistId,{
-  
-      name:name || editValue.name,
-      description:description || editValue.description
-    });
+    const res = await spotifyApi.changePlaylistDetails(
+      router.query.playlistId,
+      {
+        name: name || editValue.name,
+        description: description || editValue.description,
+      }
+    );
 
-    toast.success("Playlist changed to " + name)
+    toast.success("Playlist changed to " + name);
     return res;
-  }
-  
+  };
+
   const createPlaylist = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const res = await spotifyApi.createPlaylist(name, {
@@ -81,9 +83,15 @@ const PlaylistModal = ({ isEditing }: IProps) => {
         <p className="font-bold text-xl">
           {isEditing ? "Edit details" : "Create playlist"}
         </p>
-        <MdClose className="text-gray-400 cursor-pointer" onClick={()=>setOpen(false)} />
+        <MdClose
+          className="text-gray-400 cursor-pointer"
+          onClick={() => setOpen(false)}
+        />
       </header>
-      <form className="flex flex-col" onSubmit={isEditing ? editPlaylist : createPlaylist}>
+      <form
+        className="flex flex-col"
+        onSubmit={isEditing ? editPlaylist : createPlaylist}
+      >
         <div className="flex  gap-x-4">
           <Image src={NoImage} height={200} width={200} />
           <div className="space-y-2 flex flex-col">
@@ -96,8 +104,6 @@ const PlaylistModal = ({ isEditing }: IProps) => {
             <textarea
               onChange={(e) => setDescription(e.target.value)}
               defaultValue={isEditing ? editValue.description : ""}
-
-
               placeholder="Add an optional description "
               className="px-4 py-2 bg-zinc-700 rounded-lg outline-none"
             ></textarea>

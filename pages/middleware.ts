@@ -6,9 +6,9 @@ export { default } from "next-auth/middleware";
 
 export function middleware(req: NextApiRequest) {
   const session = getSession({ req });
-  console.log(session)
-  if(!session) {
-    NextResponse.redirect(new URL("/auth/signin"))
+  console.log(session);
+  if (!session) {
+    NextResponse.redirect(new URL("/auth/signin"));
   }
 }
 

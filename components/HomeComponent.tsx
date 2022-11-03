@@ -23,33 +23,37 @@ import shallow from "zustand/shallow";
 
 // });
 interface IProps {
-  myPlaylists:SpotifyApi.PlaylistObjectSimplified[] | undefined;
+  myPlaylists: SpotifyApi.PlaylistObjectSimplified[] | undefined;
 }
 
-const HomeComponent = ({ myPlaylists }:IProps) => {
+const HomeComponent = ({ myPlaylists }: IProps) => {
   // const [playingTrack, setPlayingTrack] =
   //   useRecoilState<any>(playingTrackState);
   const [showPlayer, setShowPlayer] = useState(false);
-  const [playingTrack, setPlayingTrack] = usePlayTrack((state:any)=>[state.playingTrack,state.setPlayingTrack],shallow)
-  const [isPlaying,setIsPlaying] = usePlayTrack((state:any)=>[state.isPlaying,state.setIsPlaying],shallow);
-  const handlePlay = (items:SpotifyApi.AlbumObjectFull) => {
+  const [playingTrack, setPlayingTrack] = usePlayTrack(
+    (state: any) => [state.playingTrack, state.setPlayingTrack],
+    shallow
+  );
+  const [isPlaying, setIsPlaying] = usePlayTrack(
+    (state: any) => [state.isPlaying, state.setIsPlaying],
+    shallow
+  );
+  const handlePlay = (items: SpotifyApi.AlbumObjectFull) => {
     setPlayingTrack(items);
 
-    if (items.uri === playingTrack.uri) {
+    if (items.uri === playingTrack?.uri) {
       setIsPlaying(!isPlaying);
     }
   };
-
 
   const { data: session } = useSession();
   const { accessToken }: any = session;
   const [newReleases, setNewReleases] = useState<any>(null);
 
-
   const fetchFeaturedPlaylists = async () => {
     const res = await spotifyApi.getFeaturedPlaylists();
     return await res.body;
-  }
+  };
 
   // const fetchMyTopArtists = async () => {
   //   const res = await spotifyApi.getMyTopArtists({
@@ -58,18 +62,10 @@ const HomeComponent = ({ myPlaylists }:IProps) => {
   //   return await res.body;
   // }
 
-
-
-
-
-
-
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
-
-
 
   useEffect(() => {
     if (!accessToken) return;
@@ -89,10 +85,11 @@ const HomeComponent = ({ myPlaylists }:IProps) => {
     setShowPlayer(true);
   }, []);
 
-
-  const featuredPlaylists = useQuery(["fetchFeaturedPlaylists"],fetchFeaturedPlaylists);
-  console.log(myPlaylists)
-
+  const featuredPlaylists = useQuery(
+    ["fetchFeaturedPlaylists"],
+    fetchFeaturedPlaylists
+  );
+  console.log(myPlaylists);
 
   return (
     <main>
@@ -101,7 +98,11 @@ const HomeComponent = ({ myPlaylists }:IProps) => {
         <h1 className="text-white text-2xl font-bold mb-2">New Releases</h1>
         <div className="grid   overflow-x-scroll  auto-cols-max grid-flow-col auto-rows-auto gap-x-2  scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
           {newReleases?.map((release: SpotifyApi.AlbumObjectFull) => (
-            <NewRelease key={uuidv4()} items={release} handlePlay={handlePlay} />
+            <NewRelease
+              key={uuidv4()}
+              items={release}
+              handlePlay={handlePlay}
+            />
           ))}
         </div>
         {/* <div className="flex gap-x-8 md:relative min-w-full ml-6">
@@ -129,13 +130,13 @@ const HomeComponent = ({ myPlaylists }:IProps) => {
           <div className="w-full"></div>
         </div> */}
         <div className=" space-y-4">
-   
-        
-          <PlaylistsSearch playlists={featuredPlaylists?.data?.playlists.items} title={featuredPlaylists?.data?.message} />
+          <PlaylistsSearch
+            playlists={featuredPlaylists?.data?.playlists.items}
+            title={featuredPlaylists?.data?.message}
+          />
           <PlaylistsSearch playlists={myPlaylists} title="Your playlists" />
         </div>
       </Body>
-   
     </main>
   );
 };

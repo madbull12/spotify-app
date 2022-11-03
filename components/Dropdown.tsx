@@ -6,8 +6,8 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 export default function Dropdown() {
-  const { data: session }= useSession();
-  console.log(session)
+  const { data: session } = useSession();
+  console.log(session);
 
   return (
     <Menu as="div" className="w-24 h-12 relative items-center sm:flex hidden">
@@ -26,7 +26,6 @@ export default function Dropdown() {
               className="rounded-full w-11 h-11 absolute -right-1 object-cover"
             /> */}
           </div>
-        
         </Menu.Button>
       </div>
       <Transition
@@ -46,7 +45,9 @@ export default function Dropdown() {
                   className={`${
                     active && "bg-white/10"
                   } group flex rounded-md items-center w-full px-2 py-2 text-sm font-semibold tracking-wide text-white cursor-default`}
-                  onClick={() => signOut({redirect: false, callbackUrl: "/auth/signin"})}
+                  onClick={() =>
+                    signOut({ redirect: false, callbackUrl: "/auth/signin" })
+                  }
                 >
                   <IoMdLogOut className="w-5 h-5 mr-2" aria-hidden="true" />
                   Log out

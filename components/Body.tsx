@@ -7,11 +7,11 @@ import Search from "./Search";
 import { v4 as uuidv4 } from "uuid";
 
 interface IProps {
-  children:React.ReactNode
+  children: React.ReactNode;
 }
-const Body = ({ children }:IProps) => {
+const Body = ({ children }: IProps) => {
   const { data: session } = useSession();
-  const accessToken:any = session?.accessToken;
+  const accessToken: any = session?.accessToken;
   // const [searchResult, setSearchResult] = useState<any>(null);
   const [newReleases, setNewReleases] = useState<any>(null);
 

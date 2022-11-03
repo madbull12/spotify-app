@@ -17,36 +17,34 @@ interface IProps {
   index: number;
 }
 const TrackAlbum = ({ track, index }: IProps) => {
-  console.log(track)
-  const[hoverRef,isHovering] = useHover<HTMLDivElement>();
+  console.log(track);
+  const [hoverRef, isHovering] = useHover<HTMLDivElement>();
   const playingTrack = usePlayTrack((state) => state.playingTrack);
   const isPlaying = usePlayTrack((state) => state.isPlaying);
 
-  const [showMenu,setShowMenu] = useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
   const clickOutsidehandler = () => {
     setShowMenu(false);
   };
-  
+
   const handlePlay = useHandlePlay();
 
-  const setSavedTrack = useSaveTrack((state)=>state.setSavedTrack);
+  const setSavedTrack = useSaveTrack((state) => state.setSavedTrack);
 
   return (
     <div
-      onClick={()=>handlePlay(track)}
+      onClick={() => handlePlay(track)}
       ref={hoverRef}
       className="flex gap-x-4 items-center py-2 cursor-pointer hover:bg-neutral-800 rounded-lg px-4"
     >
       {isHovering ? (
         <>
-          {track?.uri === playingTrack?.uri && isPlaying  ? (
-            <FaPause className="text-white"  />
-          ):(
-            <FaPlay className="text-white"  />
-
+          {track?.uri === playingTrack?.uri && isPlaying ? (
+            <FaPause className="text-white" />
+          ) : (
+            <FaPlay className="text-white" />
           )}
         </>
-       
       ) : (
         <span className="text-gray-400">{index}</span>
       )}
@@ -60,7 +58,9 @@ const TrackAlbum = ({ track, index }: IProps) => {
             </span>
           )}
           <Link href={`/artist/${track?.artists[0].id}`}>
-            <p className="text-gray-400 hover:underline cursor-pointer">{track?.artists[0].name}</p>
+            <p className="text-gray-400 hover:underline cursor-pointer">
+              {track?.artists[0].name}
+            </p>
           </Link>
         </div>
       </div>
@@ -71,22 +71,18 @@ const TrackAlbum = ({ track, index }: IProps) => {
       />
 
       <p className="text-gray-400">{msToClock(track?.duration_ms)}</p>
-      <div className="relative" >
+      <div className="relative">
         <FiMoreHorizontal
           // data-tip={`Other options for ${track.name} by ${track.artists[0].name}`}
           className={` ${isHovering ? "visible" : "invisible"} text-gray-400`}
-          onClick={(e)=>{
+          onClick={(e) => {
             e.stopPropagation();
-            setShowMenu(!showMenu)
-            setSavedTrack(track)
+            setShowMenu(!showMenu);
+            setSavedTrack(track);
           }}
         />
-        {showMenu && (
-          <PlaylistMenu clickOutsideHandler={clickOutsidehandler} />
-        )}
-       
+        {showMenu && <PlaylistMenu clickOutsideHandler={clickOutsidehandler} />}
       </div>
-  
     </div>
   );
 };

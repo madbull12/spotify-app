@@ -4,10 +4,10 @@ import { playingTrackState, playState } from "../atoms/playerAtom";
 import { IRecentlyPlayed, ITrack } from "../interface";
 
 interface IProps {
-  track:IRecentlyPlayed
+  track: IRecentlyPlayed;
 }
-function RecentlyPlayed({ track }:IProps) {
-  console.log(track)
+function RecentlyPlayed({ track }: IProps) {
+  console.log(track);
   // const [play, setPlay] = useRecoilState(playState);
   // const [playingTrack, setPlayingTrack] = useRecoilState<any>(playingTrackState);
 
@@ -20,7 +20,7 @@ function RecentlyPlayed({ track }:IProps) {
   // };
 
   return (
-    <div className="flex items-center space-x-3" >
+    <div className="flex items-center space-x-3">
       <img
         src={track?.track.album.images[1].url}
         alt="album-image"
@@ -34,11 +34,10 @@ function RecentlyPlayed({ track }:IProps) {
         </Link>
 
         <Link href={`/artist/${track.track.artists[0].id}`}>
-        <p className="text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
-          {track?.track.artists[0]?.name}
-        </p>
+          <p className="text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
+            {track?.track.artists[0]?.name}
+          </p>
         </Link>
-        
       </div>
     </div>
   );

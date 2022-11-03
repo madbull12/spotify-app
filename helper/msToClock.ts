@@ -3,11 +3,11 @@ const ms = 54000000;
 console.log(new Date(ms).toISOString().slice(11, 19)); // 👉️ 15:00:00
 
 // ✅ Or create a reusable function
-function padTo2Digits(num:number) {
-  return num.toString().padStart(2, '0');
+function padTo2Digits(num: number) {
+  return num.toString().padStart(2, "0");
 }
 
-export default function msToClock(milliseconds:number) {
+export default function msToClock(milliseconds: number) {
   let seconds = Math.floor(milliseconds / 1000);
   let minutes = Math.floor(seconds / 60);
   let hours = Math.floor(minutes / 60);
@@ -22,6 +22,6 @@ export default function msToClock(milliseconds:number) {
   hours = hours % 24;
 
   return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(
-    seconds,
+    seconds
   )}`;
 }

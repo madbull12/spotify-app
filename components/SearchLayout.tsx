@@ -1,13 +1,13 @@
-import React from 'react'
-import Search from '../components/Search'
+import React from "react";
+import Search from "../components/Search";
 
-const SearchLayout = ({ children }:{children:React.ReactNode}) => {
+const SearchLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div >
-        <Search />
-        {children}
+    <div>
+      <Search />
+      {children}
     </div>
-  )
-}
+  );
+};
 
-export default SearchLayout
+export default SearchLayout;

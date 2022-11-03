@@ -24,7 +24,7 @@ const AlbumSearch = ({ albums }: IProps) => {
       </div>
 
       <div className="grid scrollbar overflow-x-scroll auto-cols-max grid-flow-col auto-rows-auto gap-x-2   scrollbar-thumb-gray-900 scrollbar-track-gray-100">
-        {albums?.slice(0, showMore ? albums.length : 5 ).map((album) => (
+        {albums?.slice(0, showMore ? albums.length : 5).map((album) => (
           <AlbumSearchItem key={v4()} album={album} />
         ))}
       </div>
