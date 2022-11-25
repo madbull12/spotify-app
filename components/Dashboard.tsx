@@ -26,7 +26,7 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
 
       <Body>{children}</Body>
       {status === "authenticated" ? (
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Right />
         </div>
       ) : null}

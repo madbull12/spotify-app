@@ -49,7 +49,7 @@ const TrackAlbum = ({ track, index }: IProps) => {
         <span className="text-gray-400">{index}</span>
       )}
 
-      <div className="flex flex-col items-start flex-[0.5]">
+      <div className="flex flex-col items-start flex-[0.5] whitespace-nowrap text-sm md:text-base">
         <p className="text-white">{track?.name}</p>
         <div className="flex items-center gap-x-1">
           {track?.explicit && (
@@ -58,7 +58,7 @@ const TrackAlbum = ({ track, index }: IProps) => {
             </span>
           )}
           <Link href={`/artist/${track?.artists[0].id}`}>
-            <p className="text-gray-400 hover:underline cursor-pointer">
+            <p className="text-gray-400 hover:underline cursor-pointer ">
               {track?.artists[0].name}
             </p>
           </Link>
@@ -70,7 +70,7 @@ const TrackAlbum = ({ track, index }: IProps) => {
         className={` ${isHovering ? "visible" : "invisible"} text-gray-400`}
       />
 
-      <p className="text-gray-400">{msToClock(track?.duration_ms)}</p>
+      <p className="text-gray-400 text-sm md:text-base">{msToClock(track?.duration_ms)}</p>
       <div className="relative">
         <FiMoreHorizontal
           // data-tip={`Other options for ${track.name} by ${track.artists[0].name}`}

@@ -81,7 +81,7 @@ const Sidebar = () => {
             <HiDotsHorizontal className="icon" />
           </div>
           <IoMdLogOut
-            className="text-2xl cursor-pointer text-white sm:hidden"
+            className="text-2xl cursor-pointer text-white block md:hidden"
             onClick={() => signOut({ redirect: false })}
           />
         </>
