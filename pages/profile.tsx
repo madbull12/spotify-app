@@ -80,7 +80,7 @@ const ProfilePage = () => {
           </h1>
           <div className="space-y-4 ">
             {topArtists?.items.map((artist) => (
-              <div className="flex gap-x-4 items-center text-white">
+              <div key={v4()} className="flex gap-x-4 items-center text-white">
                 <Image
                   src={artist?.images[0]?.url || ""}
                   width={50}
