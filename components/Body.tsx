@@ -47,7 +47,7 @@ const Body = ({ children }: IProps) => {
   }, []);
 
   return (
-    <section className={`bg-black pb-32 min-h-screen ${router.pathname !== "/auth/signin" ? "ml-12 lg:ml-20 " : null}  p-4  space-y-8  flex-grow `}>
+    <section className={`bg-black pb-32 max-w-[1000px] min-h-screen ${router.pathname !== "/auth/signin" ? "ml-12 lg:ml-20 " : null}  p-4  space-y-8  flex-grow `}>
       {children}
     </section>
   );

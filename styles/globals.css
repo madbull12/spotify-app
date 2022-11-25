@@ -11,7 +11,7 @@
 @layer components {
 
   .link-tag {
-    @apply text-white bg-neutral-800 hover:bg-neutral-700 transition-all ease-in-out duration-150 rounded-full py-1 px-2
+    @apply text-white whitespace-nowrap bg-neutral-800 hover:bg-neutral-700 transition-all ease-in-out duration-150 rounded-full py-1 px-2
   }
   .icon {
     @apply text-lg lg:text-xl xl:text-2xl cursor-pointer text-gray-500

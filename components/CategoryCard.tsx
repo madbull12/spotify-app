@@ -19,7 +19,7 @@ const CategoryCard = ({ category }: IProps) => {
           width={category.icons[0].width ?? 300}
           className="rounded-xl"
         />
-        <p className="text-xl text-white font-semibold absolute top-4 left-4 w-16">
+        <p className="text-base md:text-xl text-white font-semibold absolute top-4 left-4 w-16">
           {category.name}
         </p>
       </div>

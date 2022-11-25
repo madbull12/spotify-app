@@ -40,7 +40,7 @@ const PlaylistsPage = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="grid grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
       {playlistsSearch?.playlists?.items.map((playlist) => (
         <PlaylistSearchItem key={v4()} playlist={playlist} />
       ))}

@@ -35,21 +35,21 @@ const TrackAlbum = ({ track, index }: IProps) => {
     <div
       onClick={() => handlePlay(track)}
       ref={hoverRef}
-      className="flex gap-x-4 items-center py-2 cursor-pointer hover:bg-neutral-800 rounded-lg px-4"
+      className="flex gap-x-2 md:gap-x-4 items-center justify-between py-2 cursor-pointer hover:bg-neutral-800 rounded-lg px-4"
     >
       {isHovering ? (
         <>
           {track?.uri === playingTrack?.uri && isPlaying ? (
-            <FaPause className="text-white" />
+            <FaPause className="text-white text-xl" />
           ) : (
-            <FaPlay className="text-white" />
+            <FaPlay className="text-white text-xl" />
           )}
         </>
       ) : (
         <span className="text-gray-400">{index}</span>
       )}
 
-      <div className="flex flex-col items-start flex-[0.5] whitespace-nowrap text-sm md:text-base">
+      <div className="flex flex-col items-start  flex-[0.5] whitespace-nowrap text-sm md:text-base">
         <p className="text-white">{track?.name}</p>
         <div className="flex items-center gap-x-1">
           {track?.explicit && (
@@ -64,7 +64,7 @@ const TrackAlbum = ({ track, index }: IProps) => {
           </Link>
         </div>
       </div>
-      <p className="text-gray-400 flex-[0.5]">{track?.album?.name}</p>
+      <p className="text-gray-400 hidden md:block flex-[0.5]">{track?.album?.name}</p>
 
       <FiHeart
         className={` ${isHovering ? "visible" : "invisible"} text-gray-400`}

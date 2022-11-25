@@ -107,7 +107,7 @@ const SearchPage: NextPageWithLayout = () => {
       {debouncedSearch ? (
         <div className="space-y-8">
           <SearchNav />
-          <div className="flex gap-x-4 w-full mt-4">
+          <div className="flex flex-col md:flex-row gap-y-4 gap-x-4 w-full mt-4">
             <div className="flex-[0.4]">
               <h1 className="text-white text-2xl font-bold mb-4">
                 Top results
@@ -172,7 +172,7 @@ const SearchPage: NextPageWithLayout = () => {
           <PodcastSearch shows={searchResult?.shows?.items} />
         </div>
       ) : (
-        <div className="grid grid-cols-5 gap-4 mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
           {categories?.categories.items.map((category: ICategory) => (
             <CategoryCard key={v4()} category={category} />
           ))}

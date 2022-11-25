@@ -42,7 +42,7 @@ const ProfilePage = () => {
 
   console.log(topArtists);
   return (
-    <div className="flex-col flex items-center py-16 gap-y-6">
+    <div className="flex-col flex items-center p-8 md:py-16 gap-y-6">
       {myProfile?.data?.images?.length === 0 ? (
         <div className="w-36 h-36 border-white border  rounded-full grid place-items-center">
           <FaUser className="text-7xl text-white " />
@@ -73,7 +73,7 @@ const ProfilePage = () => {
           <span className="text-gray-500 font-bold text-sm ">PLAYLIST</span>
         </div>
       </div>
-      <div className="flex  w-full justify-center">
+      <div className="flex gap-x-4 flex-col sm:flex-row gap-y-8 w-full justify-center">
         <div className="space-y-4 flex-[0.5]">
           <h1 className="font-bold text-lg text-white">
             Top Artists of All Time
