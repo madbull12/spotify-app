@@ -95,7 +95,7 @@ const HomeComponent = ({ myPlaylists }: IProps) => {
     <main>
       {/* <Sidebar /> */}
         <h1 className="text-white text-2xl font-bold mb-2">New Releases</h1>
-        <div className="grid   overflow-x-scroll  auto-cols-max grid-flow-col auto-rows-auto gap-x-2  scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
+        <div className="grid overflow-x-scroll  auto-cols-max grid-flow-col auto-rows-auto gap-x-2  scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
           {newReleases?.map((release: SpotifyApi.AlbumObjectFull) => (
             <NewRelease
               key={uuidv4()}
