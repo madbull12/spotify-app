@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BsSearch } from "react-icons/bs";
+import { v4 } from "uuid";
 import spotifyApi from "../lib/spotifyApi";
 import { usePlaylistModal, useSaveTrack } from "../lib/zustand";
 
@@ -63,6 +64,7 @@ const PlaylistMenuList = ({ myPlaylists }: IProps) => {
           ?.filter((playlist) => playlist.name.includes(term))
           .map((playlist) => (
             <li
+              key={v4()}
               className="p-2 hover:bg-neutral-700"
               onClick={(e) => {
                 addTrackToPlaylist(playlist);
