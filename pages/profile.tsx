@@ -37,38 +37,38 @@ const ProfilePage = () => {
     fetchMyTopArtists
   );
   const { data: topTracks } = useQuery(["fetchMyTopTracks"], fetchMyTopTracks);
-  const { data: myProfile } = useQuery(["fetchMyProfile"], fetchMyProfile);
+  const myProfile:any = useQuery(["fetchMyProfile"], fetchMyProfile);
   console.log(myProfile);
 
   console.log(topArtists);
   return (
     <div className="flex-col flex items-center py-16 gap-y-6">
-      {myProfile?.images?.length === 0 ? (
+      {myProfile?.data?.images?.length === 0 ? (
         <div className="w-36 h-36 border-white border  rounded-full grid place-items-center">
           <FaUser className="text-7xl text-white " />
         </div>
       ) : (
-        <img src={myProfile?.images[0]?.url ?? ""} />
+        <img src={myProfile?.data?.images[0]?.url ?? ""} />
       )}
       <h1 className="text-4xl font-bold text-white">
-        {myProfile?.display_name}
+        {myProfile?.data?.display_name}
       </h1>
       <div className="flex items-center gap-x-6">
         <div className="flex flex-col gap-y-2 items-center ">
           <span className="text-green-500 font-bold text-2xl">
-            {myProfile?.followers?.total}
+            {myProfile?.data?.followers?.total}
           </span>
           <span className="text-gray-500 font-bold text-sm ">FOLLOWERS</span>
         </div>
         <div className="flex flex-col gap-y-2 items-center ">
           <span className="text-green-500 font-bold text-2xl">
-            {myProfile?.followers?.total}
+            {myProfile?.data?.followers?.total}
           </span>
           <span className="text-gray-500 font-bold text-sm ">FOLLOWING</span>
         </div>
         <div className="flex flex-col gap-y-2 items-center ">
           <span className="text-green-500 font-bold text-2xl">
-            {myProfile?.followers?.total}
+            {myProfile?.data?.followers?.total}
           </span>
           <span className="text-gray-500 font-bold text-sm ">PLAYLIST</span>
         </div>
