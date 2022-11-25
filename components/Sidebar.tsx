@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { BsPlusSquare } from "react-icons/bs";
 import { usePlaylistModal } from "../lib/zustand";
 import shallow from "zustand/shallow";
+import { FaUser } from "react-icons/fa";
 
 const Sidebar = () => {
   const { data: session } = useSession();
@@ -65,6 +66,15 @@ const Sidebar = () => {
             >
               <BsPlusSquare className="icon" />
             </div>
+            <Link href="/profile">
+              <div
+                data-tip="Profile"
+            
+              >
+                <FaUser  className="icon" />
+              </div>
+            </Link>
+            
             <IoMdCompass className="icon" />
 
             <IoMdMicrophone className="icon" />

@@ -9,6 +9,8 @@ module.exports = {
     //   {
     //     protocol: "https",
     //     hostname: "**.scdn.co",
+    //     port:"",
+    //     pathname:"/image/**"
     //   },
     // ],
     domains: ['i.scdn.co',"seeded-session-images.scdn.co","charts-images.scdn.co",'platform-lookaside.fbsbx.com',"t.scdn.co","mosaic.scdn.co","thisis-images.scdn.co"],

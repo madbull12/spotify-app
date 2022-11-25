@@ -47,7 +47,6 @@ const Right = () => {
   return (
     <>
       <div className="p-4 space-y-8 pr-8 bg-black w-[300px] fixed right-0 top-0 bottom-0 z-50 ">
-        {session ? (
           <>
             <div className="flex space-x-2 items-center justify-between">
               <div className="items-center space-x-4 border-2 px-2 rounded-full h-8 hidden sm:flex">
@@ -77,7 +76,6 @@ const Right = () => {
               </button>
             </div>
           </>
-        ) : null}
       </div>
     </>
   );
