@@ -8,7 +8,7 @@ import Right from "./Right";
 import Sidebar from "./Sidebar";
 
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
-  const { data: session,status } = useSession();
+  const { data: session, status } = useSession();
   const [playingTrack, setPlayingTrack] = usePlayTrack(
     (state: any) => [state.playingTrack, state.setPlayingTrack],
     shallow
@@ -20,14 +20,17 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
 
   // const { accessToken }: any = session;
 
-
   return (
     <div className="scroll-smooth ">
       {status === "authenticated" ? <Sidebar /> : null}
 
       <Body>{children}</Body>
-      {status === "authenticated" ? <Right /> : null}
-      
+      {status === "authenticated" ? (
+        <div className="hidden md:block">
+          <Right />
+        </div>
+      ) : null}
+
       {showPlayer && (
         <div className="fixed  bottom-0 left-0 right-0 z-50">
           <Player

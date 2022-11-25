@@ -14,7 +14,7 @@ const PlaylistsSearch = ({ playlists, title }: IProps) => {
         <h1 className="font-bold text-white mb-4 text-2xl">{title}</h1>
         <button
           onClick={() => setShowMore(!showMore)}
-          className="font-bold  rounded-full px-4 py-2 hover:-translate-y-1 ease-in-out duration-100 transition-all bg-white text-black"
+          className="font-bold whitespace-nowrap  rounded-full px-4 py-2 hover:-translate-y-1 ease-in-out duration-100 transition-all bg-white text-black"
         >
           {showMore ? "Show less" : "Show more"}
         </button>

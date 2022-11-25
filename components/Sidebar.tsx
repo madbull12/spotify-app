@@ -46,8 +46,7 @@ const Sidebar = () => {
                 }`}
               />
             </Link>
-            <Link href="/search">
-              <div data-tip="Search">
+              <div data-tip="Search" onClick={()=>router.push("/search",undefined,{ shallow:true })}>
                 <IoMdSearch
                   data-tip="Search"
                   className={`icon ${
@@ -55,7 +54,6 @@ const Sidebar = () => {
                   }`}
                 />
               </div>
-            </Link>
             <div
               data-tip="Create playlist"
               onClick={() => {
