@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { FiHeart, FiMoreHorizontal } from "react-icons/fi";
+import { v4 } from "uuid";
 import AlbumSearch from "../../components/AlbumSearch";
 import AlbumSearchItem from "../../components/AlbumSearchItem";
 import ArtistSearchItem from "../../components/ArtistSearchItem";
@@ -115,7 +116,7 @@ const ArtistPage = () => {
         {artistTopTracks?.data?.tracks
           .slice(0, seeAll ? artistTopTracks?.data?.tracks.length : 5)
           .map((track, i: number) => (
-            <TrackAlbum track={track} index={i + 1} />
+            <TrackAlbum track={track} key={v4()} index={i + 1} />
           ))}
         <button
           className="uppercase font-bold text-gray-400 mt-4"
@@ -165,7 +166,7 @@ const ArtistPage = () => {
                 (discography === "album" ? "album" : "single")
             )
             .map((album) => (
-              <AlbumSearchItem album={album} />
+              <AlbumSearchItem key={v4()} album={album} />
             ))}
         </div>
       </div>

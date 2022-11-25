@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import { v4 } from "uuid";
 import EpisodeCard from "../../components/EpisodeCard";
 import spotifyApi from "../../lib/spotifyApi";
 import NoImage from "../../public/img/no-image.jpg";
@@ -36,7 +37,7 @@ const ShowPage = () => {
       </div>
       <div className="divide-y divide-gray-300 mt-6 w-3/4">
         {show?.episodes.items.map((episode) => (
-          <EpisodeCard episode={episode} />
+          <EpisodeCard  episode={episode} key={v4()} />
         ))}
       </div>
     </div>

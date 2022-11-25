@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { v4 } from "uuid";
 import Loader from "../../components/Loader";
 import PlaylistSearchItem from "../../components/PlaylistSearchItem";
 import spotifyApi from "../../lib/spotifyApi";
@@ -54,7 +55,7 @@ const GenrePage = () => {
       </Head>
       {data?.playlists.items.map(
         (playlist: SpotifyApi.PlaylistObjectSimplified) => (
-          <PlaylistSearchItem playlist={playlist} />
+          <PlaylistSearchItem playlist={playlist} key={v4()} />
         )
       )}
     </div>

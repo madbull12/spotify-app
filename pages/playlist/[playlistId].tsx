@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BsClock } from "react-icons/bs";
 import { FiHeart, FiMoreHorizontal } from "react-icons/fi";
+import { v4 } from "uuid";
 import PlayButton from "../../components/PlayButton";
 import TrackAlbum from "../../components/TrackAlbum";
 import timeConversion from "../../helper/timeConversion";
@@ -135,7 +136,7 @@ const PlaylistPage = () => {
         </div>
         {playlist?.tracks.items.map(
           (playlist: SpotifyApi.PlaylistTrackObject, i) => (
-            <TrackAlbum track={playlist?.track} index={i + 1} />
+            <TrackAlbum key={v4()} track={playlist?.track} index={i + 1} />
           )
         )}
       </div>
