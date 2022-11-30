@@ -11,7 +11,7 @@ interface IProps {
   children: React.ReactNode;
 }
 const Body = ({ children }: IProps) => {
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
   const router = useRouter();
   console.log(router.pathname)
   const accessToken: any = session?.accessToken;
@@ -47,7 +47,7 @@ const Body = ({ children }: IProps) => {
   }, []);
 
   return (
-    <section className={`bg-black pb-32 max-w-[1000px] min-h-screen ${router.pathname !== "/auth/signin" ? "ml-12 lg:ml-20 " : null}  p-4  space-y-8  flex-grow `}>
+    <section className={`bg-black pb-32 lg:max-w-full min-h-screen ${router.pathname !== "/auth/signin " ? "ml-12 lg:ml-20 w-full " : null}  p-4  space-y-8  flex-grow `}>
       {children}
     </section>
   );

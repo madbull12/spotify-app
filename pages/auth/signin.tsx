@@ -24,7 +24,7 @@ const SignInPage: NextPage = () => {
       </div>
     );
   return (
-    <div className="flex flex-col items-center bg-black min-h-screen pt-20">
+    <div className="flex flex-col items-center  bg-black min-h-screen pt-20">
       <Head>
         <title>Login</title>
       </Head>

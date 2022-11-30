@@ -10,7 +10,7 @@ const SearchNav = () => {
     }
   };
   return (
-    <ul className="flex bg-black   items-center gap-x-4 ">
+    <ul className="flex bg-black flex-wrap   items-center gap-4 ">
       <li
         className={`link-tag ${
           router.pathname === "/search" ? "bg-white text-black" : null
