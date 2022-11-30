@@ -4,7 +4,7 @@ import SearchNav from "./SearchNav";
 
 const SearchNavLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="w-full">
       <Search />
       <div className=" px-16 lg:px-24 bg-black py-4 ">
         <SearchNav />

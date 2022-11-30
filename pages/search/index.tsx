@@ -105,11 +105,11 @@ const SearchPage: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {debouncedSearch ? (
-        <div className="space-y-8">
+        <div className="space-y-8 w-full">
           <SearchNav />
           <div className="flex flex-col md:flex-row gap-y-4 gap-x-4 w-full mt-4">
             <div className="flex-[0.4]">
-              <h1 className="text-white text-2xl font-bold mb-4">
+              <h1 className="text-white text-base md:text-2xl font-bold mb-4">
                 Top results
               </h1>
               {searchResult?.tracks?.items.slice(0, 1).map((track) => (
@@ -125,12 +125,12 @@ const SearchPage: NextPageWithLayout = () => {
                         className="rounded-lg"
                         width={100}
                       />
-                      <p className="text-4xl text-white font-bold ">
+                      <p className="text-2xl md:text-4xl text-white font-bold ">
                         {track.name}
                       </p>
                       <div className="flex items-center gap-x-4">
                         <Link href={`/artist/${track.artists[0].id}`}>
-                          <p className="text-zinc-500 font-semibold truncate hover:underline">
+                          <p className="text-zinc-500 text-sm md:text-base font-semibold truncate hover:underline">
                             {track.artists[0].name}
                           </p>
                         </Link>
@@ -150,7 +150,7 @@ const SearchPage: NextPageWithLayout = () => {
               ))}
             </div>
             <div className="space-y-2 flex-[0.6]">
-              <h1 className="text-white text-2xl font-bold mb-4">Tracks</h1>
+              <h1 className="text-white text-base md:text-2xl font-bold mb-4">Tracks</h1>
               <div className="border p-2 rounded-lg h-96 overflow-y-scroll  scrollbar-thumb-zinc-800 scrollbar-thin   scrollbar-track-gray-100">
                 {searchResult?.tracks?.items.slice(0, 10).map((track) => (
                   <TrackSearch key={v4()} track={track} />
@@ -172,7 +172,7 @@ const SearchPage: NextPageWithLayout = () => {
           <PodcastSearch shows={searchResult?.shows?.items} />
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
+        <div className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
           {categories?.categories.items.map((category: ICategory) => (
             <CategoryCard key={v4()} category={category} />
           ))}

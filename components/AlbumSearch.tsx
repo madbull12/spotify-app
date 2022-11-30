@@ -13,11 +13,11 @@ const AlbumSearch = ({ albums }: IProps) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <h1 className="font-bold text-white mb-4 text-2xl">Albums</h1>
+      <div className="flex items-center gap-x-2 justify-between">
+        <h1 className="font-bold text-white mb-4  text-base md:text-2xl">Albums</h1>
         <button
           onClick={() => setShowMore(!showMore)}
-          className="font-bold  rounded-full px-4 py-2 hover:-translate-y-1 ease-in-out duration-100 transition-all bg-white text-black"
+          className="font-bold  rounded-full  whitespace-nowrap px-4 py-2 hover:-translate-y-1 ease-in-out duration-100 transition-all bg-white text-black"
         >
           {showMore ? "Show less" : "Show more"}
         </button>

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { v4 } from "uuid";
@@ -11,6 +12,7 @@ import spotifyApi from "../lib/spotifyApi";
 const ProfilePage = () => {
   const { data: session } = useSession();
   const accessToken: any = session?.accessToken;
+  const router = useRouter();
 
   useEffect(() => {
     if (!accessToken) return;
@@ -37,7 +39,7 @@ const ProfilePage = () => {
     fetchMyTopArtists
   );
   const { data: topTracks } = useQuery(["fetchMyTopTracks"], fetchMyTopTracks);
-  const myProfile:any = useQuery(["fetchMyProfile"], fetchMyProfile);
+  const myProfile: any = useQuery(["fetchMyProfile"], fetchMyProfile);
   console.log(myProfile);
 
   console.log(topArtists);
@@ -80,7 +82,11 @@ const ProfilePage = () => {
           </h1>
           <div className="space-y-4 ">
             {topArtists?.items.map((artist) => (
-              <div key={v4()} className="flex gap-x-4 items-center text-white">
+              <div
+                key={v4()}
+                onClick={() => router.push(`/artist/${artist.id}`)}
+                className="p-2 cursor-pointer hover:bg-zinc-800 rounded-lg flex gap-x-4 items-center text-white"
+              >
                 <Image
                   src={artist?.images[0]?.url || ""}
                   width={50}
