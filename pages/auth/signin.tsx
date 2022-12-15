@@ -39,7 +39,7 @@ const SignInPage: NextPage = () => {
         <div >
           <button
             onClick={() => signIn("spotify")}
-            className="text-white font-bold text-xl whitespace-nowrap bg-green-500 px-6 py-4 rounded-md hover:bg-green-600 transition-all ease-in-out duration-200 "
+            className="text-white font-bold text-lg md:text-xl whitespace-nowrap bg-green-500 sm:px-3 sm:py-2 px-2 py-1  md:px-6 md:py-4 rounded-md hover:bg-green-600 transition-all ease-in-out duration-200 "
           >
             Sign in with Spotify
           </button>
