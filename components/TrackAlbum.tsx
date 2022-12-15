@@ -51,7 +51,7 @@ const TrackAlbum = ({ track, index }: IProps) => {
 
       <div className="flex flex-col items-start md:flex[0.5]  whitespace-nowrap text-sm md:text-base">
         {track?.uri === playingTrack?.uri && isPlaying ? (
-          <p className="  text-sm md:text-base text-green-500">
+          <p className="  text-sm md:text-base text-green-500 w-3/4">
             {track?.name}
           </p>
         ) : (
