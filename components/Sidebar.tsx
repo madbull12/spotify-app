@@ -27,7 +27,7 @@ const Sidebar = () => {
   const setIsEditing = usePlaylistModal((state) => state.setIsEditing);
 
   return (
-    <section className="fixed  min-h-full top-0 z-40 flex flex-col p-4 items-center bg-black w-[60px] lg:w-[90px]  space-y-8 h-screen">
+    <section className="fixed  min-h-full top-0 z-40 flex flex-col  p-2 md:p-4  items-center bg-black w-[60px] lg:w-[90px]  space-y-8 h-screen">
       {session ? (
         <>
           <Image

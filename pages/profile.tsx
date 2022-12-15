@@ -52,24 +52,24 @@ const ProfilePage = () => {
       ) : (
         <img src={myProfile?.data?.images[0]?.url ?? ""} />
       )}
-      <h1 className="text-4xl font-bold text-white">
+      <h1 className="text-2xl md:text-4xl font-bold text-center text-white">
         {myProfile?.data?.display_name}
       </h1>
-      <div className="flex items-center gap-x-6">
-        <div className="flex flex-col gap-y-2 items-center ">
-          <span className="text-green-500 font-bold text-2xl">
+      <div className="flex items-center gap-x-6 flex-wrap justify-center">
+        <div className="flex flex-col gap-y-2 items-center  ">
+          <span className="text-green-500 font-bold text-lg md:text-2xl">
             {myProfile?.data?.followers?.total}
           </span>
           <span className="text-gray-500 font-bold text-sm ">FOLLOWERS</span>
         </div>
         <div className="flex flex-col gap-y-2 items-center ">
-          <span className="text-green-500 font-bold text-2xl">
+          <span className="text-green-500 font-bold text-lg md:text-2xl">
             {myProfile?.data?.followers?.total}
           </span>
           <span className="text-gray-500 font-bold text-sm ">FOLLOWING</span>
         </div>
         <div className="flex flex-col gap-y-2 items-center ">
-          <span className="text-green-500 font-bold text-2xl">
+          <span className="text-green-500 font-bold text-lg md:text-2xl">
             {myProfile?.data?.followers?.total}
           </span>
           <span className="text-gray-500 font-bold text-sm ">PLAYLIST</span>
@@ -77,7 +77,7 @@ const ProfilePage = () => {
       </div>
       <div className="flex gap-x-4 flex-col sm:flex-row gap-y-8 w-full justify-center">
         <div className="space-y-4 flex-[0.5]">
-          <h1 className="font-bold text-lg text-white">
+          <h1 className="font-bold  text-base md:text-lg text-white">
             Top Artists of All Time
           </h1>
           <div className="space-y-4 ">

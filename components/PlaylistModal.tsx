@@ -89,29 +89,29 @@ const PlaylistModal = ({ isEditing }: IProps) => {
         />
       </header>
       <form
-        className="flex flex-col"
+        className="flex flex-col space-y-4"
         onSubmit={isEditing ? editPlaylist : createPlaylist}
       >
-        <div className="flex  gap-x-4">
+        <div className="flex  gap-4 flex-col md:flex-row">
           <Image src={NoImage} height={200} width={200} />
           <div className="space-y-2 flex flex-col">
             <input
               onChange={(e) => setName(e.target.value)}
               defaultValue={isEditing ? editValue.name : ""}
               placeholder="Enter playlist's name"
-              className="bg-zinc-700 px-4 py-2 rounded-lg outline-none"
+              className="bg-zinc-700 text-sm md:text-base px-2 py-1 md:px-4 md:py-2 rounded-lg outline-none"
             />
             <textarea
               onChange={(e) => setDescription(e.target.value)}
               defaultValue={isEditing ? editValue.description : ""}
               placeholder="Add an optional description "
-              className="px-4 py-2 bg-zinc-700 rounded-lg outline-none"
+              className="px-2 py-1 text-sm md:text-base md:px-4 md:py-2 bg-zinc-700 rounded-lg outline-none"
             ></textarea>
           </div>
         </div>
         <button
           type="submit"
-          className="font-bold text-black bg-white px-6 py-2 rounded-full self-end"
+          className="font-bold text-sm md:text-base text-black bg-white px-4 py-1 md:px-6 md:py-2 rounded-full self-end"
         >
           SUBMIT
         </button>

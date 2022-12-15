@@ -18,6 +18,7 @@ const Body = ({ children }: IProps) => {
   // const [searchResult, setSearchResult] = useState<any>(null);
   const [newReleases, setNewReleases] = useState<any>(null);
 
+  
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
@@ -47,7 +48,7 @@ const Body = ({ children }: IProps) => {
   }, []);
 
   return (
-    <section className={`bg-black pb-32 lg:max-w-full min-h-screen ${router.pathname !== "/auth/signin " ? "ml-12 lg:ml-20 w-full " : null}  p-4  space-y-8  flex-grow `}>
+    <section className={`bg-black pb-32 lg:max-w-full min-h-screen ${router.pathname !== "/auth/signin" ? "ml-12 lg:ml-20" : "ml-0"}   p-4  space-y-8  flex-grow `}>
       {children}
     </section>
   );

@@ -5,10 +5,19 @@ import ProtectedRoute from "./ProtectedRoute";
 
 const authRoutes = [
   "/search",
+  "/search/tracks",
+  "/search/albums",
+  "/search/playlists",
+  "/search/podcastsAndEpisodes",
+  "search/artists",
+  "/search/",
+  "/show/[showId]",
+  "/genre/[categoryId]",
   "/",
   "/album/[albumId]",
   "/artist/[artistId]",
   "/playlist/[playlistId]",
+  "/profile"
 ];
 
 const AuthWrapper = ({ children }: { children: React.ReactNode }) => {

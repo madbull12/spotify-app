@@ -44,7 +44,7 @@ const TrackPage = () => {
   if (isLoading) return <Loader />;
   return (
     <div>
-      <header className="sticky bg-black  p-4 top-0 flex items-center text-gray-400 gap-x-4">
+      <header className="sticky hidden  bg-black  p-4 top-0 md:flex items-center text-gray-400 gap-x-4">
         <p>#</p>
         <p className="flex-[0.5]">TITLE</p>
         <p className="flex-[0.5]">ALBUM</p>

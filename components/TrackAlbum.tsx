@@ -35,22 +35,31 @@ const TrackAlbum = ({ track, index }: IProps) => {
     <div
       onClick={() => handlePlay(track)}
       ref={hoverRef}
-      className="flex gap-x-2 md:gap-x-4 items-center justify-between py-2 cursor-pointer hover:bg-neutral-800 rounded-lg px-4"
+      className="flex gap-x-2 md:gap-x-4 items-center py-1 px-2 justify-between text-center md:py-2 cursor-pointer hover:bg-neutral-800 rounded-lg md:px-4"
     >
       {isHovering ? (
         <>
           {track?.uri === playingTrack?.uri && isPlaying ? (
-            <FaPause className="text-white text-xl" />
+            <FaPause className="text-white text-xl hidden md:block" />
           ) : (
-            <FaPlay className="text-white text-xl" />
+            <FaPlay className="text-white text-xl hidden md:block" />
           )}
         </>
       ) : (
-        <span className="text-gray-400">{index}</span>
+        <span className="text-gray-400 hidden md:block">{index}</span>
       )}
 
-      <div className="flex flex-col items-start  flex-[0.5] whitespace-nowrap text-sm md:text-base">
-        <p className="text-white">{track?.name}</p>
+      <div className="flex flex-col items-start md:flex[0.5]  whitespace-nowrap text-sm md:text-base">
+        {track?.uri === playingTrack?.uri && isPlaying ? (
+          <p className="  text-sm md:text-base text-green-500">
+            {track?.name}
+          </p>
+        ) : (
+          <p className=" text-white text-sm md:text-base ">
+            {track?.name}
+        </p>
+        )}
+
         <div className="flex items-center gap-x-1">
           {track?.explicit && (
             <span className="rounded-sm bg-gray-400 text-black text-xs w-4 h-4 grid place-items-center">
@@ -58,19 +67,23 @@ const TrackAlbum = ({ track, index }: IProps) => {
             </span>
           )}
           <Link href={`/artist/${track?.artists[0].id}`}>
-            <p className="text-gray-400 hover:underline cursor-pointer ">
+            <p className="text-gray-400 hover:underline text-xs md:text-sm cursor-pointer ">
               {track?.artists[0].name}
             </p>
           </Link>
         </div>
       </div>
-      <p className="text-gray-400 hidden md:block flex-[0.5]">{track?.album?.name}</p>
+      <p className="text-gray-400 hidden md:block flex-[0.5]">
+        {track?.album?.name}
+      </p>
 
       <FiHeart
         className={` ${isHovering ? "visible" : "invisible"} text-gray-400`}
       />
 
-      <p className="text-gray-400 text-sm md:text-base">{msToClock(track?.duration_ms)}</p>
+      <p className="text-gray-400 hidden md:block text-sm md:text-base">
+        {msToClock(track?.duration_ms)}
+      </p>
       <div className="relative">
         <FiMoreHorizontal
           // data-tip={`Other options for ${track.name} by ${track.artists[0].name}`}
