@@ -51,11 +51,11 @@ const TrackAlbum = ({ track, index }: IProps) => {
 
       <div className="flex flex-col items-start md:flex[0.5]  whitespace-nowrap text-sm md:text-base">
         {track?.uri === playingTrack?.uri && isPlaying ? (
-          <p className="  text-sm md:text-base text-green-500 w-3/4">
+          <p className="  text-sm md:text-base text-green-500 max-w-[100px] truncate">
             {track?.name}
           </p>
         ) : (
-          <p className=" text-white text-sm md:text-base ">
+          <p className=" text-white text-sm md:text-base  max-w-[100px] truncate">
             {track?.name}
         </p>
         )}
@@ -73,7 +73,7 @@ const TrackAlbum = ({ track, index }: IProps) => {
           </Link>
         </div>
       </div>
-      <p className="text-gray-400 hidden md:block flex-[0.5]">
+      <p className="text-gray-400 hidden md:block flex-[0.5] truncate">
         {track?.album?.name}
       </p>
 
