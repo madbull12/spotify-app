@@ -38,9 +38,9 @@ const TrackSearch = ({ track }: IProps) => {
           )}
         </div>
 
-        <div className="space-y-2">
-          <p className="text-white">{track.name}</p>
-          <p className="text-gray-400 text-sm">{track.artists[0].name}</p>
+        <div className="space-y-2 w-1/2">
+          <p className="text-white  truncate">{track.name}</p>
+          <p className="text-gray-400 text-sm truncate">{track.artists[0].name}</p>
         </div>
       </div>
     </div>

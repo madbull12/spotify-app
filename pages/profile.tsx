@@ -87,13 +87,15 @@ const ProfilePage = () => {
                 onClick={() => router.push(`/artist/${artist.id}`)}
                 className="p-2 cursor-pointer hover:bg-zinc-800 rounded-lg flex gap-x-4 items-center text-white"
               >
-                <Image
-                  src={artist?.images[0]?.url || ""}
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                <h1>{artist.name}</h1>
+                <div className="md:w-[50px] w-[30px] h-[30px] md:h-[50px] relative">
+                  <Image
+                    src={artist?.images[0]?.url || ""}
+                    layout="fill"
+                    className="rounded-full"
+                  />
+                </div>
+          
+                <h1 className="truncate text-sm md:text-base">{artist.name}</h1>
               </div>
             ))}
           </div>
